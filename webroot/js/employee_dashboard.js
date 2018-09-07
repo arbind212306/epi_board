@@ -2,10 +2,11 @@ var dashboard = {
     sessionCounter : 0,
     toggleLogistics : function (type) {
         $(".sidebar-section").addClass("hidden");
-        $("#sidebar_header").html("Logistics");
         if(type === "completed") {
+            $("#sidebar_header").html("Logistics");
             $("#logistics_completed").removeClass("hidden");
         } else {
+             $("#sidebar_header").html("Logistics");
             $("#logistics_pending").removeClass("hidden");
         }
     },
@@ -46,6 +47,7 @@ var dashboard = {
         if(type === "completed") {
             $("#confirmation_status_completed").removeClass("hidden");
         } else {
+            $("#sidebar_header").html("User Info");
             $("#confirmation_status_pending").removeClass("hidden");
         }
     },
@@ -100,7 +102,7 @@ var dashboard = {
 
     toggleRoadmap : function (type) {
         $(".sidebar-section").addClass("hidden");
-        $("#sidebar_header").html("Roadmap Scheduled");
+        $("#sidebar_header").html("Scheduled Roadmap ");
         if(type === "arranged") {
             $("#roadmap_arranged").removeClass("hidden");
         } else if(type === "completed") {

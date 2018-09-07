@@ -22,6 +22,7 @@ class LogisticsController extends AppController {
     }
 
     public function index() {
+$this->set('active','8');
         $this->viewBuilder()->layout('admin_layout');
         $this->loadModel('Logistics');
         $this->loadModel('Departments');
@@ -76,7 +77,6 @@ class LogisticsController extends AppController {
 
 
         if ($this->request->is('post')) {
-            
             $logisticsTable = TableRegistry::get('logistics');
             $time = Time::now();
             $bu_name = $this->request->data('bu_name');
@@ -161,7 +161,7 @@ class LogisticsController extends AppController {
                 'fields' => array('id', 'title'),
                 'conditions' => array('AND' => ['Departments.business_unit_id' => $business_unit_id, 'Departments.sub_department_id =' => 0])))->toArray();*/
             
-            $departments_data = $this->Departments->find('all')->select(['id','title'])->distinct(['Departments.title'])->where(['AND'=>['Departments.business_unit_id' => $business_unit_id,'Departments.sub_department_id' => 0]])->toArray();
+            $departments_data = $this->Departments->find('all')->select(['id','title'])->distinct(['Departments.title'])->where(['AND'=>['Departments.business_unit_id' => $business_unit_id,'Departments.sub_department_id' => 0,'Departments.status' => 1]])->toArray();
         }
         $html = '';
         foreach ($departments_data as $key => $value) {
@@ -181,7 +181,7 @@ class LogisticsController extends AppController {
             $departments_table = TableRegistry::get('Departments');
             $sub_departments = $departments_table->find('all', array(
                         'fields' => array('id', 'title'),
-                        'conditions' => array('AND' => ['Departments.business_unit_id' => $business_unit_id, 'Departments.sub_department_id' => $department_id])))->toArray();
+                        'conditions' => array('AND' => ['Departments.business_unit_id' => $business_unit_id, 'Departments.sub_department_id' => $department_id,'Departments.status' => 1])))->toArray();
 
             $html = '';
             foreach ($sub_departments as $key => $value) {

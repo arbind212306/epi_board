@@ -41,6 +41,9 @@ class LogisticsArrangementTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Logistics', [
+            'foreignKey' => 'logistic_id'
+        ]);
        
     }
 

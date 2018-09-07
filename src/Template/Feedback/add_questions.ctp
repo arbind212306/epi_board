@@ -16,42 +16,6 @@
                <div class="col-xs-12 margin-top-lg">
                 <div class="row">
                     
-					<div class="col-md-6">
-                        <div class="form-group row">
-                            <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Assigned To</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <select class="form-control" id="user_type" name="user_type">
-                                        <option value="4">Employee</option>
-                                        <option value="2">Supervisor</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					
-					
-					
-					<div class="col-md-6">
-                        <div class="form-group row">
-                            <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Feedback Type</label>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="form-group type_append">
-                                     <select class="form-control" id="type" name="feedback_type">
-                                        <option value="15 days">15 days</option>
-                                        <option value="90 days">90 days</option>
-										<option value="30 days">30 days</option>
-                                        <option value="180 days">180 days</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3">
@@ -71,8 +35,7 @@
                             </div>
                         </div>
                     </div>
-					
-					
+							
 					
 					<div class="col-md-6">
                         <div class="form-group row">
@@ -119,7 +82,7 @@
 					
 					<div class="col-md-12">
                         <div class="form-group row">
-                            <div class="col-md-3">
+                            <div class="col-md-1">
                                 <label for="title" class="padding-top-md">Status</label>
                             </div>
                             <div class="col-md-2">
@@ -130,28 +93,19 @@
                             </div>
 							</div>
                     </div>
-					
-					
-						
-					
-                    </div>
-					
-					
-					<div class="col-md-12">
+					   </div>
+									
+					<div class="col-md-12 text-right">
                                 <div class="form-group">
-								 <button type="button" name="" onclick="return addquestion();"  class="btn btn-info" >Add More</button>
+								 <button type="button" name="" onclick="return addquestion();"  class="btn btn-primary" ><i class="fa fa-plus"></i> Add More</button>
                                   
                                 </div>
                             </div>
-					
-					
-                    
-					
-					
+								
                 </div>
                 <hr/>
                 <div class="col-xs-12 text-center">
-                    <button class="btn btn-danger padding-left-xl padding-right-xl" type="submit">Submit</button>
+                    <button class="btn btn-danger padding-left-xl padding-right-xl" type="submit">Add</button>
                 </div>
             </div>
                 <?php echo $this->Form->end();?>
@@ -160,20 +114,14 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-<?php
-echo $this->Html->script(['guage', 'custom', 'dashboard', 'sidebar', 'supervisor']);
-?>
+<?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar', 'jquery-ui']); ?>
 
 <script>
 function addquestion(){
 
- var str = '<div class="col-md-6"><div class="form-group row"><div class="col-md-3"><label for="title" class="padding-top-md">Title</label></div><div class="col-md-9"><div class="form-group"><textarea required name="title[]" id="title" cols="3" rows="6" class="form-control"></textarea></div></div></div></div><div class="col-md-6"><div class="form-group row"><div class="col-md-3"><label for="title" class="padding-top-md">Desc</label></div><div class="col-md-9"><div class="form-group"><textarea  name="describtion[]" id="title" cols="3" rows="6" class="form-control"></textarea></div></div></div></div><div class="col-md-12"><div class="form-group row"><div class="col-md-3"><label for="title" class="padding-top-md">Status</label></div><div class="col-md-2"><div class="form-group"><input type="checkbox" name="status[]"  class="form-control" value="1" ></div></div></div></div>';
+ var str = '<div class="col-md-6"><div class="form-group row"><div class="col-md-3"><label for="title" class="padding-top-md">Title</label></div><div class="col-md-9"><div class="form-group"><textarea required name="title[]" id="title" cols="3" rows="3" class="form-control"></textarea></div></div></div></div><div class="col-md-6"><div class="form-group row"><div class="col-md-3"><label for="title" class="padding-top-md">Desc</label></div><div class="col-md-9"><div class="form-group"><textarea  name="describtion[]" id="title" cols="3" rows="3" class="form-control"></textarea></div></div></div></div><div class="col-md-12"><div class="form-group row"><div class="col-md-3"><label for="title" class="padding-top-md">Status</label></div><div class="col-md-2"><div class="form-group"><input type="checkbox" name="status[]"  class="form-control" value="1" ></div></div></div></div>';
 $("#add_question").append(str);
 }
 </script>
 
 
-</body>
-</html>

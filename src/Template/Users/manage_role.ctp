@@ -10,6 +10,7 @@
             <?php
             echo $this->Form->create('', ['id' => 'add-role-form']);
             ?>
+            <input type="hidden" id="hid_id" name="hid_id">
             <div class="col-xs-12 margin-top-lg">
                 <div class="row">
                     <div class="col-md-6">
@@ -57,14 +58,14 @@
                                                         if (!empty($subCat['children'])) {
                                                             ?>
                                                             <strong>
-                                                                <label><input type="checkbox" name="access-cat[]" value="<?php if (!empty($subCat['id'])) echo $subCat['id']; ?>" class="checkbox_all" onchange="roleManagement.roleManagementCheckbox(this)"> <?php if (!empty($subCat['name'])) echo $subCat['name']; ?></label>
+                                                                <label><input type="checkbox" name="access-cat[]" id="check_ac_<?= $subCat['id']; ?>" value="<?php if (!empty($subCat['id'])) echo $subCat['id']; ?>" class="checkbox_all check_access" onchange="roleManagement.roleManagementCheckbox(this)"> <?php if (!empty($subCat['name'])) echo $subCat['name']; ?></label>
                                                             </strong>
                                                             <?php
                                                             if (!empty($subCat['children'])) {
                                                                 echo ' <div class="padding-left-lg">';
                                                                 foreach ($subCat['children'] as $child) {
                                                                     ?>
-                                                                    <div><label><input type="checkbox" name="access-cat[]" value="<?php if (!empty($child['id'])) echo $child['id']; ?>" class="checkbox_add_edit"> <?php if (!empty($child['name'])) echo $child['name']; ?></label></div>
+                                                                    <div><label><input type="checkbox" id="check_ac_<?= $child['id']; ?>" name="access-cat[]" value="<?php if (!empty($child['id'])) echo $child['id']; ?>" class="checkbox_add_edit check_access"> <?php if (!empty($child['name'])) echo $child['name']; ?></label></div>
                                                                     <?php
                                                                 }
                                                                 echo '</div>';
@@ -80,14 +81,14 @@
                                         }
                                     }else {
                                         ?> 
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <div class="panel panel-default joinee-blocks">
                                                 <div class="panel-body">
                                                     <?php foreach ($parentCat['children'] as $subCat) {
                                                         ?>
-                                                        <div>
+                                                    <div class="col-md-4">
                                                             <strong>
-                                                                <label><input type="checkbox" name="access-cat[]" value="<?php if (!empty($subCat['id'])) echo $subCat['id']; ?>"> <?php if (!empty($subCat['name'])) echo $subCat['name']; ?></label>
+                                                                <label><input type="checkbox" id="check_ac_<?= $subCat['id']; ?>" class="check_access" name="access-cat[]" value="<?php if (!empty($subCat['id'])) echo $subCat['id']; ?>"> <?php if (!empty($subCat['name'])) echo $subCat['name']; ?></label>
                                                             </strong>
                                                         </div>    
                                                         <?php
@@ -129,8 +130,8 @@
         <div class="col-md-4 text-center">
             <h4 class="margin-0 padding-top-xs">Role Management</h4>
         </div>
-        <div class="col-xs-12 margin-top-lg overflow-scroll">
-            <table class="table table-bordered table-striped">
+        <div class="col-xs-12 margin-top-lg ">
+            <table class="table table-bordered table-striped" id="myTable">
                 <thead>
                     <tr>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Name of the Role" class="red-tooltip">Name</div></th>
@@ -176,7 +177,7 @@
                                                         }
 
                                                         // For roadmap only
-                                                        if ($i == 3) {
+                                                        if (($i == 3)||($i==4)) {
                                                             if (in_array($sub['id'], $access)) {
                                                                 $show = true;
                                                             }
@@ -197,7 +198,7 @@
                                                             }
                                                         }
                                                         if ($show) {
-                                                            if ($i == 3) {
+                                                            if (($i == 3)||($i==4)) {
                                                                 echo '<p class="margin-0" style="text-align:left;"><strong>' . $name . '</strong>' . $sel . '</p>';
                                                             } else {
                                                                 echo '<p class="margin-0" style="text-align:left;"><strong>' . $name . '</strong> : ' . $sel . '</p>';
@@ -214,7 +215,7 @@
                                 }
                                 ?>
                                 <td>
-                                    <button class="btn btn-danger btn-sm" data-sidebar-button><i class="fa fa-pencil"></i> Edit</button>
+                                    <button class="btn btn-danger btn-sm edit-role" data-sidebar-button data-key="<?= $roleInfo['id']; ?>"><i class="fa fa-pencil"></i> Edit</button>
                                     <button class="btn btn-primary btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
                                 </td>
                             </tr>
@@ -236,6 +237,51 @@
 </div>
 
 <?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar', 'jquery-ui', 'role-management']); ?>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#myTable').DataTable({
+       "aaSorting" : [] 
+         
+    });
+});
+</script>
 <script>
     $('[data-toggle="tooltip"]').tooltip();
+    $(document).ready(function () {
+        $('.edit-role').click(function () {
+            var key = $(this).attr('data-key');
+            showRoleData(key);
+        });
+    });
+    function showRoleData(key) {
+        $('.check_access').prop('checked', false);
+        $.ajax({
+            url: webroot + 'users/getRoleData/' + key
+        }).done(function (data) {
+            data = $.parseJSON(data);
+            //console.log(data);
+            var udata = data.access;
+            if (udata != "") {
+                $('#name').val(data.title);
+                $('#description').val(data.description);
+                $('#hid_id').val(data.id);
+                udata = $.parseJSON(udata);
+                //console.log(udata);
+                $(udata).each(function (i, u) {
+                    $('#check_ac_' + u).prop('checked', true);
+                });
+            }
+        });
+    }
 </script>
+<style>
+  
+   .dataTables_info{width: 220px;}
+    .paging_simple_numbers{width: 220px;float: right;margin-top: -44px;margin-top: -15px;}
+    .dataTables_filter{float: right;}
+   /* .form-control input-sm{width: 71px;}
+    .col-sm-12{margin-top: -12px;}
+    .col-xs-12{margin-bottom: -40px;}*/
+</style>

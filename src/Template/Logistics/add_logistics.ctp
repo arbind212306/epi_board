@@ -13,7 +13,7 @@
                 <i class="<?php echo @$iclass; ?>"></i><?php echo @$sucessful; ?>.
             </div>
             <div class="" id="add_user" >
-               <?php echo $this->Form->create();?>
+               <?php echo $this->Form->create('',['id' => "add_logistics"]);?>
                <div class="col-xs-12 margin-top-lg">
                 <div class="row">
                     
@@ -24,12 +24,13 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <select required class="form-control bu_name" id="bu_name" name="bu_name">
+                                    <select  class="form-control bu_name" id="bu_name" name="bu_name">
                                         <option value="">Select</option>
                                         <?php foreach($business_units as $bus){?>
                                         <option value=<?php echo $bus['id'];?> ><?php echo $bus['title']; ?></option>
                                         <?php }?>
                                     </select>
+                                    <span id="check_bu_name"></span>
                                 </div>
                             </div>
                         </div>
@@ -42,9 +43,10 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                     <select required class="form-control dept" id="dept" name="dept">
+                                     <select  class="form-control dept" id="dept" name="dept">
                                          <option value="">Select</option>
                                      </select>
+                                     <span id="check_dept"></span>
                                 </div>
                             </div>
                         </div>
@@ -58,9 +60,10 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <select required class="form-control" id="sub_dept" name="sub_dept">
+                                    <select  class="form-control" id="sub_dept" name="sub_dept">
                                         <option value="">Select</option>
                                      </select>
+                                     <span id="check_sub_dept"></span>
                                 </div>
                             </div>
                         </div>
@@ -73,12 +76,13 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <select required class="form-control" id="location" name="location">
+                                    <select  class="form-control" id="location" name="location">
                                         <option value="">Select</option>
                                         <?php foreach($locations as $loc){?>
                                         <option value=<?php echo $loc['id'];?> ><?php echo $loc['title']; ?></option>
                                         <?php }?>
                                     </select>
+                                    <span id="check_location"></span>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +95,8 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
-                                    <input required type="text" id="title" name="title" class="form-control" placeholder='Enter Title'>
+                                    <input type="text" id="title" name="title" class="form-control" placeholder='Enter Title'>
+                                    <span id="check_title"></span>
                                 </div>
                             </div>
                         </div>
@@ -102,14 +107,14 @@
                                 <label for="type" class="padding-top-md">Description</label>
                             </div>
                             <div class="col-md-9">
-                                <textarea required name="description" id="description" cols="3" rows="3" class="form-control"></textarea>
+                                <textarea  name="description" id="description" cols="3" rows="3" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <hr/>
                 <div class="col-xs-12 text-center">
-                    <button class="btn btn-danger padding-left-xl padding-right-xl" type="submit">Submit</button>
+                    <button class="btn btn-danger padding-left-xl padding-right-xl" type="button" id="addlogistic">Submit</button>
                 </div>
             </div>
                 <?php echo $this->Form->end();?>
@@ -127,7 +132,8 @@
 $(document).ready(function() {
     /*  for department   */
     $('#dept').prop('disabled', true);
-    $(".bu_name").change(function () {
+    $("#bu_name").change(function () {
+         $('#dept').prop('disabled', false);
         $('#sub_dept').children('option:not(:first)').remove();
         $('#dept').children('option:not(:first)').remove();
         $('#dept').prop('disabled', false);
@@ -155,7 +161,7 @@ $(document).ready(function() {
     
     /*  for subdepartment   */
     $('#sub_dept').prop('disabled', true);
-    $(".dept").change(function () {
+    $("#dept").change(function () {
         $('#sub_dept').prop('disabled', false);
         $('#sub_dept').children('option:not(:first)').remove();
         var business_unit_id1="";
@@ -181,6 +187,95 @@ $(document).ready(function() {
                 console.log(e);
             }
         });
+    });
+
+    $('#addlogistic').click(function(){
+        var valid = true;
+      if($('#bu_name').val()=='')
+       {
+        $('#bu_name').css('border','1px solid red');
+        $('#check_bu_name').text('Please select business unit');
+        $('#check_bu_name').addClass('error_label');
+        valid = false;
+
+    }
+    else
+    {
+        $('#bu_name').css('border','1px solid #cccccc');
+        $('#check_bu_name').text('');
+
+
+    }
+     if($('#dept').val()=='')
+       {
+        $('#dept').css('border','1px solid red');
+        $('#check_dept').text('Please select department');
+        $('#check_dept').addClass('error_label');
+        valid = false;
+
+    }
+    else
+    {
+        $('#dept').css('border','1px solid #cccccc');
+        $('#check_dept').text('');
+
+
+    }
+    if($('#sub_dept').val()=='')
+       {
+        $('#sub_dept').css('border','1px solid red');
+        $('#check_sub_dept').text('Please select sub department');
+        $('#check_sub_dept').addClass('error_label');
+        valid = false;
+
+    }
+    else
+    {
+        $('#sub_dept').css('border','1px solid #cccccc');
+        $('#check_sub_dept').text('');
+
+
+    }
+     if($('#location').val()=='')
+       {
+        $('#location').css('border','1px solid red');
+        $('#check_location').text('Please select location');
+        $('#check_location').addClass('error_label');
+        valid = false;
+
+    }
+    else
+    {
+        $('#location').css('border','1px solid #cccccc');
+        $('#check_location').text('');
+
+
+    }
+     if($('#title').val()=='')
+       {
+        $('#title').css('border','1px solid red');
+        $('#check_title').text('Please enter title');
+        $('#check_title').addClass('error_label');
+        valid = false;
+
+    }
+    else
+    {
+        $('#title').css('border','1px solid #cccccc');
+        $('#check_title').text('');
+
+
+    }
+
+    if(valid == true)
+    {
+       $('#add_logistics').submit();
+    }
+    else
+    {
+    return false;
+    }
+
     });
 });
 </script>

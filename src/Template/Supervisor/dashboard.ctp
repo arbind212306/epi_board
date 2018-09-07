@@ -1,5 +1,5 @@
 
-<?php $insertsuperlogistics = $this->Url->build(['controller'=>'Supervisor','action'=>'logisticsupinsert']) ?>
+<?php $insertsuperlogistics = $this->Url->build(['controller' => 'Supervisor', 'action' => 'logisticsupinsert']) ?>
 
 <aside data-sidebar>
     <div class="padding-bottom-md container-fluid">
@@ -22,111 +22,143 @@
                 <div class="tab-content">
                     <div id="joinee_information" class="tab-pane fade in active">
                         <div id="joinee-details-outer">
-						<div class="success-msg" id="send_requirments" style="display:none;">
-				<i class="fa fa-check"></i>Logistics requirments sucessfully send.
-</div>
+                            <div class="success-msg" id="send_requirments" style="display:none;">
+                                <i class="fa fa-check"></i>Logistics requirments sucessfully send.
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="name" class="padding-top-md">Name</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p class="j-name-html padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="doj" class="padding-top-md">DOJ</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p class="j-doj-html padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="emp_id" class="padding-top-sm">Employee ID</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p class="j-emp_id-html padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="emp_email" class="padding-top-sm">Employee Email</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="j-emp_email" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="business" class="padding-top-md">Business</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="j-business" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="designation" class="padding-top-md">Department</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="department" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="j-state" class="padding-top-md">Sub Department</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="j-subd" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="designation" class="padding-top-md">Designation</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="designation" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="j-city" class="padding-top-md">City</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="j-city" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-3">
+                                                            <label for="j-state" class="padding-top-md">State</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <p id="j-state" class="padding-top-md"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                             <hr class="margin-top-0"/>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="panel panel-danger joinee-blocks" onclick="dashboard.toggleLogistics()">
                                         <div class="panel-body">
                                             <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
                                             <strong>Logistics Arrangements</strong>
-                                            <p class="margin-bottom-0 text-green" id="logistic_user_id"  style="display:none;">Done</p>
-	 <p class="margin-bottom-0 text-red" id="pending">Pending</p>
+   <p class="margin-bottom-0 text-muted logistic_date"></p>
+                                            <p class="margin-bottom-0 text-green" id="logistic_count"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <hr class="margin-top-0"/>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="name" class="padding-top-md">Name</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p class="j-name-html padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="doj" class="padding-top-md">DOJ</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p class="j-doj-html padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="emp_id" class="padding-top-sm">Employee ID</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p class="j-emp_id-html padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="emp_email" class="padding-top-sm">Employee Email</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p id="j-emp_email" class="padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="business" class="padding-top-md">Business</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p id="j-business" class="padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                               <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="designation" class="padding-top-md">Designation</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p id="designation" class="padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="j-city" class="padding-top-md">City</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p id="j-city" class="padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <div class="col-md-3">
-                                            <label for="j-state" class="padding-top-md">State</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <p id="j-state" class="padding-top-md"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div id="logistics_arrangements" class="hidden">
                             <ol class="breadcrumb">
@@ -137,47 +169,48 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span>Name : </span>
-                                        <strong>Dhanya Menon</strong>
+                                        <strong class="j-name-html"></strong>
                                     </div>
                                     <div class="col-md-4">
                                         <span>Emp Id : </span>
-                                        <strong>QA110231</strong>
+                                        <strong class="j-emp_id-html"></strong>
                                     </div>
                                     <div class="col-md-4">
                                         <span>DOJ : </span>
-                                        <strong>13/01/18</strong>
+                                        <strong class="j-doj-html"></strong>
                                     </div>
                                 </div>
                             </div>
                             <hr/>
-                            <?php echo $this->Form->create();?><div class="row">
-							
-							 <?php foreach ($logisticrecord as $logisticrecorddata) { ?>
-                                <div class="col-md-4">
-                                    <div class="panel panel-primary joinee-blocks" onclick="dashboard.panelCheckboxToggle(this)">
-                                        <div class="panel-body">
-                                            <div class="panel-proceed-btn"><input id="logistic_id" type="checkbox" class="checkbox" name="logistic_id[]" value="<?=$logisticrecorddata->id ?>"></div>
-                                            <strong><?php echo $logisticrecorddata->title ?></strong>
-                                            <p class="margin-bottom-0 text-muted"><?php echo $logisticrecorddata['location']['title'] ?></p>
-                                            <p class="margin-bottom-0 text-primary"><?php echo $logisticrecorddata['department']['title'] ?></p>
+                            <?php echo $this->Form->create(); ?><div class="row">
+
+                                <?php foreach ($logisticrecord as $logisticrecorddata) { ?>
+                                    <div class="col-md-4">
+                                        <div class="panel panel-primary joinee-blocks" onclick="dashboard.panelCheckboxToggle(this)">
+                                            <div class="panel-body">
+                                                <div class="panel-proceed-btn">
+<input id="logistic_id_<?= $logisticrecorddata->id; ?>" type="checkbox" class="checkbox log_check" name="logistic_id[]" value="<?= $logisticrecorddata->id ?>"></div>
+                                                <strong><?php echo $logisticrecorddata->title ?></strong>
+                                                <p class="margin-bottom-0 text-muted"><?php echo $logisticrecorddata['location']['title'] ?></p>
+                                                <p class="margin-bottom-0 text-primary"><?php echo $logisticrecorddata['department']['title'] ?></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 <?php } ?>
-                                <?php echo $this->Form->input('userid',(['name'=>'userid','type'=>'hidden','id'=>'userid'])); ?>
-								<?php echo  $this->Form->input('logistic_arrangement_add_by',(['name'=>'logistic_arrangement_add_by','type'=>'hidden','id'=>'logistic_arrangement_add_by','value'=>'1'])); ?>
-								
-								
+                                <?php echo $this->Form->input('userid', (['name' => 'userid', 'type' => 'hidden', 'id' => 'userid'])); ?>
+                                <?php echo $this->Form->input('logistic_arrangement_add_by', (['name' => 'logistic_arrangement_add_by', 'type' => 'hidden', 'id' => 'logistic_arrangement_add_by', 'value' => '2'])); ?>
+
+
                             </div>
                             <hr class="margin-top-0"/>
                             <div class="row">
-                              <div class="col-md-4 col-md-offset-4">
- <?php echo $this->Form->button('<i class="fa fa-paper-plane-o"></i> Send Requirements',(['class'=>'btn btn-danger btn-block','type'=>'button','onclick'=>'return logisticinsert();','id'=>''])); ?>  
-                                  
+                                <div class="col-md-4 col-md-offset-4">
+                                    <?php echo $this->Form->button('<i class="fa fa-paper-plane-o"></i> Send Requirements', (['class' => 'btn btn-danger btn-block', 'type' => 'button', 'onclick' => 'return logisticinsert();', 'id' => ''])); ?>  
+
                                 </div>
                             </div>
-							<?php echo $this->Form->end(); ?>  
-							
+                            <?php echo $this->Form->end(); ?>  
+
                         </div>
                     </div>
                     <div id="interval_feedback" class="tab-pane fade">
@@ -315,7 +348,7 @@
                         <div id="roadmap_recommend">
                             <ol class="breadcrumb">
                                 <li>Roadmap</li>
-                                <li class="active">Recommend</li>
+                                <li class="active">Listing</li>
                             </ol>
                             <div class="margin-top-sm">
                                 <div class="row">
@@ -334,19 +367,26 @@
                                 </div>
                             </div>
                             <hr/>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body" id="rmap-section">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 text-right">
-                                    <button type="button" class="btn btn-danger" id="add-road-map"><i class="fa fa-check"></i> Recommend</button>
-                                </div>
+                            <hr/>
+                            <div class="col-xs-12 margin-top-lg" id="session_table_div">
+                                <table class="table table-bordered table-striped" style="margin-left: -15px;">
+                                    <thead>
+                                        <tr>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="List of all the employees" class="red-tooltip">Business Unit</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Employee ID" class="red-tooltip">Department</div></th>
+                                            <!--<th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Department of employees" class="red-tooltip">Sub Department</div></th>-->
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Date of joining of the employee" class="red-tooltip">Meeting With</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Manager Name" class="red-tooltip">Note</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Confirmation status of employees" class="red-tooltip">Date</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of roadmap" class="red-tooltip">Start Time</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of roadmap" class="red-tooltip">End Time</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of roadmap" class="red-tooltip">Duration</div></th>
+                                            <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of roadmap" class="red-tooltip">Status</div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="session_table">
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div id="roadmap_view" class="hidden">
@@ -461,12 +501,12 @@
                     <tr>
                         <!--th><input type="checkbox" class="checkbox" name="select_all" onclick="dashboard.toggleSelectAllCheckbox(this)"></th-->
                         <th class="pointer" onclick="sortTable(1)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="List of all the employees" class="red-tooltip">Employee Name</div></th>
-                        <th class="pointer" onclick="sortTable(2)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="Confirmation status of employees" class="red-tooltip">Confirm</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Employee ID" class="red-tooltip">Emp ID</div></th>
                         <th class="pointer" onclick="sortTable(4)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="Date of joining of the employee" class="red-tooltip">DOJ</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Details" class="red-tooltip">Logistics</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of Roadmap" class="red-tooltip">Roadmap</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of feedback submitted" class="red-tooltip">Feedback</div></th>
+                        <th class="pointer" onclick="sortTable(2)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="Confirmation status of employees" class="red-tooltip">Confirm</div></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -478,25 +518,13 @@
                             <tr>
                                 <!--td><input type="checkbox" class="checkbox" name="select_individual"></td-->
                                 <td>
-                                    <div class="text-blue show_user" data-sidebar-button  data-key="<?= $jd['id']; ?>">
+                                    <div class="text-blue show_user" data-sidebar-button  data-key="<?= $jd['id']; ?>" onclick="getsessions('<?= $jd['id'] ?>');">
                                         <?php
                                         if (!empty($jd['first_name'])) {
                                             echo $jd['first_name'];
                                         }
                                         ?>
                                     </div>
-                                </td>
-                                <td>
-                                    <?php
-                                    if ($jd['status'] == 2) {
-                                        echo '<i class="fa fa-circle text-green"></i>';
-                                    } else if ($jd['status'] == 3) {
-                                        echo '<i class="fa fa-times text-red"></i>';
-                                    } else {
-                                        echo '<i class="fa fa-circle text-orange"></i>';
-                                    }
-                                    ?>
-
                                 </td>
                                 <td>
                                     <?php
@@ -514,10 +542,8 @@
                                 </td>
                                 <td>
                                     <?php
-                                    if ($jd['status'] == 2) {
+                                    if (!empty($jd['lcomplete'])) {
                                         echo '<i class="fa fa-circle text-green"></i>';
-                                    } else if ($jd['status'] == 3) {
-                                        echo '<i class="fa fa-times text-red"></i>';
                                     } else {
                                         echo '<i class="fa fa-circle text-orange"></i>';
                                     }
@@ -529,7 +555,19 @@
                                     <?php
                                     if ($jd['fcomplete']) {
                                         echo '<i class="fa fa-circle text-green"></i>';
-                                    }else {
+                                    } else {
+                                        echo '<i class="fa fa-circle text-orange"></i>';
+                                    }
+                                    ?>
+
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($jd['status'] == 2) {
+                                        echo '<i class="fa fa-circle text-green"></i>';
+                                    } else if ($jd['status'] == 3) {
+                                        echo '<i class="fa fa-times text-red"></i>';
+                                    } else {
                                         echo '<i class="fa fa-circle text-orange"></i>';
                                     }
                                     ?>
@@ -550,165 +588,81 @@
             </table>
         </div>
         <div class="col-md-4 margin-top-lg">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-body">
-                            <p><strong>Logistics</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-star fa-lg"></i> SLA Completed
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-smile-o fa-lg"></i> 100% <strong class="text-green">Success</strong> feedback
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
+            <?php
+            $style = "";
+            if (count($asnData) > 8) {
+                $style = 'style="overflow-x: scroll; max-height:500px;"';
+            }
+            ?>
+            <div class="row" <?= $style; ?>>
+                <?php
+                if (!empty($asnData)) {
+                    foreach ($asnData as $adata) {
+                        ?>   
+                        <div class="col-md-6">
+                            <div class="panel panel-danger">
+                                <div class="panel-body">
+                                    <p><strong>Roadmap Meeting</strong></p>
+                                    <p class="text-muted margin-0">
+                                        <label>Date :</label> 
+                                        <?php
+                                        $mdate = "";
+                                        if (!empty($adata['session_date'])) {
+                                            $mdate = date('d-M-Y', strtotime($adata['session_date']));
+                                        }
+                                        echo $mdate;
+                                        ?>
+                                    </p>
+
+                                    <hr class="margin-top-sm margin-bottom-sm"/>
+                                    <p class="text-muted margin-0">
+                                        <label>Joinee :</label> 
+                                        <?php
+                                        $jname = "";
+                                        if (!empty($adata['user'])) {
+                                            $jname = $adata['user']['first_name'] . " " . $adata['user']['last_name'];
+                                        }
+                                        echo $jname;
+                                        ?>
+                                    </p>
+                                    <hr class="margin-top-sm margin-bottom-sm"/>
+                                    <p class="text-muted margin-0">
+                                        <label>Time :</label> 
+                                        <?php
+                                        $mtime = "";
+                                        if (!empty($adata['start_time'])) {
+                                            $mtime = date('h:iA', strtotime($adata['start_time']));
+                                        }
+                                        if (!empty($adata['end_time'])) {
+                                            $mtime .= ' <b>to</b> ' . date('h:iA', strtotime($adata['end_time']));
+                                        }
+                                        echo $mtime;
+                                        ?>
+                                    </p>
+                                    <hr class="margin-top-sm margin-bottom-sm"/>
+                                    <p class="text-muted margin-0">
+                                        <label>Note :</label>
+                                        <?php
+                                        $mnote = "";
+                                        if (!empty($adata['note'])) {
+                                            $mnote = $adata['note'];
+                                        }
+                                        echo $mnote;
+                                        ?>
+                                    </p>
+                                    <hr class="margin-top-sm margin-bottom-sm"/>
+                                    <div class="text-center">
+                                        <button class="btn btn-danger btn-sm action-meeting-accept" data-key="<?= $adata['id']; ?>">Accept</button>
+                                        <button class="btn btn-primary btn-sm action-meeting-reject" data-key="<?= $adata['id']; ?>">Reject</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-body">
-                            <p><strong>BHR Meeting</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 2 meetings <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 3 feedback <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-body">
-                            <p><strong>Logistics</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-star fa-lg"></i> SLA Completed
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-smile-o fa-lg"></i> 100% <strong class="text-green">Success</strong> feedback
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-body">
-                            <p><strong>BHR Meeting</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 2 meetings <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 3 feedback <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-body">
-                            <p><strong>Logistics</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-star fa-lg"></i> SLA Completed
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-smile-o fa-lg"></i> 100% <strong class="text-green">Success</strong> feedback
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-body">
-                            <p><strong>BHR Meeting</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 2 meetings <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 3 feedback <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel panel-success">
-                        <div class="panel-body">
-                            <p><strong>Logistics</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-star fa-lg"></i> SLA Completed
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-smile-o fa-lg"></i> 100% <strong class="text-green">Success</strong> feedback
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-danger">
-                        <div class="panel-body">
-                            <p><strong>BHR Meeting</strong></p>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 2 meetings <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p class="text-muted margin-0">
-                                <i class="fa fa-frown-o fa-lg"></i> 3 feedback <strong class="text-red">pending</strong>
-                            </p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <div class="text-center">
-                                <button class="btn btn-danger btn-sm">Accept</button>
-                                <button class="btn btn-primary btn-sm">Reject</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        <?php
+                    }
+                }
+                ?>
+
             </div>
         </div>
     </div>
@@ -795,34 +749,88 @@
 <?php
 echo $this->Html->script(['guage', 'custom', 'dashboard', 'sidebar', 'supervisor']);
 ?>
+<?php $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 'fetchusersessionbyidcommon']);?>
 <script>
-function logisticinsert(){
+                function logisticinsert() {
 
-var userid= $("#userid").val();
-var logistic_arrangement_add_by= $("#logistic_arrangement_add_by").val();
-var logistic_id = new Array();
-        $('input:checkbox[name="logistic_id[]"]:checked').each(function() {
-           logistic_id.push($(this).val());
+                    var userid = $("#userid").val();
+                    var logistic_arrangement_add_by = $("#logistic_arrangement_add_by").val();
+                    var logistic_id = new Array();
+                    $('input:checkbox[name="logistic_id[]"]:checked').each(function () {
+                        logistic_id.push($(this).val());
+                    });
+
+                    $.ajax({
+                        url: '<?= $insertsuperlogistics ?>',
+                        method: 'POST',
+                        data: {userid: userid,
+                            logistic_arrangement_add_by: logistic_arrangement_add_by,
+                            logistic_id: logistic_id},
+                        success: function (data) {
+                            $("#send_requirments").show();
+
+                            dashboard.toggleLogistics();
+                            setTimeout(function () {
+                                $("#send_requirments").fadeOut();
+                            }, 6000);
+                            $("#logistic_user_id").show();
+                            $("#pending").hide();
+                        }
+                    });
+                }
+                $(document).ready(function () {
+                    $('.action-meeting-accept').click(function () {
+                        var btn = $(this);
+                        var uKey = $(this).attr('data-key');
+                        $.ajax({
+                            url: webroot + 'supervisor/meetingAction/' + uKey + '/1'
+                        }).done(function (data) {
+                            data = $.parseJSON(data);
+                            if (data.status == 1) {
+                                btn.parent().html('<strong class="text-green">' + data.msg + '</strong>');
+                            } else {
+                                btn.parent().html('<strong class="text-red">' + data.msg + '</strong>');
+                            }
+                        });
+                    });
+                    $('.action-meeting-reject').click(function () {
+                        var uKey = $(this).attr('data-key');
+                        var btn = $(this);
+                        $.ajax({
+                            url: webroot + 'supervisor/meetingAction/' + uKey + '/2'
+                        }).done(function (data) {
+                            data = $.parseJSON(data);
+                            btn.parent().html('<strong class="text-red">' + data.msg + '</strong>');
+
+                        });
+                    });
+
+                });
+                
+                
+    function getsessions(id) {
+         $('#session_table').html('');
+        $.ajax({
+            type: "POST",
+            url: "<?= $session_detail_by_id; ?>",
+            data: {'id': id},
+            success: function (data) {
+                //console.log("data fetched - "+data);
+                var parsedata1 = JSON.parse(data);
+                if(parsedata1!=""){
+                    $("#session_table_div").show();
+                    $("#session_table").append(parsedata1);
+                }else{
+                    parsedata1 = "<tr><td></td><td></td><td></td><td></td><td>No Data Found</td><td></td><td></td><td></td><td></td></tr>";
+                    //$("#session_table_div").hide();
+                    $("#session_table").append(parsedata1);
+                } 
+            },
+            error: function () {
+                alert("Value NOT reaching to controller ");
+            }
         });
-   
-    $.ajax({
-        url: '<?= $insertsuperlogistics ?>',
-        method: 'POST',
-        data: {userid:userid,
-		logistic_arrangement_add_by:logistic_arrangement_add_by,
-               logistic_id:logistic_id },
-        success: function(data){
-         $("#send_requirments").show();
-		
-		 dashboard.toggleLogistics();
-		  setTimeout(function(){
-        $("#send_requirments").fadeOut();
-    },6000);
-	  $("#logistic_user_id").show();
-           $("#pending").hide();	 
-}
- });
-} 
+    }
 </script>
 
 

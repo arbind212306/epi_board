@@ -38,5 +38,51 @@ if( parsData[0].user_id === parsData[0].id){
 
         }
     });
-} 
 
+ $.ajax({
+        url: webroot + 'Users/userlogistic_data',
+        method: 'POST',
+
+        data: {'user_id':id
+                },
+        success: function(data){
+       
+     $('.logstmsg').remove();
+        $('.log_check').show();
+        var assigned = 0;
+        var recvd = 0;
+        data = $.parseJSON(data);
+        console.log(data.length);
+        if (data.length > 0) {
+            $(data).each(function (i, u) {
+                if (u.logistic.id != undefined) {
+                    var ik = u.logistic.id;
+                    assigned++;
+                    if (u.r_status == 1) {
+                        recvd++;                        
+                        $('#logistic_id_' + ik).parent().append('<p class="margin-bottom-0 text-green logstmsg">Received</p>');
+                        $('#logistic_id_' + ik).hide();
+                    } else if (u.r_status == 0) {
+                        $('#logistic_id_' + ik).hide();
+                        $('#logistic_id_' + ik).parent().append('<p class="margin-bottom-0 text-orange logstmsg">In Process</p>');
+                    }
+                }
+            });
+        }
+        var stHtml = '<span class="text-green">' + recvd + '</span>/' + '<span class="text-orange">' + assigned + '</span>';
+        $('#logistic_count').html(stHtml);
+$('.logistic_date').html(data[0].time_created.substring(0,10));
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+} 

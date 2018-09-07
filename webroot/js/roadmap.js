@@ -5,9 +5,7 @@ var roadmap = {
             $("#roadmap_recommend").addClass("hidden");
             $("#roadmap_view").removeClass("hidden");
         } else if (type === "arrange") {
-            $("#roadmap_arrange").removeClass("hidden");
-            $("#roadmap_recommend").addClass("hidden");
-            $("#roadmap_view").addClass("hidden");
+            $("#roadmap").removeClass("hidden");
         } else if (type === "recommend") {
             $("#roadmap_arrange").addClass("hidden");
             $("#roadmap_recommend").removeClass("hidden");

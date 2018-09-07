@@ -200,7 +200,7 @@ return [
             /*
              * The following keys are used in SMTP transports:
              */
-            'host' => 'localhost',
+           'host' => '10.100.4.153',
             'port' => 25,
             'timeout' => 30,
             'username' => null,

@@ -37,15 +37,16 @@
                     <h3>Add Users / Joinee </h3>
                 </div>
               <div class="row margin-top-xl" >
+<h5><?= @$searcherror; ?></h5>
                     <div class="col-md-6 col-md-offset-3">
 					 <?php //echo $this->Form->create('Users',['url' => ['controller' => 'Users', 'action' => 'searchuser']]);?>
 					  <?php echo $this->Form->create('Users');?>
                         <div class="form-group">
                             <div class="input-group">
-							 <?php echo $this->Form->input('search',(['label'=>false,'type'=>'text','name' => 'search','id' => 'search','placeholder'=>'Search by Emp Id / Email Id / DOJ','class' => 'form-control' ,'required']));?>
-                              
+		 <?php echo $this->Form->input('search',(['label'=>false,'type'=>'text','name' => 'search','id' => 'search','placeholder'=>'Search by Emp Id / Email Id / DOJ','class' => 'form-control' ,'required']));?>
+                          
                                 <span class="input-group-btn">
-                                      <button class="btn btn-secondary" onclick="return ajaxsearch();" type="button"><i class="fa fa-search"></i></button>
+                                      <button class="btn btn-secondary" id="myBtn" onclick="return ajaxsearch();" type="button"><i class="fa fa-search"></i></button>
                                   </span>
                             </div>
                         </div>
@@ -281,6 +282,9 @@
 <script>
 function ajaxsearch(){	
 var search=$('#search').val();
+
+
+
 if(search === ''){
     $('#err').html('Please enter Emp Id / Email Id / DOJ');
     $('#error').show();
@@ -348,7 +352,6 @@ $.ajax({
 		
 	}
 	
-   
     }
 	});
 

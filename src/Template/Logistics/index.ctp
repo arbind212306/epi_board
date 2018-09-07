@@ -110,8 +110,8 @@
 
                     <hr/>
                     <div class="col-xs-12 padding-bottom-lg text-center margin-top-lg">
-        <button type=""  data-sidebar-button class="btn btn-primary padding-left-lg padding-right-lg">Close</button>
-        <button type="button" class="btn btn-danger padding-left-lg padding-right-lg" id="updatelogistics">Update</button>
+        <button type=""  data-sidebar-button class="btn btn-primary btn-sm padding-left-lg padding-right-lg">Close</button>
+        <button type="button" class="btn btn-danger btn-sm padding-left-lg padding-right-lg" id="updatelogistics">Update</button>
                     </div>
                 </form>
             </div>
@@ -126,7 +126,7 @@
     <div class="success-msg" id="success" style="text-align:center;">
      <i class="fa fa-check"></i>
         <!--<?= $this->Flash->render('flash', ['element' => 'success']);?>-->
-     Logistics Added Sucessfully.
+     Changes Done Sucessfully.
     </div>
     <?php } ?>
     
@@ -282,10 +282,10 @@ function editdata(id)
         var bu_name = $('#bu_name').val();
         var dept  = $('#dept').val();
         var sub_dept  = $('#sub_dept').val();
-        var location = $('#location').val();
+        var location_data = $('#location').val();
         var title = $('#title').val();
         var description = $('#description').val();
-        console.log("bu_name -"+bu_name+"dept -"+dept+"sub_dept -"+sub_dept+"location -"+location+"title -"+title+"description- "+description);
+        console.log("bu_name -"+bu_name+"dept -"+dept+"sub_dept -"+sub_dept+"location_data -"+location_data+"title -"+title+"description- "+description);
         $.ajax({
             type:"POST",
             url: "<?= $update_logistics_details; ?>",
@@ -294,14 +294,14 @@ function editdata(id)
                bu_name : bu_name,
                dept  : dept,
                sub_dept  : sub_dept,
-               location  : location,
+               location  : location_data,
                title : title,
                description : description,
            },
             success : function(data) {
+                console.log(data);
               alert("Records Updated Sucessfully");
                 location.reload(true);
-               // alert(data);
                },
               error : function() {
                 //alert("Value NOT reaching to controller ");
@@ -319,6 +319,7 @@ function editdata(id)
                'status' : status
                },
         success : function(data) {
+            alert("Logistic Inactivated Successfully");
            location.reload();
           },
         error : function() {
@@ -339,6 +340,7 @@ function editdata(id)
                'status' : status
                },
         success : function(data) {
+            alert("Logistic Activated Successfully");
             location.reload();
           },
         error : function() {
@@ -348,3 +350,8 @@ function editdata(id)
     });
  }
 </script>
+<style>
+    .dataTables_info{width: 170px;}
+    .paging_simple_numbers{width: 170px;float: right;margin-top: -44px;}
+    #report_table td {text-align:left;}
+</style> 

@@ -12,8 +12,8 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><i class="fa fa-bell-o fa-lg text-blue"></i> <span class="hidden-lg hidden-md hidden-sm text-blue">Notifications</span></a></li>
-            <li><a href="#"><i class="fa fa-question-circle fa-lg text-orange"></i> <span class="hidden-lg hidden-md hidden-sm text-orange">Help</span></a></li>
+           <!--  <li><a href="#"><i class="fa fa-bell-o fa-lg text-blue"></i> <span class="hidden-lg hidden-md hidden-sm text-blue">Notifications</span></a></li>
+            <li><a href="#"><i class="fa fa-question-circle fa-lg text-orange"></i> <span class="hidden-lg hidden-md hidden-sm text-orange">Help</span></a></li> -->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <div class="inline-block">

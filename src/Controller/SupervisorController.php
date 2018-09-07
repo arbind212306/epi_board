@@ -17,17 +17,22 @@ class SupervisorController extends AppController {
     }
 
     public function dashboard() {
+        $user = $this->Auth->user();
+        $user_type = $user['user_type'];
+        if ($user_type != 2) {
+            return $this->redirect($this->referer());
+        }
         // Get new joinees
         $userTbl = TableRegistry::getTableLocator()->get('Users');
         $query1 = $userTbl->find('all')
-                ->where(['user_type' => 4, 'status' => 1])
-                ->contain(['FeedbackUsers']);
+                ->where(['user_type' => 4, 'status !=' => 0, 'ob_status' => 1])
+                ->contain(['FeedbackUsers', 'LogisticsArrangement']);
         $joineeData = [];
         foreach ($query1 as $rw) {
-            if (!empty($rw)) {
-
-
+            if (!empty($rw) &&(!in_array($rw->status,[3]))) {
+                
                 $fcomplete = false;
+                $locomplete = false;
                 if (!empty($rw->feedback_users)) {
                     foreach ($rw->feedback_users as $uf) {
                         if ($uf->status != 1) {
@@ -37,75 +42,75 @@ class SupervisorController extends AppController {
                         }
                     }
                 }
-                $rw->fcomplete=$fcomplete;
+                if (!empty($rw->logistics_arrangement)) {
+                    $locomplete = true;
+                }
+
+                $rw->fcomplete = $fcomplete;
+                $rw->lcomplete = $locomplete;
                 $joineeData[] = $rw->toArray();
             }
         }
         //pr($joineeData);die;
-    
-   //$logisticTable=TableRegistry::getTableLocator()->get('logistics');
-   //$logisticdata=$logisticTable->find('all')->where(['status'=>1])->toArray();
-   
-   //$departTable=TableRegistry::getTableLocator()->get('departments');
-   //$departdata= $departTable->find('all')->where(['status'=>1])->toArray();
-   //$departdataarr=[];
-   //foreach($departdata){
-	 
-   //}
-    $this->loadModel('Logistics');
+        //$logisticTable=TableRegistry::getTableLocator()->get('logistics');
+        //$logisticdata=$logisticTable->find('all')->where(['status'=>1])->toArray();
+        //$departTable=TableRegistry::getTableLocator()->get('departments');
+        //$departdata= $departTable->find('all')->where(['status'=>1])->toArray();
+        //$departdataarr=[];
+        //foreach($departdata){
+        //}
+        $this->loadModel('Logistics');
         $this->loadModel('Departments');
-		 $this->loadModel('Locations');
-    $logisticrecord = $this->Logistics->find('all')->contain(['Departments','Locations'])->distinct(['Logistics.id'])->toArray();
-   
-  
-   
-   
-   
-   //$locationTable=TableRegistry::getTableLocator()->get('locations');
-   //$locationdata= $locationTable->find('all')->where(['status'=>1])->toArray();
+        $this->loadModel('Locations');
+        $logisticrecord = $this->Logistics->find('all')->contain(['Departments', 'Locations'])->distinct(['Logistics.id'])->toArray();
 
-        $this->set(compact('joineeData','logisticrecord'));
+
+
+
+
+        //$locationTable=TableRegistry::getTableLocator()->get('locations');
+        //$locationdata= $locationTable->find('all')->where(['status'=>1])->toArray();
+        // Get raodmap meeting data
+        $addSessionsTbl = TableRegistry::getTableLocator()->get('AddSessions');
+        $query2 = $addSessionsTbl->find('all')
+                ->where(['user_id' => $user['id'], 'AddSessions.is_accepted' => 0, 'AddSessions.status' => 1, 'AddSessions.session_date >' => time()])
+                ->contain(['Users']);
+        $asnData = [];
+        foreach ($query2 as $rw) {
+            if (!empty($rw)) {
+                $asnData[] = $rw->toArray();
+            }
+        }
+//        pr($asnData);die;
+        $this->set(compact('joineeData', 'logisticrecord', 'asnData'));
     }
 
-	public function logisticsupinsert() {
-		
-		 $this->autoRender = false;
+    public function logisticsupinsert() {
+
+        $this->autoRender = false;
         if ($this->request->is('ajax')) {
             $time1 = Time::now();
             $userid = $this->request->data('userid');
             $logistic_id = $this->request->data('logistic_id');
-			 $logistic_arrangement_add_by= $this->request->data('logistic_arrangement_add_by');
-	
+            $logistic_arrangement_add_by = $this->request->data('logistic_arrangement_add_by');
+
             $logisticsarrangementTable = TableRegistry::get('logistics_arrangement');
-           
-            
-                           foreach($logistic_id as $logistic_ids){
-                        $logdata = $logisticsarrangementTable->newEntity();
-						 $logdata->logistic_id= $logistic_ids;
-                       $logdata->logistic_arrangement_add_by= $logistic_arrangement_add_by;
-                   $logdata->user_id = $userid;
-             $logdata->time_created= $time1;
-                          if ($logisticsarrangementTable->save($logdata)) {
-                
+
+
+            foreach ($logistic_id as $logistic_ids) {
+                $logdata = $logisticsarrangementTable->newEntity();
+                $logdata->logistic_id = $logistic_ids;
+                $logdata->logistic_arrangement_add_by = $logistic_arrangement_add_by;
+                $logdata->user_id = $userid;
+                $logdata->time_created = $time1;
+                if ($logisticsarrangementTable->save($logdata)) {
+                    
+                }
             }
         }
-        }
         exit;
-		
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    }
+
     public function getJoinee($user_id) {
         $this->autoRender = false;
         $returnData = [];
@@ -115,9 +120,12 @@ class SupervisorController extends AppController {
             die;
         }
         $userTbl = TableRegistry::getTableLocator()->get('Users');
-        $query1 = $userTbl->get($user_id);
-        if (!empty($query1)) {
-            $jObj = $query1->toArray();
+        $query1 = $userTbl->find('all')
+                ->where(['Users.id' => $user_id, 'ob_status' => 1, 'Users.status' => 1])
+                ->contain(['BusinessUnits', 'Departments', 'SubDepart']);
+
+        if (!empty($query1->first())) {
+            $jObj = $query1->first()->toArray();
             $jObj['doj'] = date('d/m/Y', strtotime($jObj['doj']));
             $returnData = $jObj;
         }
@@ -127,28 +135,21 @@ class SupervisorController extends AppController {
 
     public function getRMapData($user_id) {
         $this->autoRender = false;
-        $joineeRmapTbl = TableRegistry::getTableLocator()->get('JoineeRoadmaps');
-        $rmapTbl = TableRegistry::getTableLocator()->get('Roadmaps');
-        $query1 = $joineeRmapTbl->find('all')
-                ->where(['user_id' => $user_id]);
+        $sessionTbl = TableRegistry::getTableLocator()->get('AddSessions');
+        $query1 = $sessionTbl->find('all')
+                ->where(['joinee_id' => $user_id]);
         $assignedRmap = [];
-        foreach ($query1 as $rw) {
-            if (!empty($rw)) {
-                $assignedRmap[$rw->roadmap_id] = $rw->status;
-            }
-        }
-        // Get all roadmaps
-        $query2 = $rmapTbl->find('all')
-                ->where(['status' => 1]);
         $rHtml = "";
-        foreach ($query2 as $i=> $rw2) {
-            if (!empty($rw2)) {
+        foreach ($query1 as $rw) {
+            //pr($rw);die;
+            if (!empty($rw)) {
+                $assignedRmap[] = $rw->toArray();
                 $status = 0;
                 if (!empty($assignedRmap[$rw2->id])) {
                     $status = $assignedRmap[$rw2->id];
                 }
-                if($i!=0){
-                    $rHtml = $rHtml."<hr/>";
+                if ($i != 0) {
+                    $rHtml = $rHtml . "<hr/>";
                     $i++;
                 }
                 $rHtml = $rHtml
@@ -175,47 +176,60 @@ class SupervisorController extends AppController {
         die;
     }
 
-    public function saveRmap() {
-        $this->autoRender = false;
-        $joineeRmapTbl = TableRegistry::getTableLocator()->get('JoineeRoadmaps');
-
-        if ($this->request->is('post')) {
-            $requestData = $this->request->data;
-            $author = $this->Auth->user('id');
-            if (!empty($requestData['sel'])) {
-                foreach ($requestData['sel'] as $rId) {
-                    $jr = $joineeRmapTbl->newEntity();
-                    $jr->user_id = $requestData['key'];
-                    $jr->roadmap_id = $rId;
-                    $jr->added_by = $author;
-                    $jr->status = 1;
-                    $joineeRmapTbl->save($jr);
-                }
-            }
-        }
-    }
+//    public function saveRmap() {
+//        $this->autoRender = false;
+//        $joineeRmapTbl = TableRegistry::getTableLocator()->get('JoineeRoadmaps');
+//
+//        if ($this->request->is('post')) {
+//            $requestData = $this->request->data;
+//            $author = $this->Auth->user('id');
+//            if (!empty($requestData['sel'])) {
+//                foreach ($requestData['sel'] as $rId) {
+//                    $jr = $joineeRmapTbl->newEntity();
+//                    $jr->user_id = $requestData['key'];
+//                    $jr->roadmap_id = $rId;
+//                    $jr->added_by = $author;
+//                    $jr->status = 1;
+//                    $joineeRmapTbl->save($jr);
+//                }
+//            }
+//        }
+//    }
 
     public function getFeedbackData($user_id) {
         $this->autoRender = false;
-        $feedbackUserTbl = TableRegistry::getTableLocator()->get('FeedbackUsers');
+        $fbTbl = TableRegistry::getTableLocator()->get('Feedbacks');
+        //$feedbackUserTbl = TableRegistry::getTableLocator()->get('FeedbackUsers');
+        $uTbl = TableRegistry::getTableLocator()->get('Users');
         $feedBackData = [];
+
+        // Get basic info of user
+        $uinfo = $uTbl->get($user_id);
+        $username = $uinfo['first_name'] . " " . $uinfo['last_name'];
+        $ueId = $uinfo['emp_id'];
+        $doj = date('d/m/Y', strtotime($uinfo['doj']));
         // Get feedbacl list for user
-        $query1 = $feedbackUserTbl->find('all')
-                ->where(['user_id' => $user_id])
-                ->contain(['Feedbacks' => ['FeedbackQuestions' => ['FeedbackResponses']]]);
-        foreach ($query1 as $key => $rw) {
+        $query1 = $fbTbl->find('all')
+                ->where(['status' => 1, 'for_supervisor' => 1])
+                ->contain([
+            'FeedbackVerify' => function ($q) use ($user_id){
+                return $q->where(['FeedbackVerify.user_id' =>$user_id]);
+            },
+            'FeedbackQuestions' => ['Questions']]);
+        foreach ($query1 as $rw) {
             //pr($rw);die;
             if (!empty($rw)) {
+                $key = $rw['id'];
                 $completed = false;
-                if ($rw['status'] == 1) {
+                if (!empty($rw['feedback_verify'])) {  // This method will be replaced by another method later
                     $completed = true;
                 }
                 $completedOn = "-";
                 $completedTxt = "<h5>&nbsp;</h5>";
-                $title = $rw['feedback']['title'];
+                $title = $rw['title'];
                 $fstatus = '<p class="margin-bottom-0 text-red">Pending</p>';
-                if (!empty($rw['completed_on'])) {
-                    $completedOn = date('d/m/Y', strtotime($rw['completed_on']));
+                if (($completed)&&!empty($rw['feedback_verify'][0])) {
+                    $completedOn = date('d/m/Y', strtotime($rw['feedback_verify'][0]['created']));
                     $completedTxt = '<h5 class="text-muted">Completed on ' . $completedOn . '</h5>';
                 }
                 if ($completed) {
@@ -235,7 +249,9 @@ class SupervisorController extends AppController {
                             </div>';
                 $detailedHtml = '<div class="hidden feedback-sec" id="detail-sec-' . $key . '">
                             <form class="feedback-form" onsubmit="return false;">
-                            <input type="hidden" name="fu_id" value="' . $rw['id'] . '">
+                            <input type="hidden" name="fu_id" value="' . $user_id . '">
+                            <input type="hidden" name="f_id" value="' . $key . '">
+                            <input type="hidden" name="u_id" value="' . $user_id . '">    
                             <ol class="breadcrumb">
                                 <li class="text-blue pointer goback-feedback" data-rel="' . $key . '">Interval Feedback</li>
                                 <li class="active">' . $title . '</li>
@@ -244,15 +260,15 @@ class SupervisorController extends AppController {
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span>Name : </span>
-                                        <strong class="j-name-html"></strong>
+                                        <strong class="j-name-html">' . $username . '</strong>
                                     </div>
                                     <div class="col-md-4">
                                         <span>Emp Id : </span>
-                                        <strong class="j-emp_id-html"></strong>
+                                        <strong class="j-emp_id-html">' . $ueId . '</strong>
                                     </div>
                                     <div class="col-md-4">
                                         <span>DOJ : </span>
-                                        <strong class="j-doj-html"></strong>
+                                        <strong class="j-doj-html">' . $doj . '</strong>
                                     </div>
                                 </div>
                             </div>
@@ -266,15 +282,19 @@ class SupervisorController extends AppController {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">';
-                if (!empty($rw['feedback']['feedback_questions'])) {
-                    foreach ($rw['feedback']['feedback_questions'] as $key1 => $fq) {
+                $feedbackAnsData = $rw['feedback_verify'];
+                if (!empty($rw['feedback_questions'])) {
+                    foreach ($rw['feedback_questions'] as $key1 => $fq) {
+                        if($completed){
+                            $answer = $feedbackAnsData[$key1];
+                        }
                         $detailedHtml .= '<div class="col-md-6">
-                                                    <p>' . ($key1 + 1) . '. ' . $fq['title'] . '</p>';
+                                                    <p>' . ($key1 + 1) . '. ' . $fq['question']['title'] . '</p>';
                         $ratingG = 0;
-                        if ($fq['type'] == 2) {
+                        if ($fq['question']['type'] == 2) {
                             $starClas = " star-rate";
                             if ($completed) {
-                                $ratingG = $fq['feedback_response']['rating'];
+                                $ratingG = $answer['rating'];
                                 $starClas = "";
                             }
                             $detailedHtml .= ' <input type="hidden" name="q_' . $fq['id'] . '" class="rate" value="' . $ratingG . '"/><div class="u-rate" data-rate="0">&nbsp;';
@@ -287,12 +307,12 @@ class SupervisorController extends AppController {
                                 $ratingG--;
                             }
                             $detailedHtml .= '</div>';
-                        } else if ($fq['type'] == 1) {
+                        } else if ($fq['question']['type'] == 1) {
                             $textExtra = "";
                             $tval = "";
                             if ($completed) {
                                 $textExtra = ' readonly ';
-                                $tval = $fq['feedback_response']['answer'];
+                                $tval = $answer['answer'];
                             }
                             $detailedHtml .= '<div class="form-group">
                                                                     <textarea class="form-control" ' . $textExtra . ' rows="2" name="q_' . $fq['id'] . '">' . $tval . '</textarea>
@@ -332,12 +352,15 @@ class SupervisorController extends AppController {
             $requestData = $this->request->data;
             $params = array();
             parse_str($requestData['fdata'], $params);
+            // pr($params);die;
             foreach ($params as $questn => $answr) {
                 $questn = explode('q_', $questn);
                 if (count($questn) > 1) {
                     $question_id = $questn[count($questn) - 1];
                     $feedRes = $feedbackResponsesTbl->newEntity();
                     $feedRes->feedback_question_id = $question_id;
+                    $feedRes->feedback_id = $params['f_id'];
+                    $feedRes->user_id = $params['u_id'];
                     $feedRes->rating = $answr;
                     $feedRes->answer = $answr;
                     $feedRes->response_by = $this->Auth->user('id');
@@ -345,14 +368,97 @@ class SupervisorController extends AppController {
                     $feedbackResponsesTbl->save($feedRes);
                 }
             }
-            if (!empty($params['fu_id'])) {
-                $feedbackUsersTbl = TableRegistry::getTableLocator()->get('FeedbackUsers');
-                $fu = $feedbackUsersTbl->get($params['fu_id']);
-                $fu->status = 1;
-                $fu->completed_on = date('Y-m-d', time());
-                $feedbackUsersTbl->save($fu);
+//            if (!empty($params['fu_id'])) {
+//                $feedbackUsersTbl = TableRegistry::getTableLocator()->get('FeedbackUsers');
+//                $fu = $feedbackUsersTbl->get($params['fu_id']);
+//                $fu->status = 1;
+//                $fu->completed_on = date('Y-m-d', time());
+//                $feedbackUsersTbl->save($fu);
+//            }
+        }
+    }
+
+    public function getLogisticData($user_id) {
+        $logArgmntTbl = TableRegistry::getTableLocator()->get('LogisticsArrangement');
+        $query = $logArgmntTbl->find('all')
+                ->where(['user_id' => $user_id])
+                ->contain(['Logistics']);
+        $logData = [];
+        foreach ($query as $rw) {
+            if (!empty($rw)) {
+                $logData[] = $rw->toArray();
             }
         }
+        echo json_encode($logData);
+        die;
+    }
+
+
+
+    public function access() {
+        $accessCatTbl = TableRegistry::getTableLocator()->get('AccessCategories');
+
+        if ($this->request->is('post')) {
+            $requsetData = $this->request->data;
+            //pr($requsetData);die;
+
+            if (!empty($requsetData['child'])) {
+                $ac = $accessCatTbl->newEntity();
+                if (!empty($requsetData['parent_id'])) {
+                    $ac->parent_id = $requsetData['parent_id'];
+                } else {
+                    $ac->parent_id = 0;
+                }
+                $ac->name = $requsetData['child'];
+                $ac->status = 1;
+            }
+            $accessCatTbl->save($ac);
+        }
+        // Get category list
+        $query1 = $accessCatTbl->find('list')
+                ->where(['status' => 1, 'parent_id' => 0]);
+        $aCatData = $query1->toArray();
+        $this->set(compact('aCatData'));
+    }
+
+    public function getAccOpt($level) {
+        $accessCatTbl = TableRegistry::getTableLocator()->get('AccessCategories');
+        $query1 = $accessCatTbl->find('list')
+                ->where(['status' => 1, 'parent_id' => $level]);
+        $aCatData = $query1->toArray();
+        $html = "";
+        foreach ($aCatData as $id => $ac) {
+            if (!empty($ac)) {
+                $html .= '<option value="' . $id . '">' . $ac . '</option>';
+            }
+        }
+        echo $html;
+        die;
+    }
+
+    public function meetingAction($session_id, $is_accepted) {
+        $this->autoRender = false;
+        $addSessionsTbl = TableRegistry::getTableLocator()->get('AddSessions');
+        $addS = $addSessionsTbl->get($session_id);
+        if ($addS->user_id != $this->Auth->user('id')) {
+            echo json_encode(['status' => '0', 'msg' => 'invalid access !']);
+            die;
+        }
+        if (!empty($is_accepted)) {
+            $msg = "Meeting updated successfully !";
+            if ($is_accepted == 1) {
+                $addS->is_accepted = 1;
+                $msg = "Meeting accepted successfully !";
+            } else if ($is_accepted == 2) {
+                $addS->is_accepted = 2;
+                $msg = "Meeting rejected successfully !";
+            }
+            $addSessionsTbl->save($addS);
+            echo json_encode(['status' => '1', 'msg' => $msg]);
+            die;
+        }
+        echo json_encode(['status' => '0', 'msg' => 'invalid access !']);
+        die;
     }
 
 }

@@ -18,12 +18,28 @@ class UsersTable extends Table {
         $this->hasMany('FeedbackUsers', [
             'foreignKey' => 'user_id'
         ]);
+        $this->belongsTo('BusinessUnits', [
+            'foreignKey' => 'businees_unit'
+        ]);
+        $this->belongsTo('Departments', [
+            'foreignKey' => 'department',
+            'propertyName' => 'department'
+        ]);
+        $this->belongsTo('SubDepart', [
+            'className'=>'Departments',
+            'foreignKey' => 'sub_department'
+        ]);
+        $this->belongsTo('Users', [
+            'ClassName' => 'Users',
+            'foreignKey' => 'manager_emp_id',
+            'propertyName' => 'manager_emp_id'
+        ]);
     }
 
     public function findAuth(\Cake\ORM\Query $query, array $options) {
         $query
                 ->find('all')
-                ->where(['Users.status' => 1]);
+                ->where(['Users.status !=' =>0,'ob_status'=>1]);
         return $query;
     }
 

@@ -1,5 +1,4 @@
-<?php $fetchlogisticsPopup = $this->Url->build(['controller'=>'Users','action'=>'fetchlogisticsPopup']) ?>
-<?php $insertlogistics = $this->Url->build(['controller'=>'Users','action'=>'logisticinsert']) ?>
+
 <aside data-sidebar>
     <div class="padding-bottom-md container-fluid">
         <div class="row">
@@ -11,10 +10,10 @@
             </div>
             <div class="col-xs-12 margin-top-md">
                 <div class="nav-center">
-                    <ul class="nav nav-pills text-center">
+                    <ul class="nav nav-pills text-center" style="margin-top:35px;">
                         <li class="active"><a data-toggle="pill" href="#joinee_information" id="joinee_tab">Joinee Information</a></li>
-                        <li><a data-toggle="pill" href="#interval_feedback" id="interval_tab">Interval Feedback</a></li>
-                        <li><a data-toggle="pill" href="#roadmap" id="roadmap_tab">Roadmap</a></li>
+                        <!--<li><a data-toggle="pill" href="#interval_feedback" id="interval_tab">Interval Feedback</a></li>
+                        <li><a data-toggle="pill" href="#roadmap" id="roadmap_tab">Roadmap</a></li>  -->
                     </ul>
                 </div>
                 <hr class="margin-top-0"/>
@@ -33,10 +32,8 @@
                                         <div class="panel-body">
                                             <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
                                             <strong>Logistics Arrangements</strong>
-                                            <p class="margin-bottom-0 text-muted">-</p>
-											
-	<p class="margin-bottom-0 text-green" id="logistic_user_id"  style="display:none;">Done</p>
-	 <p class="margin-bottom-0 text-red" id="pending">Pending</p>
+                                        <p class="margin-bottom-0 text-muted logistic_date"></p>
+                                             <p class="margin-bottom-0 text-green" id="logistic_count"></p>
 											 
                                         </div>
                                     </div>
@@ -264,23 +261,34 @@
                             <hr/>
                             <div class="row">
 <?php echo $this->Form->create();?>
-<?php foreach($logistics as $logistic){
+<?php 
+$i=1;
+$j=1;
+foreach($logistics as $logistic){
 $cstatus = $logistic['department_id'];
 $location_id = $logistic['location_id'];
 $location_name=$locationarr[$location_id];
- $cstatusTxt=$cstatusData[$cstatus];
+ @$cstatusTxt=$cstatusData[$cstatus];
   ?>
                                 <div class="col-md-4">
                                     <div class="panel panel-primary joinee-blocks" onclick="dashboard.panelCheckboxToggle(this)">
                                         <div class="panel-body">
-                                            <div class="panel-proceed-btn"><input  id="logistic_id" type="checkbox" class="checkbox" name="logistic_id[]" value="<?= $logistic->id ?>" multiple></div>
-                                            <strong><?= $logistic->title ?></strong>
+                                            <div class="panel-proceed-btn"  >
+<input  id="logistic_id_<?php echo $i++;?>" type="checkbox" class="checkbox log_check" name="logistic_id[]" value="<?= $logistic->id ?>" multiple>
+<span class=" user_logistic_done" id ="user_logistic_done_<?php echo $j++;?>" style="display:none;"> In process</span>
+
+</div>
+                                            
+ 
+
+<strong><?= $logistic->title ?></strong>
                                             <p class="margin-bottom-0 text-muted"><?= $location_name ?></p>
-                                            <p class="margin-bottom-0 text-primary"><?= $cstatusTxt ?></p>
+                                            <p class="margin-bottom-0 text-primary"><?= @$cstatusTxt ?></p>
                                         </div>
                                     </div>
                                 </div>
-<?php } ?>
+
+<?php   } ?>
                  <?php echo $this->Form->input('userid',(['name'=>'userid','type'=>'hidden','id'=>'userid'])); ?>               
                         
                       
@@ -674,403 +682,11 @@ $location_name=$locationarr[$location_id];
                                 </div>
                             </div>
                         </div>
-                        <div id="supervisor_monthly_feedback" class="hidden">
-                            <ol class="breadcrumb">
-                                <li class="text-blue pointer" onclick="dashboard.supervisorMonthlyFeedback()">Interval Feedback</li>
-                                <li class="active">Supervisor Monthly Feedback</li>
-                            </ol>
-                            <div class="margin-top-sm">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <span>Name : </span>
-                                        <strong id="smf_username"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>Emp Id : </span>
-                                        <strong id="smf_empid"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>DOJ : </span>
-                                        <strong id="smf_doj"></strong>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="fa fa-share text-red pointer fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h4 class="margin-0">Supervisor Monthly Feedback Form</h4>
-                                    <h5 class="text-muted">Completed on 15/01/17</h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div>
-                                        <p>1. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>2. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>3. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>4. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <p>5. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>6. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            <div class="well well-sm">
-                                                <small class="text-muted">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>7. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            <div class="well well-sm">
-                                                <small class="text-muted">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <h4>SPOC Comments (if any)</h4>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="5"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-4 text-right">
-                                    <button class="btn btn-danger btn-block">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="BHR_Bi_annual_feedback" class="hidden">
-                            <ol class="breadcrumb">
-                                <li class="text-blue pointer" onclick="dashboard.toggleBHRBiAnnualFeedback()">Interval Feedback</li>
-                                <li class="active">BHR Bi-Annual Feedback Feedback</li>
-                            </ol>
-                            <div class="margin-top-sm">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <span>Name : </span>
-                                        <strong id="bhr_username"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>Emp Id : </span>
-                                        <strong id="bhr_empid"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>DOJ : </span>
-                                        <strong id="bhr_doj"></strong>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="fa fa-share text-red pointer fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h4 class="margin-0">Supervisor Monthly Feedback Form</h4>
-                                    <h5 class="text-muted">Completed on 15/01/17</h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div>
-                                        <p>1. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>2. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>3. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>4. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <p>5. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>6. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            <div class="well well-sm">
-                                                <small class="text-muted">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>7. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            <div class="well well-sm">
-                                                <small class="text-muted">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <h4>SPOC Comments (if any)</h4>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="5"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-4 text-right">
-                                    <button class="btn btn-danger btn-block">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="BHR_annual_feedback" class="hidden">
-                            <ol class="breadcrumb">
-                                <li class="text-blue pointer" onclick="dashboard.toggleBHRAnnualFeedback()">Interval Feedback</li>
-                                <li class="active">BHR Annual Feedback Feedback</li>
-                            </ol>
-                            <div class="margin-top-sm">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <span>Name : </span>
-                                        <strong id="bhr_af_username"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>Emp Id : </span>
-                                        <strong id="bhr_af_empid"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>DOJ : </span>
-                                        <strong id="bhr_af_doj"></strong>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="fa fa-share text-red pointer fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <h4 class="margin-0">Supervisor Monthly Feedback Form</h4>
-                                    <h5 class="text-muted">Completed on 15/01/17</h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div>
-                                        <p>1. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>2. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>3. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>4. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div>
-                                        <p>5. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            A.
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>6. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            <div class="well well-sm">
-                                                <small class="text-muted">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="margin-sm"/>
-                                    <div>
-                                        <p>7. How would you rate his/her performance up to this point?</p>
-                                        <div>
-                                            <div class="well well-sm">
-                                                <small class="text-muted">
-                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <h4>SPOC Comments (if any)</h4>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="5"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-4 text-right">
-                                    <button class="btn btn-danger btn-block">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                       
+					
+					
+					
+					
                     <div id="roadmap" class="tab-pane fade">
                         <div id="roadmap_arrange" class="hidden">
                             <ol class="breadcrumb">
@@ -1246,98 +862,7 @@ $location_name=$locationarr[$location_id];
                                 </div>
                             </div>
                         </div>
-                        <div id="roadmap_view" class="">
-                            <ol class="breadcrumb">
-                                <li>Roadmap</li>
-                                <li class="active">View Roadmap</li>
-                            </ol>
-                            <div class="margin-top-sm">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <span>Name : </span>
-                                        <strong id="r_username"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>Emp Id : </span>
-                                        <strong id="r_emp_id"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>DOJ : </span>
-                                        <strong id="r_doj"></strong>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="fa fa-share text-red pointer fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <div class="row text-center">
-                                                <div class="col-md-4">
-                                                    <strong>BHR 45 Days Session</strong>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p class="margin-0">21/01/2017</p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p class="margin-0">7 Hours</p>
-                                                </div>
-                                            </div>
-                                            <hr/>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Joinee Feedback</label>
-                                                    <div class="well well-sm">
-                                                        <p class="margin-0">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>BHR Feedback</label>
-                                                    <div class="well well-sm">
-                                                        <p class="margin-0">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <strong>Comment</strong>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" rows="6" id="comments"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 text-center">
-                                                    <button class="btn btn-danger">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="padding-xl text-center bg-dark">
-                                        <div>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-half-o fa-lg text-gold"></i></span>
-                                            <span><i class="fa fa-star-o fa-lg text-gold"></i></span>
-                                        </div>
-                                        <div>
-                                            <h3>9/10</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                     
                 </div>
             </div>
         </div>
@@ -1351,11 +876,11 @@ $location_name=$locationarr[$location_id];
             <h4>Manage Logistics</h4>
         </div>
         <div class="col-xs-12 margin-top-lg overflow-scroll">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="report_table">
                 <thead>
                 <tr>
                     <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="List of all the employees" class="red-tooltip">Employee Name</div></th>
-                    
+                  
                     <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Employee ID" class="red-tooltip">Emp ID</div></th>
                     <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Date of joining of the employee" class="red-tooltip">DOJ</div></th>
                     <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Confirmation status of employees" class="red-tooltip">Confirm</div></th>
@@ -1369,7 +894,9 @@ $location_name=$locationarr[$location_id];
 foreach($userrecord as $userrecords) :
 				@$log_userid= @$userrecords->logistics_arrangement[0]['user_id']; ?>
                     <tr>
-                        <td><div class="text-blue" data-sidebar-button data-panel-type="logistics" id="<?= 'user_'.$userrecords['id'] ?>" onclick="return displayIdBasedData('<?= $userrecords['id'] ?>');"><?= $userrecords['first_name']; ?> <?= $userrecords['last_name']; ?></div></td>
+                        <td><div class="text-blue logistic_user_arrangements" data-sidebar-button data-panel-type="logistics" id="<?= 'user_'.$userrecords['id'] ?>" onclick="return displayIdBasedData('<?= $userrecords['id'] ?>');"><?= $userrecords['first_name']; ?> <?= $userrecords['last_name']; ?>
+
+</div></td>
                       
                         <td><?= $userrecords['emp_id']; ?></td>
                         <td><?= $userrecords['doj']; ?></td>
@@ -1391,10 +918,28 @@ foreach($userrecord as $userrecords) :
 </div>
 
 <?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar','jquery-ui','dashboard']); ?>
+<?php $logistic_data = $this->Url->build(['controller'=>'Users','action'=>'userlogistic_data']) ?>
+<?php $fetchlogisticsPopup = $this->Url->build(['controller'=>'Users','action'=>'fetchlogisticsPopup']) ?>
+<?php $insertlogistics = $this->Url->build(['controller'=>'Users','action'=>'logisticinsert']) ?>
+
 <script>
     $('[data-toggle="tooltip"]').tooltip();
 </script>
+
+<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script>
+    $(document).ready(function () {
+    $('#report_table').DataTable({
+       "aaSorting" : [] 
+         
+    });
+});
+</script>
+
+<script>
+
 function displayIdBasedData(id){
     $.ajax({
         url: '<?= $fetchlogisticsPopup ?>',
@@ -1403,9 +948,8 @@ function displayIdBasedData(id){
         success: function(data){
            var parsData = JSON.parse(data);
            var name = parsData[0].first_name + ' ' + parsData[0].last_name;
-        
-
- $('#userid').val(parsData[0].id);
+      
+      $('#userid').val(parsData[0].id);
            $('#username').html(name);
  $('#i_username').html(name);
 $('#r_username').html(name);
@@ -1422,31 +966,63 @@ $('#r_doj').html(parsData[0].doj.substring(0,10));
 $('#smf_empid,#bhr_empid,#bhr_af_empid').html(parsData[0].emp_id);
 $('#smf_username,#bhr_username,#bhr_af_username').html(name);
 $('#smf_doj,#bhr_doj,#bhr_af_doj').html(parsData[0].doj.substring(0,10));
-
-
-            $('#email').html(parsData[0].email);
+             $('#email').html(parsData[0].email);
 		$('#mobile').html(parsData[0].mobile);
 		$('#city').html(parsData[0].city);
 		$('#bhr_emp_id').html(parsData[0].bhr_emp_id);
 		$('#businees_unit').html(parsData[0].businees_unit);
 		$('#department').html(parsData[0].department);
 		$('#sub_department').html(parsData[0].sub_department);
-		
 		$('#designation').html(parsData[0].designation);
                $('#supervisor_name').html(parsData[0].supervisor_name);
-		
-   
-         if( parsData[0].user_id === id){
-			$('#pending').hide();
-			$('#logistic_user_id').show();
-		}
-            else{
-                            $('#pending').show();
-			$('#logistic_user_id').hide();
-}
-          
+		   
+        
         }
     });
+
+ $.ajax({
+        url: '<?= $logistic_data ?>',
+        method: 'POST',
+
+        data: {'user_id':id
+                },
+        success: function(data){
+       
+     $('.logstmsg').remove();
+        $('.log_check').show();
+        var assigned = 0;
+        var recvd = 0;
+        data = $.parseJSON(data);
+
+      
+        console.log(data.length);
+        if (data.length > 0) {
+            $(data).each(function (i, u) {
+                if (u.logistic.id != undefined) {
+                    var ik = u.logistic.id;
+                    assigned++;
+                    if (u.r_status == 1) {
+                        recvd++;                        
+                        $('#logistic_id_' + ik ).parent().append('<p class="margin-bottom-0 text-green logstmsg">Received</p>');
+                        $('#logistic_id_' + ik).hide();
+                    } else if (u.r_status == 0) {
+                        $('#logistic_id_' + ik).hide();
+                        $('#logistic_id_' + ik).parent().append('<p class="margin-bottom-0 text-orange logstmsg">In Process</p>');
+                    }
+                }
+            });
+        }
+        var stHtml = '<span class="text-green">' + recvd + '</span>/' + '<span class="text-orange">' + assigned + '</span>';
+        $('#logistic_count').html(stHtml);
+  $('.logistic_date').html(data[0].time_created.substring(0,10));
+
+}
+});
+
+
+
+
+
 } 
 </script>
 
@@ -1479,5 +1055,13 @@ var logistic_id = new Array();
 </script>
 
 
-
+<style>
+  
+   .dataTables_info{width: 220px;}
+    .paging_simple_numbers{width: 220px;float: right;margin-top: -44px;margin-top: -15px;}
+    .dataTables_filter{float: right;}
+    .form-control input-sm{width: 71px;}
+    /*.col-sm-12{margin-top: -12px;}*/
+    .col-xs-12{margin-bottom: -40px;}
+</style>
 

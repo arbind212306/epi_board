@@ -27,13 +27,10 @@
                                     <label for="usertype" class="padding-top-md">Usertype</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select class="form-control" id="usertype" name="usertype">
-                                        <option value="1">Admin</option>
-                                        <option value="2">Supervisor</option>
-                                        <option value="3">SPOC</option>
-                                        <option value="4">Employee</option> 
-                                       
-                                        
+                                    <select class="form-control" id="user_type" name="user_type"> 
+                                        <?php foreach($roles as $roles){?>
+                                        <option value=<?php echo $roles['id'];?> ><?php echo $roles['title']; ?></option>
+                                        <?php }?>   
                                     </select>
                                 </div>
                             </div>
@@ -187,6 +184,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <select required class="form-control bu_name" id="dept" name="dept">
+
                                         <?php foreach($departments as $departments){?>
                                         <option value=<?php echo $departments['id'];?> ><?php echo $departments['title']; ?></option>
                                         <?php }?>
@@ -285,7 +283,7 @@
         </div>
      <div class="col-xs-12 margin-top-lg ">
 
-            <table class="table table-striped" id="report_table" style="width:100%">
+            <table class="table table-striped" id="report_table" >
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -301,12 +299,12 @@
                <?php foreach($userrecord as $userrecords ){ ?>
                 <tr>
                     <td><?php echo $userrecords['first_name'] ?> <?php echo $userrecords['last_name'] ?></td>
-                    <td><?php echo $userrecords['doj'] ?></td>
+                    <td><?php $orgdate = $userrecords['doj'];  $date = date("M d Y", strtotime($orgdate)); echo $date; ?></td>
                     <td><?php echo $userrecords['emp_id'] ?></td>
                      <td><?php echo $userrecords['department'] ?></td>
                     <td><?php echo $userrecords['supervisor_name'] ?></td>
                     <td>
-
+                        
                         <button class="btn btn-danger btn-sm" data-sidebar-button onclick="return editdata('<?php echo $userrecords['id'];?>')"><i class="fa fa-pencil"></i> Edit</button>
                         <?php if($userrecords['status'] == '1'){ ?>
                    <button class="btn btn-primary btn-sm"onclick="return inactiveuser('<?php echo $userrecords['id'];?>')"><i class="fa fa-trash-o"></i> Inactive</button>
@@ -326,7 +324,10 @@
 <?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar','jquery-ui','user-management']); ?>
 <?php $url_userdetail = $this->Url->build(['controller' => 'Users', 'action' => 'userManagement']); ?>
 <?php $update_userdetail = $this->Url->build(['controller' => 'Users', 'action' => 'addUser']); ?>
-<?php $deleteuser = $this->Url->build(['controller' => 'Users', 'action' => 'deleteuser']); ?>
+<?php $deleteuser = $this->Url->build(['controller' => 'Users', 'action' => 'deleteuser']); 
+?>
+<?php $dept_url = $this->Url->build(['controller' => 'Users', 'action' => 'getdepartments']); ?>
+<?php $s_dept_url = $this->Url->build(['controller' => 'Users', 'action' => 'getsubdepartments']); ?>
 <script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
@@ -337,6 +338,67 @@
          
     });
 });
+</script>
+<script type="text/javascript">
+
+    $('#dept').prop('disabled', true);
+    $("#bu").change(function () {
+        $('#dept').prop('disabled', false);
+        $('#dept').children('option:not(:first)').remove();
+        $('#subdept').children('option:not(:first)').remove();
+        var business_unit_id ="";
+        $('#dept').html('');
+        $('#subdept').html('');
+        business_unit_id = $('#bu').find(":selected").val();
+        console.log("business_unit_id - "+business_unit_id);
+        $.ajax({
+            url: "<?= $dept_url; ?>",
+            //url: '/cake3.6.4/Tests/getstates',
+            type: 'POST',
+            data: {"business_unit_id": business_unit_id},
+            success: function(data){
+            var parsedata= JSON.parse(data);
+            $("#dept").append(parsedata);
+            },
+            error: function(e) 
+            {
+                alert("An error occurred: " + e.responseText.message);
+                console.log(e);
+            }
+        });
+    });
+
+
+
+    $('#subdept').prop('disabled', true);
+    $("#dept").change(function () {
+        $('#subdept').prop('disabled', false);
+        $('#subdept').children('option:not(:first)').remove();
+        var business_unit_id1="";
+        var department_id1="";
+        $('#subdept').html('');
+        
+        business_unit_id1 = $('#bu').find(":selected").val();
+        department_id1 = $('#dept').find(":selected").val();
+        console.log("business_unit_id1 - "+business_unit_id1+"    department_id1 - "+department_id1);
+        $.ajax({
+            url: "<?= $s_dept_url; ?>",
+            //url: '/cake3.6.4/Tests/getstates',
+            type: 'POST',
+            data: {"id": department_id1,"business_unit_id": business_unit_id1},
+            success: function(data){
+                console.log(data);
+            var parsedata1= JSON.parse(data);
+            $("#subdept").append(parsedata1);
+            },
+            error: function(e) 
+            {
+                alert("An error occurred: " + e.responseText.message);
+                console.log(e);
+            }
+        });
+    });
+
 
 </script>
 <script>
@@ -354,7 +416,7 @@
            var extract_date = data[0].doj.substring(0,10);
            var stringdate = new Date(extract_date);
            var date = stringdate.toLocaleDateString();
-           $('#usertype').val(data[0].user_type);
+           $('#user_type').val(data[0].user_type);
            $('#username').val(data[0].username);
            $('#empid').val(data[0].emp_id);
            $('#frstname').val(data[0].first_name);
@@ -377,7 +439,7 @@
            
         },
         error : function() {
-           alert("Value NOT reaching to controller ");
+           
            
         }
     });
@@ -387,7 +449,7 @@
     $('#adduser').click(function(){
     
         var username = $('#username').val();
-        var user_type = $('#usertype').val();
+        var user_type = $('#user_type').val();
         var id       = $('#id').val();
         var first_name = $('#frstname').val();
         var last_name  = $('#lstname').val();
@@ -462,7 +524,7 @@
            location.reload();
           },
         error : function() {
-           alert("Value NOT reaching to controller ");
+           // alert("Value NOT reaching to controller ");
            
         }
     });
@@ -482,41 +544,18 @@
             location.reload();
           },
         error : function() {
-           alert("Value NOT reaching to controller ");
+           // alert("Value NOT reaching to controller ");
            
         }
     });
-
-
  }
-
 </script>
 <style>
-    #report_table {
-       
-        border-collapse: collapse;
-        width: 100%;
-        table-layout: fixed;
-    }
-
-    #report_table td, #report_table th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    
-
-    /*#report_table tr:hover {background-color: #ddd;}*/
-
-    #report_table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        color: white;
-    }
-    .dataTables_wrapper .dataTables_filter {
-float: right;
-text-align: left;
-
-}
+  
+   .dataTables_info{width: 220px;}
+    .paging_simple_numbers{width: 220px;float: right;margin-top: -44px;margin-top: -15px;}
+    .dataTables_filter{float: right;}
+   /* .form-control input-sm{width: 71px;}
+    .col-sm-12{margin-top: -12px;}
+    .col-xs-12{margin-bottom: -40px;}*/
 </style>

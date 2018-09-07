@@ -15,9 +15,11 @@
  */
 
 namespace App\Controller;
+
 //use Cake\I18n\Time;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+
 //use Cake\Core\Configure;
 
 /**
@@ -53,29 +55,45 @@ class AppController extends Controller {
             ],
             'logoutRedirect' => [
                 'controller' => 'Users',
-                'action' => 'login',
-                'home'
+                'action' => 'login'
             ],
-           'authenticate' => [
-            'Form' => [
-                'finder' => 'auth'
-            ]
-        ]
+            'authenticate' => [
+                'Form' => [
+                    'finder' => 'auth'
+                ]
+            ],
+                /* 'authorize' => 'Controller' */
         ]);
+    }
+
+    /*
+     * Enable the following component for recommended CakePHP security settings.
+     * see https://book.cakephp.org/3.0/en/controllers/components/security.html
+     */
+
+    //$this->loadComponent('Security');
+
+
+
+    public function beforeFilter(Event $event) {
         
     }
-       
-        /*
-         * Enable the following component for recommended CakePHP security settings.
-         * see https://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
 
-    
-    
-     public function beforeFilter(Event $event) {
-         
+    public function checkAccess() {
+        //return true;
+        $user = $this->Auth->user();
+        $reqController = $this->request->params['controller'];
+        $reqAction = $this->request->params['action'];
+        // var_dump($reqAction);
+        //var_dump($reqController);die;
+        if (!empty($user['access'])) {
+            foreach ($user['access'] as $aInfo) {
+                if (($aInfo['controller'] == $reqController) && ($aInfo['action'] == $reqAction)) {
+                    return true;
+                }
+            }
         }
-
+        return $this->redirect($this->referer());
+    }
 
 }
