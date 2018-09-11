@@ -43,7 +43,7 @@
 					  <?php echo $this->Form->create('Users');?>
                         <div class="form-group">
                             <div class="input-group">
-		 <?php echo $this->Form->input('search',(['label'=>false,'type'=>'text','name' => 'search','id' => 'search','placeholder'=>'Search by Emp Id / Email Id / DOJ','class' => 'form-control' ,'required']));?>
+		 <?php echo $this->Form->input('search',(['label'=>false,'type'=>'text','name' => 'search','class'=>'search form-control','id' => 'search','placeholder'=>'Search by Emp Id / Email Id / DOJ' ,'required']));?>
                           
                                 <span class="input-group-btn">
                                       <button class="btn btn-secondary" id="myBtn" onclick="return ajaxsearch();" type="button"><i class="fa fa-search"></i></button>
@@ -56,6 +56,10 @@
                 </div>
                 <hr/>
 				<div class="col-md-12 col-md-offset-1">
+<div class="info-msg" id="keypressmsg" style="display:none;">
+				 <i class="fa fa-info"></i>
+Please click on search icon
+</div>
 				<div class="warning-msg" id="error" style="display:none;">
 				
 				 <i class="fa fa-warning"></i>
@@ -153,7 +157,7 @@
                                     <label for="doj" class="padding-top-md">DOJ</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="date" id="doj" name="doj" class="form-control" readonly>
+                                    <input type="text" id="doj" name="doj" class="form-control" readonly>
                                 </div>
                             </div>
 							
@@ -231,10 +235,10 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                    <label for="supervisor" class="padding-top-md">Band</label>
+                                    <label for="supervisor" class="padding-top-md">Manager Name</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" id="band" name="band" class="form-control"  readonly>
+                                    <input type="text" id="supervisor_name" name="supervisor_name" class="form-control"  readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -288,7 +292,7 @@ var search=$('#search').val();
 if(search === ''){
     $('#err').html('Please enter Emp Id / Email Id / DOJ');
     $('#error').show();
-	$('#add_user').hide();
+	$('#add_user,#keypressmsg').hide();
 	$('#alreadyonboarding').hide();
 	$('#success').hide();
     return false;
@@ -318,12 +322,12 @@ $.ajax({
 		$('#sub_department').val(result[0].sub_department);
 		
 		$('#designation').val(result[0].designation);
-		$('#band').val(result[0].band);
+		$('#supervisor_name').val(result[0].supervisor_name);
 		$('#manager_emp_id').val(result[0].manager_emp_id);
 		$('#bhr_emp_id').val(result[0].bhr_emp_id);
 		
 		if( result[0].ob_status == 1){
-			$('#update_obstatus').hide();
+			$('#update_obstatus,#keypressmsg').hide();
 			$('#alreadyonboarding').show();
 		$('#success').hide();
 			$('#error').hide();
@@ -332,7 +336,7 @@ $.ajax({
 		
 		if( result[0].ob_status == '' || result[0].ob_status == null){
 			$('#update_obstatus').show();
-			$('#alreadyonboarding').hide();
+			$('#alreadyonboarding,#keypressmsg').hide();
 		$('#success').hide();
 			$('#error').hide();
 			
@@ -344,9 +348,10 @@ $.ajax({
 	}
 	else {
 		$('#add_user').hide();
-		$('#success').hide();
+		$('#success,#keypressmsg').hide();
                 $('#err').html('Record not found ');
 		$('#error').show();
+
 		
 		$('#alreadyonboarding').hide();
 		
@@ -355,7 +360,17 @@ $.ajax({
     }
 	});
 
-}			
+
+}
+	
+$('.search').keypress(function(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    $('#keypressmsg').show();
+    }
+});
+
+
         </script>
 
 

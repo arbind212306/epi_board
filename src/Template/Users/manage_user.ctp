@@ -163,27 +163,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="panel panel-success joinee-blocks" onclick="dashboard.toggle15DayChecklist()">
-                                        <div class="panel-body">
-                                            <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
-                                            <strong>15 Day Checklist</strong>
-                                            <p class="margin-bottom-0 text-muted">15/01/2017</p>
-                                            <p class="margin-bottom-0 text-green">Done</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="panel panel-success joinee-blocks" onclick="dashboard.toggleConfirmationStatus()">
-                                        <div class="panel-body">
-                                            <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
-                                            <strong>Confirmation Status</strong>
-                                            <p class="margin-bottom-0 text-muted">15/05/2017</p>
-                                            <p class="margin-bottom-0 text-green">Done</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div id="logistics_arrangements" class="hidden">
@@ -223,7 +202,7 @@
                                         <div class="panel panel-primary joinee-blocks" onclick="dashboard.panelCheckboxToggle(this)">
                                             <div class="panel-body">
                                                 <div class="panel-proceed-btn">
-                                                    <input id="logistic_id_<?= $querys->id; ?>" type="checkbox" class="checkbox log_check" name="logistic_id[]" value="<?= $querys->id ?>">
+                                                    <!-- <input id="logistic_id_<?= $querys->id; ?>" type="checkbox" class="checkbox log_check" name="logistic_id[]" value="<?= $querys->id ?>"> -->
                                                 </div>
                                                 <strong><?= $querys['title']; ?></strong>
                                                 <p class="margin-bottom-0 text-muted"><?= $location_name; ?></p>
@@ -235,170 +214,7 @@
 
 
                             </div>
-                        </div>
-                        <div id="15_day_checklist" class="hidden">
-                            <ol class="breadcrumb">
-                                <li class="text-blue pointer" onclick="dashboard.toggle15DayChecklist()">Joinee Information</li>
-                                <li class="active">15 Day Checklist</li>
-                            </ol>
-                            <div class="margin-top-sm">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <span>Name : </span>
-                                        <strong class="joineeinformation_name">Dhanya Menon</strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>Emp Id : </span>
-                                        <strong class="joineeinformation_empid">QA110231</strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>DOJ : </span>
-                                        <strong class="joineeinformation_doj">13/01/18</strong>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="fa fa-share text-red pointer fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <h5>Organisation Overview</h5>
-                            <div class="well well-sm">
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                            </div>
-                            <h5>Process Overview</h5>
-                            <div class="well well-sm">
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                            </div>
-                            <h5>Learning Overview</h5>
-                            <div class="well well-sm">
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                                <hr class="margin-top-sm margin-bottom-sm"/>
-                                <p>Q. I am aware of Quatrro values and its journey</p>
-                                <p class="margin-bottom-0">A. I am almost certain</p>
-                            </div>
-                        </div>
-                        
-                        <div id="confirmation_status" class="hidden">
-                            <ol class="breadcrumb">
-                                <li class="text-blue pointer" onclick="dashboard.toggleConfirmationStatus()">Joinee Information</li>
-                                <li class="active">Confirmation Status</li>
-                            </ol>
-                            <div class="margin-top-sm">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <span>Name : </span>
-                                        <strong class="joineeinformation_name"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>Emp Id : </span>
-                                        <strong class="joineeinformation_empid"></strong>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>DOJ : </span>
-                                        <strong class="joineeinformation_doj"></strong>
-                                    </div>
-                                    <div class="col-md-3 text-right">
-                                        <i class="fa fa-share text-red pointer fa-lg"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr/>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="well well-sm">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <strong>BHR 45 Day Session</strong>
-                                                <p class="margin-0">10/01/2018</p>
-                                                <p class="margin-0">4:00 PM</p>
-                                                <p class="margin-0">Anil</p>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <strong>Joinee Feedback</strong>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <small class="text-muted">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <strong>BHR Feedback</strong>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <small class="text-muted">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="well well-sm">
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <strong>BHR 90 Day Session</strong>
-                                                <p class="margin-0">10/01/2018</p>
-                                                <p class="margin-0">4:00 PM</p>
-                                                <p class="margin-0">Anil</p>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <strong>Joinee Feedback</strong>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <small class="text-muted">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <strong>BHR Feedback</strong>
-                                                <div class="panel panel-default">
-                                                    <div class="panel-body">
-                                                        <small class="text-muted">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                     </div>
                     <div id="interval_feedback" class="tab-pane fade">
                         <div id="interval_feedback_outer">
@@ -419,7 +235,18 @@
                                 </div>
                             </div>
                             <hr/>
+                            <div class="row" style="margin-left: 1px;margin-bottom: 9px;">
+                                <strong>Feedback by Supervisor</strong>
+                            </div>
                             <div class="row" id="f-info-sec">
+
+                            </div>
+                            <hr>
+                            <div class="row" style="margin-left: 1px;margin-bottom: 9px;">
+                                <strong>Feedback by Employee</strong>
+                            </div>
+                            <div class="row" id="f-info-sec-emp">
+
                             </div>
                             <!--<div class="row">
                                 <div class="col-md-4">
@@ -465,6 +292,8 @@
                             </div>-->
                         </div>
                         <div id="f-details-sec">
+                        </div>
+                        <div id="f-details-sec-emp">
                         </div>
                         <!--<div id="supervisor_monthly_feedback" class="hidden">
                             <ol class="breadcrumb">
@@ -906,7 +735,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -921,10 +750,20 @@
 <!-- fluid container starts here -->
 <div class="container-fluid container-padding-top">
     <div class="row" id="dashboard_table">
+
+<div clas="col-md-12 ">
+ <div class="<?php echo @$class; ?> text-center">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close"><?php echo @$close; ?></a>
+                   <i class="<?php echo @$iclass; ?>"></i><h5 style="color:green;"><?php echo $this->Flash->render(); ?></h5>
+                </div>
+        </div>
+        <?php $adduser = $this->Url->build(['controller' => 'Users', 'action' => 'addUser']); ?>
+        <?php echo $this->Form->create('Users', ['url' => ['Controller' => 'Users', 'action' => 'delete']]); ?>
         <div class="col-md-6">
-            <?php $adduser = $this->Url->build(['controller' => 'Users', 'action' => 'addUser']); ?>
+
             <a href="<?= $adduser; ?>" class="btn btn-danger btn-sm"><i class="fa fa-plus"></i> Add</a>
-            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+            <?php echo $this->Form->button('<i class="fa fa-trash-o"></i> Delete', (['class' => 'btn btn-primary btn-sm', 'type' => 'submit'])); ?>
+
         </div>
         <div class="col-md-6 text-right">
             <a href="<?= $this->Url->build(['controller' => 'Dashboard', 'action' => 'dashboard']) ?>" class="btn btn-danger btn-sm"><i class="fa fa-bar-chart"></i></a>
@@ -933,31 +772,52 @@
             <table class="table table-bordered table-striped" id="myTable">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" class="checkbox" name="select_all" onclick="dashboard.toggleSelectAllCheckbox(this)"></th>
+                        <th></th>
                         <th class="pointer" onclick="sortTable(1)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="List of all the employees" class="red-tooltip">Employee Name</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Employee ID" class="red-tooltip">Emp ID</div></th>
                         <th class="pointer" onclick="sortTable(4)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="Date of joining of the employee" class="red-tooltip">DOJ</div></th>
-                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of intimation sent to the new employee" class="red-tooltip">Intimation</div></th>
-                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of arrangements provided for the employee" class="red-tooltip">Arrangements</div></th>
-                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of session intimation" class="red-tooltip">Session Intimation</div></th>
-                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of 45 Day BHR Connect" class="red-tooltip">45 Day BHR Connect</div></th>
+                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of intimation sent to the new employee" class="red-tooltip">Logistics</div></th>
+                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of arrangements provided for the employee" class="red-tooltip">15 Day Check List</div></th>
+                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of session intimation" class="red-tooltip">Feedback</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of 45 Day BHR Connect" class="red-tooltip">Confirm</div></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
+                    //pr($feedbacksfetch);die;
                     if (!empty($users)):
                         foreach ($users as $showUser):
                             ?>    
                             <tr data-type="completed">
-                                <td><input type="checkbox" class="checkbox" name="select_individual"></td>
+                                <td><input type="checkbox" class="checkbox" name="id[]" value="<?= $showUser['id'] ?>"></td>
                                 <td><div class="text-blue logistic_user_arrangements" data-key="<?= $showUser['id'] ?>" data-sidebar-button id="<?= 'user_' . $showUser['id'] ?>" onclick="displayIdBasedData('<?= $showUser['id'] ?>');getsessions('<?= $showUser['id'] ?>');">
                                         <?= $showUser['first_name'] . ' ' . $showUser['last_name'] ?>
                                         <td><?= $showUser['emp_id'] ?></td>
                                         <td><?= $showUser['doj'] ?></td>
-                                        <td><i class="fa fa-circle text-green"></i></td>
-                                        <td><i class="fa fa-circle text-orange"></i></td>
-                                        <td><i class="fa fa-circle text-red"></i></td>
+                                        <td>
+                                            <?php
+                                            $logIcon = '<i class="fa fa-circle text-red"></i>';
+                                            if (isset($showUser['lcomplete'])) {
+                                                if ($showUser['lcomplete'] == 1) {
+                                                    $logIcon = '<i class="fa fa-circle text-green"></i>';
+                                                } else if ($showUser['lcomplete'] == 0) {
+                                                    $logIcon = '<i class="fa fa-circle text-orange"></i>';
+                                                }
+                                            }
+                                            echo $logIcon;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $fIcon = '<i class="fa fa-circle text-orange"></i>';
+                                            if (!empty($showUser['fifteen'])) {
+                                                $fIcon = '<i class="fa fa-circle text-green"></i>';
+                                            }
+                                            echo $fIcon;
+                                            ?>
+
+
+                                        </td>
                                         <td><i class="fa fa-circle text-red"></i></td>
                                         <td>
                                             <?php
@@ -975,6 +835,7 @@
                             <?php
                         endforeach;
                     endif;
+                    $this->Form->end();
                     ?>
                 </tbody>
             </table>
@@ -1056,7 +917,7 @@
 </div>
 <!-- fluid container ends here  -->
 
-<?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar', 'jquery-ui', 'dashboard', 'chart.min', 'guage', 'customquery','manageuser']); ?>
+<?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar', 'jquery-ui', 'dashboard', 'chart.min', 'guage', 'customquery', 'manageuser']); ?>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <?php
@@ -1064,12 +925,12 @@ $logistic_data = $this->Url->build(['controller' => 'Users', 'action' => 'userlo
 $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 'fetchusersessionbyidcommon']);
 ?>
 <script>
-    $(document).ready(function () {
-    $('#myTable').DataTable({
-       "aaSorting" : [] 
-         
-    });
-});
+                $(document).ready(function () {
+                    $('#myTable').DataTable({
+                        "aaSorting": []
+
+                    });
+                });
 </script>
 <script>
     $('[data-toggle="tooltip"]').tooltip();
@@ -1139,6 +1000,10 @@ $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 
     }
 
     $(document).on('click', '.u_confirm', function () {
+        var r = confirm("Confirm the joinee ..?");
+        if (r != true) {
+            return false;
+        }
         var btn = $(this);
         var key = $(this).attr('data-key');
         $.ajax({
@@ -1148,6 +1013,10 @@ $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 
         });
     });
     $(document).on('click', '.u_reject', function () {
+        var r = confirm("Are you sure to reject joinee ..?");
+        if (r != true) {
+            return false;
+        }
         var btn = $(this);
         var key = $(this).attr('data-key');
         $.ajax({
@@ -1158,11 +1027,11 @@ $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 
     });
 </script>
 <style>
-  
-   .dataTables_info{width: 220px;}
+
+    .dataTables_info{width: 220px;}
     .paging_simple_numbers{width: 220px;float: right;margin-top: -44px;margin-top: -15px;}
     .dataTables_filter{float: right;}
-   /* .form-control input-sm{width: 71px;}
-    .col-sm-12{margin-top: -12px;}
-    .col-xs-12{margin-bottom: -40px;}*/
+    /* .form-control input-sm{width: 71px;}
+     .col-sm-12{margin-top: -12px;}
+     .col-xs-12{margin-bottom: -40px;}*/
 </style>

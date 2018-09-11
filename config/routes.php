@@ -55,6 +55,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/', ['controller' => 'Users', 'action' => 'login']);
     $routes->connect('/manageuser', ['controller' => 'Users', 'action' => 'manageUser'], ['_name' => 'manageuser']);
     $routes->connect('/supervisor', ['controller' => 'Supervisor', 'action' => 'dashboard']);
+    $routes->connect('/dashboard', ['controller' => 'Dashboard', 'action' => 'dashboard']);
 //    $routes->connect('/dashboard', ['controller' => 'Pages', 'action' => 'dashboard']);
 
     /**

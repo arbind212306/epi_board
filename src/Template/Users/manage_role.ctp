@@ -110,7 +110,8 @@
             ?>
 
             <div class="col-xs-12 text-center">
-                <button class="btn btn-danger padding-left-xl padding-right-xl" type="submit">Submit</button>
+                <button type=""  data-sidebar-button class="btn btn-primary btn-sm padding-left-lg padding-right-lg">Close</button>
+                <button class="btn btn-danger btn-sm  padding-left-xl padding-right-xl" type="submit">Submit</button>
             </div>
 
         </div>
@@ -125,7 +126,7 @@
 <div class="container-fluid container-padding-top">
     <div class="row">
         <div class="col-md-4">
-            <button class="btn btn-danger btn-sm" data-sidebar-button><i class="fa fa-plus"></i> Add</button>
+            <button class="btn btn-danger btn-sm ad-btn" data-sidebar-button><i class="fa fa-plus"></i> Add</button>
         </div>
         <div class="col-md-4 text-center">
             <h4 class="margin-0 padding-top-xs">Role Management</h4>
@@ -255,6 +256,12 @@
             showRoleData(key);
         });
     });
+    $(document).ready(function () {
+        $('.ad-btn').click(function () {
+            var key = $(this).attr('data-key');
+            removeRoleData(key);
+        });
+    });
     function showRoleData(key) {
         $('.check_access').prop('checked', false);
         $.ajax({
@@ -275,9 +282,15 @@
             }
         });
     }
+    
+    function removeRoleData(key) {
+        $('.check_access').prop('checked', false);
+                $('#name').val('');
+                $('#description').val('');
+                $('#hid_id').val('');
+            }
 </script>
 <style>
-  
    .dataTables_info{width: 220px;}
     .paging_simple_numbers{width: 220px;float: right;margin-top: -44px;margin-top: -15px;}
     .dataTables_filter{float: right;}

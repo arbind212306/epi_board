@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <input type="checkbox" name="status" id="status" class="form-control" value="1" >
+                                        <input type="checkbox" name="status" style="height: 20px;" id="status" class="form-control" value="1" >
                                         <input type="hidden" name="id" id="id" class="form-control" value=""  >
                                     </div>
                                 </div>
@@ -98,7 +98,8 @@
                 </div>
                 <hr/>
                 <div class="col-xs-12 text-center">
-                    <button class="btn btn-danger padding-left-xl padding-right-xl" type="button" id="update_qns">Update</button>
+                    <button type=""  data-sidebar-button class="btn btn-primary btn-sm padding-left-lg padding-right-lg">Close</button>
+                    <button class="btn btn-danger btn-sm padding-left-xl padding-right-xl" type="button" id="update_qns">Update</button>
                 </div>
             </div>
             <?php echo $this->Form->end(); ?>
@@ -318,4 +319,9 @@
         text-align: left;
 
     }
+ 
+    .dataTables_info{width: 200px;}
+    .paging_simple_numbers{width: 235px;float: right;margin-top: -27px;}
+    #report_table td {text-align:left;}
+
 </style>

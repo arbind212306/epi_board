@@ -33,7 +33,7 @@ if(!empty($session_data['Auth']['User']['access'])){
 <li id ="2" class="<?= $acalassl ;?>"><?php if(in_array(14,$access_menu)) echo $this->Html->link('Logistics',['controller' => 'Users', 'action' => 'logistics']); ?></li>
                                 <li role="separator" class="divider"></li>
 <?php $aclass=""; if($active == 3) { $aclass='active'; } ?>
-<li id="3" class="<?= $aclass ?>"><?php if(in_array(15,$access_menu)) echo $this->Html->link('Confirmation',['controller' => 'Users', 'action' => 'confirmation']); ?></li>
+<li id="3" class="<?= $aclass ?>"><?php if(in_array(15,$access_menu)) //echo $this->Html->link('Confirmation',['controller' => 'Users', 'action' => 'confirmation']); ?></li>
                 </ul>
             </li>
             <li class="dropdown">

@@ -74,9 +74,9 @@
                                             <div class="row">
                                                 <div class="col-md-12 witnessRow_0">
                                                     <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="bu_name">Business Unit</label>
-                                                            <select required class="form-control" onchange="getdepartment();" id="bu_name_0" name="bu_name[]">
+                                                        <div class="form-group" id="0">
+                                                            <label for="bu_name">Business Unit <span style="color: red"> * </span></label>
+                                                            <select required class="form-control" onchange="getdepartment(0,this);" id="bu_name_0" name="bu_name[]">
                                                                 <option value="">Select</option>
                                                                 <?php foreach ($business_units as $business_unit) { ?>
                                                                     <option id="bu_op_0" value="<?= $business_unit['id']; ?>"><?= $business_unit['title']; ?>
@@ -87,17 +87,17 @@
                                                     </div>
 
                                                     <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="dept">Department</label>
-                                                            <select required class="form-control" onchange="getsubdepartment();" id="dept_0" name="dept[]" >
+                                                        <div class="form-group" id="0">
+                                                            <label for="dept">Department <span style="color: red"> * </span></label>
+                                                            <select required class="form-control" onchange="getsubdepartment(0,this);" id="dept_0" name="dept[]" >
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="sub_dept">Sub Department</label>
-                                                            <select required class="form-control" onchange="getmeetingwithdata();" id="sub_dept_0" name="sub_dept[]">
+                                                        <div class="form-group" id="0">
+                                                            <label for="sub_dept">Sub Department <span style="color: red"> * </span></label>
+                                                            <select required class="form-control" onchange="getmeetingwithdata(0,this);" id="sub_dept_0" name="sub_dept[]">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
@@ -105,7 +105,7 @@
 
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label for="meeting_with">Meeting With</label>
+                                                            <label for="meeting_with">Meeting With <span style="color: red"> * </span></label>
                                                             <select required  class="form-control user_id_0" id="user_id_0" name="user_id[]">
                                                                 <option value="">Select</option>
                                                             </select>
@@ -124,21 +124,21 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <label for="session_meeting_date">Date</label>
+                                                                    <label for="session_meeting_date">Date <span style="color: red"> * </span></label>
                                                                     <input required type="date" class="form-control" name="session_date[]" id="session_date_0">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label for="session_meeting_time">From</label>
-                                                                    <input required type="time" class="form-control" name="start_time[]" onchange="getmeetingduration();" id="start_time_0">
+                                                                <div class="form-group" id="0">
+                                                                    <label for="session_meeting_time">From <span style="color: red"> * </span></label>
+                                                                    <input required type="time" class="form-control" name="start_time[]" onchange="getmeetingduration(0,this);" id="start_time_0">
                                                                 </div>
                                                             </div>
 
                                                             <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label for="session_meeting_time">To</label>
-                                                                    <input required type="time" class="form-control" name="end_time[]" onchange="getmeetingduration();" id="end_time_0">
+                                                                <div class="form-group" id="0">
+                                                                    <label for="session_meeting_time">To <span style="color: red"> * </span></label>
+                                                                    <input required type="time" class="form-control" name="end_time[]" onchange="getmeetingduration(0,this);" id="end_time_0">
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
@@ -201,9 +201,9 @@
                         <div class="row">
                             <div class="col-md-12 witnessRow_0">
                                 <div class="col-md-3">
-                                    <div class="form-group bu_name_es_ap">
-                                        <label for="bu_name">Business Unit</label>
-                                        <select required class="form-control" onchange="getdepartment('es');" id="bu_name_es" name="bu_name_es">
+                                    <div class="form-group bu_name_es_ap" id="es">
+                                        <label for="bu_name">Business Unit <span style="color: red"> * </span></label>
+                                        <select required class="form-control" onchange="getdepartment('es', this);" id="bu_name_es" name="bu_name_es">
                                             <option value="">Select</option>
                                             <?php foreach ($business_units as $business_unit) { ?>
                                                 <option value="<?= $business_unit['id']; ?>"><?= $business_unit['title']; ?>
@@ -214,9 +214,9 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <div class="form-group dept_es_ap">
-                                        <label for="dept">Department</label>
-                                        <select required class="form-control" onchange="getsubdepartment('es');" id="dept_es" name="dept_es" >
+                                    <div class="form-group dept_es_ap" id="es">
+                                        <label for="dept">Department <span style="color: red"> * </span></label>
+                                        <select required class="form-control" onchange="getsubdepartment('es', this);" id="dept_es" name="dept_es" >
                                             <option value="">Select</option>
                                             <?php foreach ($departments as $dep_es) { ?>
                                                 <option value="<?= $dep_es['id']; ?>"><?= $dep_es['title']; ?>
@@ -226,9 +226,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="form-group sub_dept_es_ap">
-                                        <label for="sub_dept">Sub Department</label>
-                                        <select required class="form-control" onchange="getmeetingwithdata('es');" id="sub_dept_es" name="sub_dept_es">
+                                    <div class="form-group sub_dept_es_ap" id="es">
+                                        <label for="sub_dept">Sub Department <span style="color: red"> * </span></label>
+                                        <select required class="form-control" onchange="getmeetingwithdata('es',this);" id="sub_dept_es" name="sub_dept_es">
                                             <option value="">Select</option>
                                             <?php foreach ($sub_departments as $sub_dep_es) { ?>
                                                 <option value="<?= $sub_dep_es['id']; ?>"><?= $sub_dep_es['title']; ?>
@@ -240,7 +240,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group user_id_es_ap">
-                                        <label for="meeting_with">Meeting With</label>
+                                        <label for="meeting_with">Meeting With <span style="color: red"> * </span></label>
                                         <select required  class="form-control user_id_es" id="user_id_es" name="user_id_es">
                                             <option value="">Select</option>
                                             <?php foreach ($users_data as $users_data_es) { ?>
@@ -264,21 +264,21 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="session_meeting_date">Date</label>
+                                                <label for="session_meeting_date">Date <span style="color: red"> * </span></label>
                                                 <input required type="date" class="form-control" name="session_date_es" id="session_date_es">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="session_meeting_time">From</label>
-                                                <input required type="time" onchange="getmeetingduration('es');" class="form-control" name="start_time_es" id="start_time_es">
+                                            <div class="form-group" id="es">
+                                                <label for="session_meeting_time">From <span style="color: red"> * </span></label>
+                                                <input required type="time" onchange="getmeetingduration('es', this);" class="form-control" name="start_time_es" id="start_time_es">
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="session_meeting_time">To</label>
-                                                <input required type="time" onchange="getmeetingduration('es');" class="form-control" name="end_time_es" id="end_time_es">
+                                            <div class="form-group" id="es">
+                                                <label for="session_meeting_time">To <span style="color: red"> * </span></label>
+                                                <input required type="time" onchange="getmeetingduration('es', this);" class="form-control" name="end_time_es" id="end_time_es">
                                             </div>
                                         </div>
                                         <div class="col-md-2">
@@ -291,6 +291,9 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <div id="edit_mode_s_error" class="hidden" style="color: red;text-align: center;">Please fill Mandatory Fields</div>
+                        
                     </div>
                 </div>
             </div>
@@ -346,12 +349,12 @@
                         <tr>
                             <td>
                                 <div class="text-blue" data-sidebar-button data-panel-type="roadmap" id="<?= 'user_' . $roadmaplistings['id'] ?>" onclick="roadmap.openRoadmap('arrange');editdata('<?= $roadmaplistings['id'] ?>');getsessions('<?= $roadmaplistings['id'] ?>')">
-                                <?= $roadmaplistings['first_name']; ?><?= $roadmaplistings['last_name']; ?></div>
+                                <?= $roadmaplistings['employee_name']; ?></div>
                             </td>
                             <td><?= $roadmaplistings['emp_id']; ?></td>
                             <td><?= $roadmaplistings['doj']; ?></td>
-                            <td><?= $roadmaplistings['department']['title']; ?></td>
-                            <td>Raghav</td>
+                            <td><?= $roadmaplistings['department']; ?></td>
+                            <td><?= $roadmaplistings['manager_name']; ?></td>
                             <td>
                                 <div class="text-blue" id="roadmap_div" data-panel-type="roadmap">
                                     <?php if($roadmaplistings['status'] == 2){?>
@@ -396,12 +399,16 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
 <script>
     $('[data-toggle="tooltip"]').tooltip();
 </script>
+<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script>
+    $(document).ready(function () {
     $('#report_table').DataTable({
-        "sDom": '<"row view-filter"<"col-sm-12"<"pull-left"l><"pull-right"f><"clearfix">>>t<"row view-pager"<"col-sm-12"<"text-center"ip>>>'
+       "aaSorting" : []
     });
+});
+
 </script>
 
 <script type="text/javascript">  
@@ -409,26 +416,29 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
     $("#dept_" + increment + "").prop('disabled', true);
     $("#sub_dept_" + increment + "").prop('disabled', true);
     $("#user_id_" + increment + "").prop('disabled', true);
-
-    function getdepartment(id) {
-        if(id=="es"){
-           increment = "es";
+    function getdepartment(sid, t) {
+        if(sid=="es"){
+           c_div_id = "es";
         }
-        var option_id = $(this).attr("id");
-        //var option_id = $(this).find('option:selected').attr('id');
-        //var option_id = $(this).attr("id");
-        //var option_id = $(this).children(":selected").attr("id");
-        console.log('option_id - '+option_id);
+        
+        var c_div_id = $(t).closest("div").prop("id");
+        console.log("id of parent div - "+c_div_id);
+        
+        $("#dept_" + c_div_id + "").prop('disabled', false);
+        $("#sub_dept_" + c_div_id + "").prop('disabled', true);
+        $("#user_id_" + c_div_id + "").prop('disabled', true);
         
         console.log("bu_name changed with increment" + increment);
         $("#dept_0").prop('disabled', false);
-        $("#dept_" + increment + "").prop('disabled', false);
+        $("#dept_" + c_div_id + "").prop('disabled', false);
         var business_unit_id = "";
-        $("#dept_" + increment + "").html('<option value="">Select</option>');
-        $("#sub_dept_" + increment + "").html('<option value="">Select</option>');
-        $("#dept_" + increment + "").val('');
-        $("#sub_dept_" + increment + "").val('');
-        business_unit_id = $("#bu_name_" + increment + "").find(":selected").val();
+        $("#dept_" + c_div_id + "").html('<option value="">Select</option>');
+        $("#sub_dept_" + c_div_id + "").html('<option value="">Select</option>');
+        $("#user_id_" + c_div_id + "").html('<option value="">Select</option>');
+        $("#dept_" + c_div_id + "").val('');
+        $("#sub_dept_" + c_div_id + "").val('');
+        $("#user_id_" + c_div_id + "").val('');
+        business_unit_id = $("#bu_name_" + c_div_id + "").find(":selected").val();
         console.log("business_unit_id - " + business_unit_id);
         $.ajax({
             url: "<?= $dept_url; ?>",
@@ -436,31 +446,38 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
             data: {"business_unit_id": business_unit_id},
             success: function (data) {
                 var parsedata = JSON.parse(data);
-                $("#dept_" + increment + "").append(parsedata);
+                $("#dept_" + c_div_id + "").append(parsedata);
             },
             error: function (e)
             {
-                alert("An error occurred: " + e.responseText.message);
+                console("An error occurred: " + e.responseText.message);
                 console.log(e);
             }
         });
     }
 
-    function getsubdepartment(id) {
+    function getsubdepartment(id, t) {
         if(id=="es"){
-           increment = "es";
+           c_div_id = "es";
         }
-        console.log("dept_ changed with increment" + increment);
+        var c_div_id = $(t).closest("div").prop("id");
+        console.log("id of parent div - "+c_div_id);
+        
+        
+        
+        $("#user_id_" + c_div_id + "").prop('disabled', true);
+        
+        console.log("dept_ changed with increment" + c_div_id);
         $("#sub_dept_0").prop('disabled', false);
-        $("#sub_dept_" + increment + "").prop('disabled', false);
+        $("#sub_dept_" + c_div_id + "").prop('disabled', false);
         var business_unit_id1 = "";
         var department_id1 = "";
-        $("#sub_dept_" + increment + "").html('<option value="">Select</option>');
-         $("#sub_dept_" + increment + "").val('');
+        $("#sub_dept_" + c_div_id + "").html('<option value="">Select</option>');
+         $("#sub_dept_" + c_div_id + "").val('');
         //$('#sub_dept').find('option').remove().end().append('<option value="">Select</option>').val('whatever');
 
-        business_unit_id1 = $("#bu_name_" + increment + "").find(":selected").val();
-        department_id1 = $("#dept_" + increment + "").find(":selected").val();
+        business_unit_id1 = $("#bu_name_" + c_div_id + "").find(":selected").val();
+        department_id1 = $("#dept_" + c_div_id + "").find(":selected").val();
         console.log("business_unit_id1 - " + business_unit_id1 + "    department_id1 - " + department_id1);
         $.ajax({
             url: "<?= $s_dept_url; ?>",
@@ -468,33 +485,39 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
             data: {"id": department_id1, "business_unit_id": business_unit_id1},
             success: function (data) {
                 var parsedata1 = JSON.parse(data);
-                $("#sub_dept_" + increment + "").append(parsedata1);
+                $("#sub_dept_" + c_div_id + "").append(parsedata1);
             },
             error: function (e)
             {
-                alert("An error occurred: " + e.responseText.message);
+                console("An error occurred: " + e.responseText.message);
                 console.log(e);
             }
         });
     }
 
-    function getmeetingwithdata(id) {
+    function getmeetingwithdata(id, t) {
         if(id=="es"){
-           increment = "es";
+           c_div_id = "es";
         }
-        console.log("sub_dept_ changed with increment" + increment);
+        var c_div_id = $(t).closest("div").prop("id");
+        console.log("id of parent div - "+c_div_id);
+        
+        
+        $("#user_id_" + c_div_id + "").prop('disabled', false);
+        
+        console.log("sub_dept_ changed with increment" + c_div_id);
         $("#user_id_0").prop('disabled', false);
-        $("#user_id_" + increment + "").prop('disabled', false);
+        
         var business_unit_id1 = "";
         var department_id1 = "";
         var sub_department_id1 = "";
-        $("#user_id_" + increment + "").html('<option value="">Select</option>');
-        $("#user_id_" + increment + "").val('');
+        $("#user_id_" + c_div_id + "").html('<option value="">Select</option>');
+        $("#user_id_" + c_div_id + "").val('');
         //$('#sub_dept').find('option').remove().end().append('<option value="">Select</option>').val('whatever');
 
-        business_unit_id1 = $("#bu_name_" + increment + "").find(":selected").val();
-        department_id1 = $("#dept_" + increment + "").find(":selected").val();
-        sub_department_id1 = $("#sub_dept_" + increment + "").find(":selected").val();
+        business_unit_id1 = $("#bu_name_" + c_div_id + "").find(":selected").val();
+        department_id1 = $("#dept_" + c_div_id + "").find(":selected").val();
+        sub_department_id1 = $("#sub_dept_" + c_div_id + "").find(":selected").val();
         console.log("business_unit_id1 - " + business_unit_id1 + "    department_id1 - " + department_id1 + "    sub_department_id1 - " + sub_department_id1);
         $.ajax({
             url: "<?= $meeting_with_url; ?>",
@@ -502,22 +525,25 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
             data: {"business_unit_id": business_unit_id1, "department_id": department_id1, "sub_department_id": sub_department_id1},
             success: function (data) {
                 var parsedata1 = JSON.parse(data);
-                $("#user_id_" + increment + "").append(parsedata1);
+                $("#user_id_" + c_div_id + "").append(parsedata1);
             },
             error: function (e)
             {
-                alert("An error occurred: " + e.responseText.message);
+                console("An error occurred: " + e.responseText.message);
                 console.log(e);
             }
         });
     }
 
-    function getmeetingduration(id) {
+    function getmeetingduration(id, t) {
         if(id=="es"){
-           increment = "es";
+           c_div_id = "es";
         }
-        var start = $("#start_time_" + increment + "").val();
-        var end = $("#end_time_" + increment + "").val();
+        var c_div_id = $(t).closest("div").prop("id");
+        console.log("id of parent div - "+c_div_id);
+        
+        var start = $("#start_time_" + c_div_id + "").val();
+        var end = $("#end_time_" + c_div_id + "").val();
 
         start = start.split(":");
         end = end.split(":");
@@ -538,7 +564,7 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
         var validdata = typeof diffc;
         console.log("typeof duration- " + validdata);
         console.log("time diff - " + diffc);
-        $("#duration_" + increment + "").val(diffc);
+        $("#duration_" + c_div_id + "").val(diffc);
     }
 
 </script>
@@ -554,10 +580,13 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
                 //console.log("data fetched on click of bu_name and result - "+data);
                 var parsedata1 = JSON.parse(data);
                 $("#bu_name_" + increment + "").append(parsedata1);
+                $("#dept_" + increment + "").prop('disabled', true);
+                $("#sub_dept_" + increment + "").prop('disabled', true);
+                $("#user_id_" + increment + "").prop('disabled', true);
             },
             error: function (e)
             {
-                alert("An error occurred: " + e.responseText.message);
+                console.log("An error occurred: " + e.responseText.message);
                 console.log(e);
             }
         });
@@ -592,7 +621,7 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
                 $('#es_user_empid').html(data.user_data[0].emp_id);
             },
             error: function () {
-                alert("Value NOT reaching to controller ");
+                console.log("Value NOT reaching to controller ");
             }
         });
     }
@@ -607,11 +636,11 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
                'status' : status
                },
         success : function(data) {
-            alert('Session deleted Successfuly');
+            console.log('Session deleted Successfuly');
            location.reload();
           },
         error : function() {
-           alert("Value NOT reaching to controller ");
+           console.log("Value NOT reaching to controller ");
            
         }
     });
@@ -639,7 +668,7 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
                 
             },
             error: function () {
-                alert("Value NOT reaching to controller ");
+                console.log("Value NOT reaching to controller ");
             }
         });
     }
@@ -663,6 +692,7 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
     }
     
     function editsessiondata(id){
+        console.log("id - "+id);
     $.ajax({
         type:"POST",
         url: "<?= $url_edit_session; ?>",
@@ -688,7 +718,7 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
            $("#user_id_es").prop('disabled', true);
         },
         error : function() {
-           alert("Value NOT reaching to controller ");
+           console.log("some error occured in fetch data using editsessiondata function");
         }
     });
 }
@@ -706,8 +736,11 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
         var end_time_es = $('#end_time_es').val();
         
         
-        console.log('sub_dept_es - '+sub_dept_es);
-        //console.log("bu_name -"+bu_name+"dept -"+dept+"sub_dept -"+sub_dept+"location -"+location+"title -"+title+"description- "+description);
+        console.log("bu_name_es -"+bu_name_es+"    dept_es -"+dept_es+"    sub_dept_es -"+sub_dept_es+"    note_es -"+note_es+"    user_id_es -"+user_id_es+"    session_date_es- "+session_date_es+"    start_time_es- "+start_time_es+"    end_time_es- "+end_time_es);
+        if(bu_name_es == '' || dept_es == '' || sub_dept_es == '' || session_date_es == '' || start_time_es == '' || end_time_es == ''){
+            $("#edit_mode_s_error").removeClass("hidden");
+            return false;
+        }else{
         $.ajax({
             type:"POST",
             url: "<?= $url_update_session ?>",
@@ -725,18 +758,23 @@ $url_update_session = $this->Url->build(['controller' => 'Users', 'action' => 'u
            },
             success : function(data) {
                 console.log(data);
-                alert("Session Updated Sucessfully");
+                console.log("Session Updated Sucessfully");
                 location.reload(true);
                },
               error : function() {
-                //alert("Value NOT reaching to controller ");
+                console.log("some error occured in updating session");
                 } 
-            });
+            });}
  });
 
 
 </script>
 <style>
-    .dataTables_info{width: 170px;}
-    .paging_simple_numbers{width: 170px;float: right;margin-top: -44px;}
-</style>    
+  
+   .dataTables_info{width: 200px;}
+    .paging_simple_numbers{width: 220px;float: right;margin-top: -44px;margin-top: -15px;}
+    .dataTables_filter{float: right;}
+    
+    /*.col-sm-12{margin-top: -12px;}*/
+   
+</style>

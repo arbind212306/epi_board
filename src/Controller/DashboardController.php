@@ -53,9 +53,12 @@ class DashboardController extends AppController {
        
        $onBoardPerDay = [];
        $confirmed = [];
+       $active = [];
+       $inactive = [];
+       $allConfirmationData = [];
        $counter = 1;
        
-           for($i=1; $i<=7; $i++){
+           for($i=1; $i<=90; $i++){
                 $agoDate =  date('Y-m-d', strtotime("-$counter days"));
                 $countAugust = $this->Dashboard->countTotalOnBoard($agoDate);
                 $data =["date"=>$agoDate,"value"=>$countAugust];//.'"'.'}';
@@ -63,20 +66,48 @@ class DashboardController extends AppController {
                 $confirmation = $this->Dashboard->countTotalConfirmation($agoDate);
                 $data2 = ["date"=>$agoDate,"value"=>$confirmation];
                 array_push($confirmed, $data2);
+                $activeConfirmation = $this->Dashboard->countTotalActive($agoDate);
+                $data3 = ["date"=>$agoDate,"value"=>$activeConfirmation];
+//                 $data3 = ["date"=>$agoDate,"value"=>$confirmation,"value2"=>$activeConfirmation];
+                array_push($active, $data3);
+                $inActiveConfirmation = $this->Dashboard->countTotalInactive($agoDate);
+                $data4 = ["date"=>$agoDate,"value"=>$inActiveConfirmation];
+                array_push($inactive, $data4);
+                $data5 = ["date"=>$agoDate,"value"=>$confirmation,"value2"=>$activeConfirmation,"value3"=>$inActiveConfirmation];
+                array_push($allConfirmationData, $data5);
                 $counter++;
               }
-       
+       //code to reverse array according to graph that accepts value
         $onBoardPerDay = array_reverse($onBoardPerDay);
         if(!empty($onBoardPerDay)){
+            //code to convert the array to json string that graph accepts for displaying value
            $onBoardPerDay = json_encode($onBoardPerDay);
         }
+        //code to reverse array according to graph that accepts value
         $confirmed = array_reverse($confirmed);
         if(!empty($confirmed)){
+            //code to convert the array to json string that graph accepts for displaying value
            $confirmed = json_encode($confirmed);
         }
+        //code to reverse array according to graph that accepts value
+        $active = array_reverse($active);
+        if(!empty($active)){
+            //code to convert the array to json string that graph accepts for displaying value
+            $active = json_encode($active);
+        }
+        //code to reverse array according to graph that accepts value
+        $inactive = array_reverse($inactive);
+        if(!empty($inactive)){
+            //code to convert the array to json string that graph accepts for displaying value
+            $inactive = json_encode($inactive);
+        }
         
+        $allConfirmationData = array_reverse($allConfirmationData);
+        if(!empty($allConfirmationData)){
+            $allConfirmationData = json_encode($allConfirmationData);
+        }
        $this->set(compact('business_units','location','onBoardPerDay','bu_unit','department','sub_department','city',
-               'daysAgo', 'confirmed','inProgress','received','pending'));
+               'daysAgo', 'confirmed','active','inactive','allConfirmationData','inProgress','received','pending'));
     }
     
     //query for getting department based on business unit selection with ajax
@@ -119,10 +150,6 @@ class DashboardController extends AppController {
         }
     }
     
-    //method for fetching selected department
-    public function getSelectedDepartments(){
-        
-    }
     
     //code for fetching onboard data according to filter and displaying it on dashbord page with ajax
     public function getFilterDashbordData(){
@@ -165,11 +192,48 @@ class DashboardController extends AppController {
                     }
                 }
                 //code for getting previous 30 days data
-                if($daysAgo == 30 || $daysAgo == 90 || $daysAgo == 365){
+                if($daysAgo == 30){
                     for($i=1; $i<=30; $i++){
                         $agoDate =  date('Y-m-d', strtotime("-$counter days"));
                         $confirmation = $this->Dashboard->CountBasedOnFilter($business_units,$department,
                                 $sub_department,$location,$agoDate);
+                        $data =["date"=>$agoDate,"value"=>$confirmation];
+                        array_push($onBoard, $data);
+                        $counter++;
+                    }
+                }
+                //code for getting previous 90 days data
+                if($daysAgo == 90){
+                    for($i=1; $i<=90; $i++){
+                        $agoDate =  date('Y-m-d', strtotime("-$counter days"));
+                        $confirmation = $this->Dashboard->CountBasedOnFilter($business_units,$department,
+                                $sub_department,$location,$agoDate);
+                        $data =["date"=>$agoDate,"value"=>$confirmation];
+                        array_push($onBoard, $data);
+                        $counter++;
+                    }
+                }
+                //code for getting previous 180 days data. i.e., 6 months
+                if($daysAgo == 180){
+                    for($i=1; $i<=6; $i++){
+                        $agoDate =  date('Y-m', strtotime("-$counter months"));
+                        $year = date('Y-m-d', strtotime("-$counter months"));
+                        $month = date('m', strtotime("-$counter months"));
+                        $confirmation = $this->Dashboard->CountBasedOnMonth($business_units,$department,
+                                $sub_department,$location,$month,$year);
+                        $data =["date"=>$agoDate,"value"=>$confirmation];
+                        array_push($onBoard, $data);
+                        $counter++;
+                    }
+                }
+                //code for getting previous 365 days data. i.e., 1 year months wise
+                if($daysAgo == 180){
+                    for($i=1; $i<=12; $i++){
+                        $agoDate =  date('Y-m', strtotime("-$counter months"));
+                        $year = date('Y-m-d', strtotime("-$counter months"));
+                        $month = date('m', strtotime("-$counter months"));
+                        $confirmation = $this->Dashboard->CountBasedOnMonth($business_units,$department,
+                                $sub_department,$location,$month,$year);
                         $data =["date"=>$agoDate,"value"=>$confirmation];
                         array_push($onBoard, $data);
                         $counter++;
@@ -218,19 +282,78 @@ class DashboardController extends AppController {
                     for($i=1; $i<=7; $i++){
                         $agoDate =  date('Y-m-d', strtotime("-$counter days"));
                         $getCounted = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
-                        $location,$agoDate);
-                        $data =["date"=>$agoDate,"value"=> $getCounted];
+                        $location,$agoDate,$status=2);
+                        $getActive = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=1);
+                        $getInActive = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=0);
+                        $data =["date"=>$agoDate,"value1"=> $getCounted,"value2"=>$getActive,"value3"=>$getInActive];
                         array_push($onBoard, $data);
                         $counter++;
                     }
                 }
                 //code for getting previous 30 days data
-                if($daysAgo == 30 || $daysAgo == 90 || $daysAgo == 365){
+                if($daysAgo == 30){
                     for($i=1; $i<=30; $i++){
                         $agoDate =  date('Y-m-d', strtotime("-$counter days"));
                         $getCounted = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
-                        $location,$agoDate);
-                        $data =["date"=>$agoDate,"value"=>$getCounted];
+                        $location,$agoDate,$status=2);
+                        $getActive = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=1);
+                        $getInActive = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=0);
+                        $data =["date"=>$agoDate,"value1"=> $getCounted,"value2"=>$getActive,"value3"=>$getInActive];
+                        array_push($onBoard, $data);
+                        $counter++;
+                    }
+                }
+                //code for getting previous 90 days data
+                if($daysAgo == 90){
+                    for($i=1; $i<=90; $i++){
+                        $agoDate =  date('Y-m-d', strtotime("-$counter days"));
+                        $getCounted = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=2);
+                        $getActive = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=1);
+                        $getInActive = $this->Dashboard->getConfirmation($business_units,$department,$sub_department,
+                        $location,$agoDate,$status=0);
+                        $data =["date"=>$agoDate,"value1"=> $getCounted,"value2"=>$getActive,"value3"=>$getInActive];
+                        array_push($onBoard, $data);
+                        $counter++;
+                    }
+                }
+                //code for getting previous 180 days data i.e, 6 months
+                if($daysAgo == 180){
+                    for($i=1; $i<=6; $i++){
+//                        $currentDate = date('Y-m-d');
+                        $agoDate =  date('Y-m', strtotime("-$counter months"));
+                        $year = date('Y-m-d', strtotime("-$counter months"));
+                        $month = date('m', strtotime("-$counter months"));
+                        $getCounted = $this->Dashboard->getConfirmationMonthWise($business_units,$department,
+                                $sub_department,$location,$month,$status=2,$year);
+                        $getActive = $this->Dashboard->getConfirmationMonthWise($business_units,$department,
+                                $sub_department,$location,$month,$status=1,$year);
+                        $getInActive = $this->Dashboard->getConfirmationMonthWise($business_units,$department,
+                                $sub_department,$location,$month,$status=0,$year);
+                        $data =["date"=>$agoDate,"value1"=> $getCounted,"value2"=>$getActive,"value3"=>$getInActive];
+                        array_push($onBoard, $data);
+                        $counter++;
+                    }
+                }
+                //code for getting previous 365 days data i.e, i year, month wise
+                if($daysAgo == 365){
+                    for($i=1; $i<=12; $i++){
+//                        $currentDate = date('Y-m-d');
+                        $agoDate =  date('Y-m', strtotime("-$counter months"));
+                        $year = date('Y-m-d', strtotime("-$counter months"));
+                        $month = date('m', strtotime("-$counter months"));
+                        $getCounted = $this->Dashboard->getConfirmationMonthWise($business_units,$department,
+                                $sub_department,$location,$month,$status=2,$year);
+                        $getActive = $this->Dashboard->getConfirmationMonthWise($business_units,$department,
+                                $sub_department,$location,$month,$status=1,$year);
+                        $getInActive = $this->Dashboard->getConfirmationMonthWise($business_units,$department,
+                                $sub_department,$location,$month,$status=0,$year);
+                        $data =["date"=>$agoDate,"value1"=> $getCounted,"value2"=>$getActive,"value3"=>$getInActive];
                         array_push($onBoard, $data);
                         $counter++;
                     }
@@ -239,7 +362,7 @@ class DashboardController extends AppController {
                 if(!empty($onBoard)){
                     $onBoard = json_encode($onBoard);
                 }
-                echo $onBoard;
+                echo $onBoard;exit;
             }
         }
     }

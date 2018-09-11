@@ -257,7 +257,11 @@ return [
             //'username' => 'my_app',
             //'password' => 'secret',
             //'database' => 'my_app',
-			
+		
+//            'host' => 'localhost:3307',
+//            'username' => 'root',
+//            'password' => '',
+//            'database' => 'springboardv2',
 			//connection for testserver
             'host' => '10.100.7.24',
             'username' => 'appuser',

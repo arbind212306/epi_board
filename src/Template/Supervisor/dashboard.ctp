@@ -145,14 +145,14 @@
                                 </div>
 
                             </div>
-                             <hr class="margin-top-0"/>
+                            <hr class="margin-top-0"/>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="panel panel-danger joinee-blocks" onclick="dashboard.toggleLogistics()">
                                         <div class="panel-body">
                                             <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
                                             <strong>Logistics Arrangements</strong>
-   <p class="margin-bottom-0 text-muted logistic_date"></p>
+                                            <p class="margin-bottom-0 text-muted logistic_date"></p>
                                             <p class="margin-bottom-0 text-green" id="logistic_count"></p>
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@
                                         <div class="panel panel-primary joinee-blocks" onclick="dashboard.panelCheckboxToggle(this)">
                                             <div class="panel-body">
                                                 <div class="panel-proceed-btn">
-<input id="logistic_id_<?= $logisticrecorddata->id; ?>" type="checkbox" class="checkbox log_check" name="logistic_id[]" value="<?= $logisticrecorddata->id ?>"></div>
+                                                    <input id="logistic_id_<?= $logisticrecorddata->id; ?>" type="checkbox" class="checkbox log_check" name="logistic_id[]" value="<?= $logisticrecorddata->id ?>"></div>
                                                 <strong><?php echo $logisticrecorddata->title ?></strong>
                                                 <p class="margin-bottom-0 text-muted"><?php echo $logisticrecorddata['location']['title'] ?></p>
                                                 <p class="margin-bottom-0 text-primary"><?php echo $logisticrecorddata['department']['title'] ?></p>
@@ -504,6 +504,7 @@
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Employee ID" class="red-tooltip">Emp ID</div></th>
                         <th class="pointer" onclick="sortTable(4)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="Date of joining of the employee" class="red-tooltip">DOJ</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Details" class="red-tooltip">Logistics</div></th>
+                        <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Details" class="red-tooltip">15 Day Check List</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of Roadmap" class="red-tooltip">Roadmap</div></th>
                         <th><div data-toggle="tooltip" data-placement="bottom" data-original-title="Status of feedback submitted" class="red-tooltip">Feedback</div></th>
                         <th class="pointer" onclick="sortTable(2)"><div data-toggle="tooltip" data-placement="bottom" data-original-title="Confirmation status of employees" class="red-tooltip">Confirm</div></th>
@@ -542,12 +543,26 @@
                                 </td>
                                 <td>
                                     <?php
-                                    if (!empty($jd['lcomplete'])) {
-                                        echo '<i class="fa fa-circle text-green"></i>';
-                                    } else {
-                                        echo '<i class="fa fa-circle text-orange"></i>';
+                                    $logIcon = '<i class="fa fa-circle text-red"></i>';
+                                    if (isset($jd['lcomplete'])) {
+                                        if ($jd['lcomplete'] == 1) {
+                                            $logIcon = '<i class="fa fa-circle text-green"></i>';
+                                        } else if ($jd['lcomplete'] == 0) {
+                                            $logIcon = '<i class="fa fa-circle text-orange"></i>';
+                                        }
                                     }
+                                    echo $logIcon;
                                     ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $fIcon = '<i class="fa fa-circle text-orange"></i>';
+                                    if (!empty($jd['fifteen'])) {
+                                        $fIcon = '<i class="fa fa-circle text-green"></i>';
+                                    }
+                                    echo $fIcon;
+                                    ?>
+
 
                                 </td>
                                 <td><i class="fa fa-circle text-orange"></i></td>
@@ -660,9 +675,18 @@
                         </div>
                         <?php
                     }
-                }
+                } else {
+                    ?>
+                    <div class="col-md-12">
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                <p><strong>Roadmap Meeting</strong></p>
+                                <p>No meetings !</p>
+                            </div>
+                        </div>
+                    </div>    
+                <?php }
                 ?>
-
             </div>
         </div>
     </div>
@@ -749,7 +773,7 @@
 <?php
 echo $this->Html->script(['guage', 'custom', 'dashboard', 'sidebar', 'supervisor']);
 ?>
-<?php $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 'fetchusersessionbyidcommon']);?>
+<?php $session_detail_by_id = $this->Url->build(['controller' => 'Users', 'action' => 'fetchusersessionbyidcommon']); ?>
 <script>
                 function logisticinsert() {
 
@@ -806,31 +830,31 @@ echo $this->Html->script(['guage', 'custom', 'dashboard', 'sidebar', 'supervisor
                     });
 
                 });
-                
-                
-    function getsessions(id) {
-         $('#session_table').html('');
-        $.ajax({
-            type: "POST",
-            url: "<?= $session_detail_by_id; ?>",
-            data: {'id': id},
-            success: function (data) {
-                //console.log("data fetched - "+data);
-                var parsedata1 = JSON.parse(data);
-                if(parsedata1!=""){
-                    $("#session_table_div").show();
-                    $("#session_table").append(parsedata1);
-                }else{
-                    parsedata1 = "<tr><td></td><td></td><td></td><td></td><td>No Data Found</td><td></td><td></td><td></td><td></td></tr>";
-                    //$("#session_table_div").hide();
-                    $("#session_table").append(parsedata1);
-                } 
-            },
-            error: function () {
-                alert("Value NOT reaching to controller ");
-            }
-        });
-    }
+
+
+                function getsessions(id) {
+                    $('#session_table').html('');
+                    $.ajax({
+                        type: "POST",
+                        url: "<?= $session_detail_by_id; ?>",
+                        data: {'id': id},
+                        success: function (data) {
+                            //console.log("data fetched - "+data);
+                            var parsedata1 = JSON.parse(data);
+                            if (parsedata1 != "") {
+                                $("#session_table_div").show();
+                                $("#session_table").append(parsedata1);
+                            } else {
+                                parsedata1 = "<tr><td></td><td></td><td></td><td></td><td>No Data Found</td><td></td><td></td><td></td><td></td></tr>";
+                                //$("#session_table_div").hide();
+                                $("#session_table").append(parsedata1);
+                            }
+                        },
+                        error: function () {
+                            alert("Value NOT reaching to controller ");
+                        }
+                    });
+                }
 </script>
 
 

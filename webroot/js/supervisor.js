@@ -142,7 +142,7 @@ function showLogisticData(key) {
             $(data).each(function (i, u) {
                 if (u.logistic.id != undefined) {
                     var ik = u.logistic.id;
- console.log(ik);
+ //console.log(ik);
                     assigned++;
                     if (u.r_status == 1) {
                         recvd++;                        

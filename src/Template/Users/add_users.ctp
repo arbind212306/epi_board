@@ -306,6 +306,8 @@
 <?php echo $this->Html->script(['jquery-1.12.4', 'bootstrap.min', 'sidebar','jquery-ui','dashboard','chart.min','guage']); ?>
 <?php $dept_url = $this->Url->build(['controller' => 'Users', 'action' => 'getdepartments']); ?>
 <?php $s_dept_url = $this->Url->build(['controller' => 'Users', 'action' => 'getsubdepartments']); ?>
+<?php $username_url = $this->Url->build(['controller' => 'Users', 'action' => 'addUsers']); ?>
+
 <script type="text/javascript">
 $(document).ready(function() {
     /*  for department   */
@@ -363,9 +365,104 @@ $(document).ready(function() {
             }
         });
     });
+     var valid = false;
+     var value = 0;
+    $('#username').change(function(){
+    var username = $('#username').val();
+       // var valid = true;
+    $.ajax({
+            url: "<?= $username_url; ?>",
+            //url: '/cake3.6.4/Tests/getstates',
+            type: 'POST',
+            data: {"username": username},
+            success: function(data){
+                console.log(data);
+                if(data != '0')
+                {
+                // alert("Username  exist");
+                $('#username').css('border','1px solid red');
+                $('#check_username').text('username already exist');
+                $('#check_username').addClass('error_label');
+                       valid = false;
+                       value = 1;
+                 }
+                 else{
+                    $('#username').css('border','1px solid #cccccc');
+                    $('#check_username').text('');
+                    valid = true;
+                    value = 0;
+                 }
 
+                    
+            // var parsedata= JSON.parse(data);
+            // $("#department").append(parsedata);
+            },
+            error: function(e) 
+            {
+                // alert("An error occurred: " + e.responseText.message);
+                // console.log(e);
+            }
+        });
+
+    })
+
+    $('#emp_email').change(function(){
+    var email = $('#emp_email').val();
+       // var valid = true;
+    $.ajax({
+            url: "<?= $username_url; ?>",
+            //url: '/cake3.6.4/Tests/getstates',
+            type: 'POST',
+            data: {"email": email},
+            success: function(data){
+                console.log(data);
+                if(data != '0')
+                {
+                // alert("Username  exist");
+                $('#emp_email').css('border','1px solid red');
+                $('#check_emp_email').text('Email id already exist');
+                $('#check_emp_email').addClass('error_label');
+                  valid = false;
+                  value = 1;
+                 }
+                 else{
+                    $('#emp_email').css('border','1px solid #cccccc');
+                    $('#check_emp_email').text('');
+                    valid = true;
+                    value = 0;
+                 }
+
+                    
+            // var parsedata= JSON.parse(data);
+            // $("#department").append(parsedata);
+            },
+            error: function(e) 
+            {
+                // alert("An error occurred: " + e.responseText.message);
+                // console.log(e);
+            }
+        });
+
+    })
+    
+    
     $('#adduser').click(function(){
-      var valid = true;
+    //   var valid = true;
+
+     if(($('#username').val()!='') && (value == 1))
+    {   
+        $('#username').css('border','1px solid red');
+        $('#check_username').text('Username already exist');
+        $('#check_username').addClass('error_label');
+        valid = false;
+    }
+    else {
+        $('#username').css('border','1px solid #cccccc');
+        $('#check_username').text('');
+    }
+   
+
+
     if($('#username').val()=='')
     {   
         $('#username').css('border','1px solid red');
@@ -377,6 +474,8 @@ $(document).ready(function() {
         $('#username').css('border','1px solid #cccccc');
         $('#check_username').text('');
     }
+
+   
     if($('#user_type').val()=='')
     {
         $('#user_type').css('border','1px solid red');
@@ -467,6 +566,22 @@ $(document).ready(function() {
 
 
     }
+
+    if(($('#emp_email').val()!='') && (value == 1))
+    {
+        $('#emp_email').css('border','1px solid red');
+        $('#check_emp_email').text('Email id already exist');
+        $('#check_emp_email').addClass('error_label');
+        valid = false;
+
+    }
+    else
+    {
+        $('#emp_email').css('border','1px solid #cccccc');
+        $('#check_emp_email').text('');
+
+
+    }
     if($('#emp_email').val()=='')
     {
         $('#emp_email').css('border','1px solid red');
@@ -482,6 +597,7 @@ $(document).ready(function() {
 
 
     }
+    
     if($('#city').val()=='')
     {
         $('#city').css('border','1px solid red');

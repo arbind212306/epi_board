@@ -2,10 +2,14 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2 bg-white margin-bottom-xl">
             <div class="padding-md">
-                <div class="text-center">
+        <div class="text-left col-md-2">
+<?php $adduser = $this->Url->build(['controller' => 'Feedback', 'action' => 'questionslist']); ?>
+                    <h3> <a href="<?= $adduser; ?>" class="btn btn-danger btn-sm"> Back</a> </h3>
+                </div>
+                <div class="text-center col-md-10">
                     <h3>Add Question </h3>
                 </div>
-            </div>
+            </div> 
             <hr/>
             <div class="<?php echo @$class; ?>">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close"><?php echo @$close; ?></a>
@@ -87,7 +91,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-								 <input type="checkbox" name="status[]"  class="form-control" value="1">
+								 <input type="checkbox" style="height: 20px;margin-top: 13px;" name="status[]"  class="form-control" value="1">
                                   
                                 </div>
                             </div>
@@ -97,7 +101,7 @@
 									
 					<div class="col-md-12 text-right">
                                 <div class="form-group">
-								 <button type="button" name="" onclick="return addquestion();"  class="btn btn-primary" ><i class="fa fa-plus"></i> Add More</button>
+								 <button type="button" name="" onclick="return addquestion();"  class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i> Add More</button>
                                   
                                 </div>
                             </div>
@@ -105,7 +109,7 @@
                 </div>
                 <hr/>
                 <div class="col-xs-12 text-center">
-                    <button class="btn btn-danger padding-left-xl padding-right-xl" type="submit">Add</button>
+                    <button class="btn btn-danger btn-sm padding-left-xl padding-right-xl" type="submit">Add</button>
                 </div>
             </div>
                 <?php echo $this->Form->end();?>

@@ -103,27 +103,55 @@ class UsersController extends AppController {
 
 //method for displaying users details on dashboard page
     public function manageUser() {
- $this->set('active', '1');
+        $fifteen_check_list_id = 4;
+        $this->set('active', '1');
         $this->checkAccess();
         $this->viewBuilder()->layout('admin_layout');
-    
+
         $userTbl = TableRegistry::getTableLocator()->get('Users');
+        $feedbacks = TableRegistry::get('feedbacks');
         // Get joinee
         $users = [];
         $query1 = $userTbl->find('all')
-                ->where(['user_type' => 4, 'ob_status' => 1])->order(['id' => 'DESC']);
+                ->where(['user_type' => 4, 'ob_status' => 1])->order(['id' => 'DESC'])
+                ->contain(['LogisticsArrangement', 'FeedbackVerifyUser' => function ($q) use($fifteen_check_list_id) {
+                return $q->where(['FeedbackVerifyUser.feedback_id' => $fifteen_check_list_id]);
+            }]);
+        $locomplete = null;
+        $fiften_status = 0;
         foreach ($query1 as $rw) {
             if (!empty($rw)) {
+                // pr($rw); //die;
+                // Logicstic status
+                if (!empty($rw->logistics_arrangement)) {
+                    $locomplete = 0;
+                    foreach ($rw->logistics_arrangement as $lr) {
+                        if ($lr->r_status == 1) {
+                            $locomplete = 1;
+                        } else {
+                            $locomplete = 0;
+                        }
+                    }
+                }
+                $rw->lcomplete = $locomplete;
+                // Feedback status
+                if (!empty($rw->feedback_verify_user)) {
+                    $fiften_status = 1;
+                }
+                $rw->fifteen = $fiften_status;
                 $users[] = $rw->toArray();
             }
         }
-    $feedbacks=TableRegistry::get('feedbacks');
-   $feedbacksfetch=$feedbacks->find('all')->where(['status'=>'1'])->toArray();
-      $userTbl = TableRegistry::getTableLocator()->get('logistics');
-     $query2 = $userTbl->find('all')->where(['status'=>'1'])->toArray();
-           
-		  
-	   $cstatusTable = TableRegistry::getTableLocator()->get('departments');
+        //die;
+        // Feedback info
+        $fifteendaystatus = 0;
+        $feedstatus = 0;
+
+        $userTbl = TableRegistry::getTableLocator()->get('logistics');
+        $query2 = $userTbl->find('all')->where(['status' => '1'])->toArray();
+
+
+        $cstatusTable = TableRegistry::getTableLocator()->get('departments');
         $query4 = $cstatusTable->find('all')->where(['status' => 1]);
         $cstatusData = [];
         foreach ($query4 as $stts) {
@@ -131,16 +159,16 @@ class UsersController extends AppController {
                 $cstatusData[$stts->id] = $stts->title;
             }
         }
-	   	   $locationTable=TableRegistry::getTableLocator()->get('locations');
-	   $locationrecord=$locationTable->find()->where(['status'=>'1']);
-	   $locationarr= [];
-	   foreach($locationrecord as $locationrecords){
-		   if(!empty($locationrecords)) {
-		    $locationarr[$locationrecords->id]=$locationrecords->title;
-	   }
-	   }
-		  		   
-        $this->set(compact('users','query2','cstatusData','locationarr','feedbacksfetch'));
+        $locationTable = TableRegistry::getTableLocator()->get('locations');
+        $locationrecord = $locationTable->find()->where(['status' => '1']);
+        $locationarr = [];
+        foreach ($locationrecord as $locationrecords) {
+            if (!empty($locationrecords)) {
+                $locationarr[$locationrecords->id] = $locationrecords->title;
+            }
+        }
+
+        $this->set(compact('users', 'query2', 'cstatusData', 'locationarr', 'feedbacksfetch'));
     }
 
 //method for fetching data based on id of selected row with ajax for dashboard page
@@ -205,7 +233,7 @@ class UsersController extends AppController {
     }
 
     public function userManagement() {
-$this->set('active','7');
+        $this->set('active', '7');
         $this->viewBuilder()->layout('admin_layout');
         $usersTable = TableRegistry::get('users');
         $business_units_table = TableRegistry::get('BusinessUnits');
@@ -234,7 +262,7 @@ $this->set('active','7');
 
     public function manageRole() {
         $this->viewBuilder()->layout('admin_layout');
-    $this->set('active','6');
+        $this->set('active', '6');
         $accessCatTbl = TableRegistry::getTableLocator()->get('AccessCategories');
         $roleTbl = TableRegistry::getTableLocator()->get('Roles');
 
@@ -280,21 +308,25 @@ $this->set('active','7');
 
     public function roadmap() {
         $this->viewBuilder()->layout('admin_layout');
-    
-  $this->set('active', '4');
-        $this->loadModel('Departments');
-        $usertable = TableRegistry::getTableLocator()->get('Users'); //MeetingWithUsers
-        $roadmaplisting = $usertable->find('all', array('order' => array('Users.id' => 'desc')))->contain(['Departments'])->where(['ob_status' => '1', 'user_type' => '4'])->toArray();
-        //pr($roadmaplisting);die;
-        $departmentdata = TableRegistry::getTableLocator()->get('departments');
-        $departmentrecord = $departmentdata->find()->where(['status' => 1])->toArray();
-        $departmentarray = [];
-        foreach ($departmentrecord as $departmentarrays) {
-            if (!empty($departmentarrays)) {
-                $departmentarray[$departmentarrays->id] = $departmentarrays->title;
-            }
-        }
 
+        $this->set('active', '4');
+        $this->loadModel('Departments');
+        //$usertable = TableRegistry::getTableLocator()->get('Users'); //MeetingWithUsers
+        //$roadmaplisting = $usertable->find('all', array('order' => array('Users.id' => 'desc')))->contain(['Departments'])->where(['ob_status' => '1', 'user_type' => '4'])->toArray();
+
+        $conn = ConnectionManager::get('default');
+        $roadmap_query = "SELECT u.id, u.status, u.emp_id, u.doj, concat(u.first_name,' ', u.last_name) as employee_name, concat(m.first_name,' ', m.last_name) as manager_name,m.manager_emp_id as Manag_emp_id, d.title as department,bu.title as businees_unit,d1.title as sub_department FROM users u Left join users m on u.manager_emp_id=m.emp_id inner join departments as d on u.department = d.id left join business_units as bu on bu.id = u.businees_unit left join departments as d1 on u.sub_department = d1.id WHERE u.status ='1' AND u.ob_status ='1' AND u.user_type='4'";
+        $roadmaplisting = $conn->execute($roadmap_query)->fetchAll('assoc');
+        //pr($roadmaplisting);die;
+        //pr($roadmaplisting);die;
+        /* $departmentdata = TableRegistry::getTableLocator()->get('departments');
+          $departmentrecord = $departmentdata->find()->where(['status' => 1])->toArray();
+          $departmentarray = [];
+          foreach ($departmentrecord as $departmentarrays) {
+          if (!empty($departmentarrays)) {
+          $departmentarray[$departmentarrays->id] = $departmentarrays->title;
+          }
+          } */
 
         $business_units_table = TableRegistry::get('BusinessUnits');
         $business_units = $business_units_table->find('all', array('fields' => array('id', 'title'), 'conditions' => array('BusinessUnits.status' => 1)))->toArray();
@@ -344,9 +376,7 @@ $this->set('active','7');
                     $message = "Error in data insertion";
                 }
             }
-            $class = 'alert alert-success alert-dismissible fade in';
-            $iclass = 'fa fa-check';
-            $close = '&times';
+
             $this->Flash->set($message, ['element' => 'success']);
             return $this->redirect(['controller' => 'Users', 'action' => 'roadmap']);
         }
@@ -371,12 +401,20 @@ $this->set('active','7');
         if ($this->request->is('ajax')) {
             $id = $this->request->data('id');
             $add_sessions_table = TableRegistry::getTableLocator()->get('add_sessions');
-            $sessions_data = $add_sessions_table->find('all')->contain(['Departments', 'BusinessUnits'])->where(['AND' => ['add_sessions.joinee_id' => $id, 'add_sessions.status' => 1]])->toArray();
+
+
+            $conn = ConnectionManager::get('default');
+            $roadmap_query = "SELECT a.*, concat(u.first_name,' ', u.last_name) as employee_name, concat(m.first_name,' ', m.last_name) as manager_name, d.title as department,bu.title as business_unit FROM add_sessions a Left join users u on a.joinee_id=u.id Left join users m on a.user_id=m.id inner join departments as d on u.department = d.id left join business_units as bu on bu.id = u.businees_unit WHERE u.status ='1' AND a.status ='1' AND a.joinee_id ='" . $id . "'";
+            $sessions_data = $conn->execute($roadmap_query)->fetchAll('assoc');
+            //pr($sessions_data);die; 
+            //$sessions_data = $add_sessions_table->find('all')->contain(['Departments', 'BusinessUnits'])->where(['AND' => ['add_sessions.joinee_id' => $id, 'add_sessions.status' => 1]])->toArray();
             //pr($sessions_data);die;
             $html = '';
             if (!empty($sessions_data)) {
                 foreach ($sessions_data as $ses_data) {
-                    $diff = date_diff($ses_data['end_time'], $ses_data['start_time']);
+                    $end_time = new \DateTime($ses_data['end_time']);
+                    $start_time = new \DateTime($ses_data['start_time']);
+                    $diff = date_diff($end_time, $start_time);
                     $hours = $diff->h;
                     $minute = $diff->i;
                     $dur = $hours . "Hr " . $minute . " Min";
@@ -389,7 +427,7 @@ $this->set('active','7');
                     }
                     $note = substr($ses_data['note'], 0, 20) . '...';
                     //<a href='editSession/".$ses_data['id']."'></a>
-                    $html .= "<tr><td><div data-panel-type='roadmap'>" . $ses_data['business_unit']['title'] . "</div></td><td>" . $ses_data['department']['title'] . "</td><td>Raghav</td><td title='" . $ses_data['note'] . "'>" . $note . "</td><td>" . $ses_data['session_date'] . "</td><td>" . $ses_data['start_time'] . "</td><td>" . $ses_data['end_time'] . "</td><td>" . $dur . "</td><td><i class='" . $status . "'></i></td><td><div data-sidebar-button data-panel-type='edit_session' id='es_btn' onclick='open_edit_mode(" . $edit_session . ");editsessiondata(" . $ses_data['id'] . ");'><i class='fa fa-edit'></i></div> <button style='border: 0px;background-color: #dddddd;' onclick='return inactivesession(" . $ses_data['id'] . ");'><i class='fa fa-trash'></i></button></td></tr>";
+                    $html .= "<tr><td><div data-panel-type='roadmap'>" . $ses_data['business_unit'] . "</div></td><td>" . $ses_data['department'] . "</td><td>" . $ses_data['manager_name'] . "</td><td title='" . $ses_data['note'] . "'>" . $note . "</td><td>" . $ses_data['session_date'] . "</td><td>" . $ses_data['start_time'] . "</td><td>" . $ses_data['end_time'] . "</td><td>" . $dur . "</td><td><i class='" . $status . "'></i></td><td><div data-sidebar-button data-panel-type='edit_session' id='es_btn' onclick='open_edit_mode(" . $edit_session . ");editsessiondata(" . $ses_data['id'] . ");'><i class='fa fa-edit'></i></div> <button type='button' style='border: 0px;background-color: #dddddd;' onclick='return inactivesession(" . $ses_data['id'] . ");'><i class='fa fa-trash'></i></button></td></tr>";
                 }
             }
             //echo(json_encode(array($sessions_data)));
@@ -402,13 +440,21 @@ $this->set('active','7');
     public function fetchusersessionbyidcommon() {
         if ($this->request->is('ajax')) {
             $id = $this->request->data('id');
-            $add_sessions_table = TableRegistry::getTableLocator()->get('add_sessions');
-            $sessions_data = $add_sessions_table->find('all')->contain(['Departments', 'BusinessUnits'])->where(['AND' => ['add_sessions.joinee_id' => $id, 'add_sessions.status' => 1]])->toArray();
+            //$add_sessions_table = TableRegistry::getTableLocator()->get('add_sessions');
+            //$sessions_data = $add_sessions_table->find('all')->contain(['Departments', 'BusinessUnits'])->where(['AND' => ['add_sessions.joinee_id' => $id, 'add_sessions.status' => 1]])->toArray();
             //pr($sessions_data);die;
+
+            $conn = ConnectionManager::get('default');
+            $roadmap_query = "SELECT a.*, concat(u.first_name,' ', u.last_name) as employee_name, concat(m.first_name,' ', m.last_name) as manager_name, d.title as department,bu.title as business_unit FROM add_sessions a Left join users u on a.joinee_id=u.id Left join users m on a.user_id=m.id inner join departments as d on u.department = d.id left join business_units as bu on bu.id = u.businees_unit WHERE u.status ='1' AND a.status ='1' AND a.joinee_id ='" . $id . "'";
+            $sessions_data = $conn->execute($roadmap_query)->fetchAll('assoc');
+            //pr($sessions_data);die; 
+
             $html = '';
             if (!empty($sessions_data)) {
                 foreach ($sessions_data as $ses_data) {
-                    $diff = date_diff($ses_data['end_time'], $ses_data['start_time']);
+                    $end_time = new \DateTime($ses_data['end_time']);
+                    $start_time = new \DateTime($ses_data['start_time']);
+                    $diff = date_diff($end_time, $start_time);
                     $hours = $diff->h;
                     $minute = $diff->i;
                     $dur = $hours . "Hr " . $minute . " Min";
@@ -421,7 +467,7 @@ $this->set('active','7');
                     }
                     $note = substr($ses_data['note'], 0, 20) . '...';
                     //<a href='editSession/".$ses_data['id']."'></a>
-                    $html .= "<tr><td><div data-panel-type='roadmap'>" . $ses_data['business_unit']['title'] . "</div></td><td>" . $ses_data['department']['title'] . "</td><td>Raghav</td><td title='" . $ses_data['note'] . "'>" . $note . "</td><td>" . $ses_data['session_date'] . "</td><td>" . $ses_data['start_time'] . "</td><td>" . $ses_data['end_time'] . "</td><td>" . $dur . "</td><td><i class='" . $status . "'></i></td></tr>";
+                    $html .= "<tr><td><div data-panel-type='roadmap'>" . $ses_data['business_unit'] . "</div></td><td>" . $ses_data['department'] . "</td><td>" . $ses_data['manager_name'] . "</td><td title='" . $ses_data['note'] . "'>" . $note . "</td><td>" . $ses_data['session_date'] . "</td><td>" . $ses_data['start_time'] . "</td><td>" . $ses_data['end_time'] . "</td><td>" . $dur . "</td><td><i class='" . $status . "'></i></td></tr>";
                 }
             }
             //echo(json_encode(array($sessions_data)));
@@ -438,7 +484,9 @@ $this->set('active','7');
             $this->loadModel('Users');
             $this->loadModel('BusinessUnits');
             $sessions_table = TableRegistry::getTableLocator()->get('add_sessions');
-            $sess_data['sess_data'] = $sessions_table->find('all')->contain(['Departments', 'BusinessUnits', 'Users'])->where(['AND' => ['add_sessions.id' => $id, 'add_sessions.status' => 1]])->toArray();
+            $sess_data['sess_data'] = $sessions_table->find('all')->contain(['Departments', 'BusinessUnits', 'Users'])->where(['AND' => ['add_sessions.id' => $id]])->toArray();
+            //pr($sess_data['sess_data']);die;
+
             $department_id = $sess_data['sess_data'][0]['department_id'];
             $sub_department_id = $sess_data['sess_data'][0]['sub_department_id'];
             $meeting_with_id = $sess_data['sess_data'][0]['user_id'];
@@ -766,7 +814,7 @@ $this->set('active','7');
     }
 
     public function confirmation() {
-    $this->set('active','3');
+        $this->set('active', '3');
         $this->viewBuilder()->layout('admin_layout');
         $usersTable = TableRegistry::get('Users');
         $conn = ConnectionManager::get('default');
@@ -782,23 +830,78 @@ $this->set('active','7');
     }
 
     public function addUser() {
+        $this->set('active', 'adduser');
         $this->checkAccess();
         $this->viewBuilder()->layout('admin_layout');
         $this->loadModel('Users');
-       $search= $this->request->data('search');
- 
-          
-    
+        $search = $this->request->data('search');
         if ($this->request->is('post')) {
-          
-                    return $this->redirect(['controller' => 'Users', 'action' => 'addUser']);
-                if(!empty($search)){
-                $searcherror= "Please Click on search icon";
-                   } 
+            $time = Time::now();
+            $id = $this->request->data('id');
+            $username = $this->request->data('username');
+            $user_type = $this->request->data('user_type');
+            $auth_type = $this->request->data('auth_type');
+            $first_name = $this->request->data('first_name');
+            $last_name = $this->request->data('last_name');
+            $doj = $this->request->data('doj');
+
+            $empid = $this->request->data('emp_id');
+            $email = $this->request->data('email');
+            $business = $this->request->data('businees_unit');
+            $mobile = $this->request->data('mobile');
+            $city = $this->request->data('city');
+            $country = $this->request->data('country');
+            $dept = $this->request->data('department');
+            $subdept = $this->request->data('sub_department');
+
+            $designation = $this->request->data('designation');
+            $band = $this->request->data('band');
+            $manager_emp_id = $this->request->data('manager_emp_id');
+            $bhr_emp_id = $this->request->data('bhr_emp_id');
+            $password = $this->request->data('password');
+            //$password1 = md5($this->request->data['password']);
+
+            $usersTable = TableRegistry::get('users');
+            $usersdata = $usersTable->newEntity();
+            $usersdata->user_type = $user_type;
+            $usersdata->first_name = $first_name;
+            $usersdata->last_name = $last_name;
+
+            $usersdata->doj = $doj;
+            $usersdata->username = $username;
+            $usersdata->user_type = $user_type;
+            $usersdata->emp_id = $empid;
+            $usersdata->email = $email;
+            $usersdata->businees_unit = $business;
+
+            $usersdata->businees_unit = $business;
+            $usersdata->mobile = $mobile;
+            $usersdata->city = $city;
+            $usersdata->country = $country;
+            $usersdata->sub_department = $subdept;
+
+            $usersdata->designation = $designation;
+            $usersdata->manager_emp_id = $manager_emp_id;
+            $usersdata->bhr_emp_id = $bhr_emp_id;
+            $usersdata->time_created = $time;
+
+            if (empty($id)) {
+                if ($usersTable->save($usersdata)) {
+                    $id = $usersdata->id;
+                    return $this->redirect(['controller' => 'Users', 'action' => 'userManagement']);
+                    $sucessful = "User added sucessfully";
+                }
+            } else {
+                $conditions = array('id' => $id);
+                $fields = array('username' => $username, 'city' => $city, 'user_type' => $user_type, 'emp_id' => $empid, 'email' => $email, 'mobile' => $mobile, 'department' => $dept, 'sub_department' => $subdept, 'designation' => $designation, 'country' => $country, 'first_name' => $first_name, 'last_name' => $last_name, 'auth_type' => $auth_type, 'businees_unit' => $business, 'manager_emp_id' => $manager_emp_id, 'bhr_emp_id' => $bhr_emp_id, 'band' => $band);
+                $usersTable->updateAll($fields, $conditions);
+            }
         }
 
 
-        $this->set(compact('sucessful','searcherror'));
+        $this->set(compact('sucessful'));
+
+        $this->set(compact('sucessful', 'searcherror'));
     }
 
 // function for adding user when user is not in the database
@@ -811,6 +914,27 @@ $this->set('active','7');
         $roles = $roles_table->find('all', array('fields' => array('id', 'title')))->toArray();
 
         $business_units = $business_units_table->find('all', array('fields' => array('id', 'title'), 'conditions' => array('BusinessUnits.status' => 1)))->toArray();
+
+
+        if ($this->request->is('ajax')) {
+            $username = $this->request->data('username');
+            $email = $this->request->data('email');
+            $conn = ConnectionManager::get('default');
+            if (!empty($username)) {
+                $query1 = "select count(id) as username from users where username = '" . $username . "'";
+                $sessions_data = $conn->execute($query1)->fetchAll('assoc');
+                $value = $sessions_data[0]['username'];
+                echo $value;
+                die();
+            }
+            if (!empty($email)) {
+                $query2 = "select count(id) as email from users where email = '" . $email . "'";
+                $sessions_data = $conn->execute($query2)->fetchAll('assoc');
+                $value = $sessions_data[0]['email'];
+                echo $value;
+                die();
+            }
+        }
 
 
         if ($this->request->is('post')) {
@@ -897,7 +1021,6 @@ $this->set('active','7');
     public function deleteuser() {
         $this->autoRender = false;
         if ($this->request->is('ajax')) {
-
             $id = $this->request->data('id');
             $status = $this->request->data('status');
             $usersTable = TableRegistry::get('users');
@@ -907,33 +1030,47 @@ $this->set('active','7');
         }
     }
 
+    public function delete($id = null) {
+        $this->loadModel('Users');
+        $this->request->allowMethod(['post', 'delete']);
+        $id = $_POST['id'];
+        //$deleterecord = explode(",",$_POST['select_individual'] );
+        foreach ($id as $ids) {
+            $delete_users = $this->Users->get($ids);
+            if ($this->Users->delete($delete_users)) {
+
+                $sucessful = 'Record is Successfully Delete!.';
+                $class = 'alert alert-success alert-dismissible fade in';
+                $iclass = 'fa fa-check';
+                $close = '&times';
+            }
+        }
+        $this->Flash->set($sucessful);
+        $this->redirect(['action' => 'manageUser']);
+        $this->set(compact('sucessful'));
+    }
+
 //feadback list
-public function feedbacklist(){
-$this->autoRender = false;
+    public function feedbacklist() {
+        $this->autoRender = false;
         if ($this->request->is('ajax')) {
             $id = $this->request->data['id'];
-			
-		$connection = ConnectionManager::get('default');
-            $sql = "select q.title from feedback_questions as fq inner join questions as q on q.id=fq.question_id where fq.feedback_id = '".$id."'   ";
-            $users  = $connection->execute($sql)->fetchAll('assoc');
-							    $html = '';
+
+            $connection = ConnectionManager::get('default');
+            $sql = "select q.title from feedback_questions as fq inner join questions as q on q.id=fq.question_id where fq.feedback_id = '" . $id . "'   ";
+            $users = $connection->execute($sql)->fetchAll('assoc');
+            $html = '';
             if (!empty($users)) {
-        $u=1;
-        foreach ($users as $user){
-                   $html .= '<div><p>'.$user["title"].'</p><div> ';
-				   
-    }
-               
+                $u = 1;
+                foreach ($users as $user) {
+                    $html .= '<div><p>' . $user["title"] . '</p><div> ';
+                }
             }
-         $arrData = json_encode( $html);
+            $arrData = json_encode($html);
             echo $arrData;
         }
+    }
 
-
-
-
-
-}
     // employee dashboard function
     public function employeeDashboard() {
         $session = $this->request->session();
@@ -943,9 +1080,9 @@ $this->autoRender = false;
         $usersTable = TableRegistry::get('users');
         $usersLogistic = TableRegistry::get('logistics_arrangement');
 
-    $feedbackdata = TableRegistry::get('feedbacks');
-    $feedbackuser=  $feedbackdata->find('all',array('order'=>array('id','title')))->where(['for_joinee'=>'1','status'=>'1'])->toArray();
-       
+        $feedbackdata = TableRegistry::get('feedbacks');
+        $feedbackuser = $feedbackdata->find('all', array('order' => array('id', 'title')))->where(['for_joinee' => '1', 'status' => '1'])->toArray();
+
 
         $conn = ConnectionManager::get('default');
         $id = $this->request->data('id');
@@ -955,8 +1092,14 @@ $this->autoRender = false;
         $query2 = "select u.*, d.title as department, d1.title as sub_department, bu.title as businees_unit from users as u inner join departments as d on u.department = d.id  left join departments as d1 on u.sub_department = d1.id left join business_units as bu on bu.id = u.businees_unit where u.id = '" . $user_id . "'";
         $user_details = $conn->execute($query2)->fetchAll('assoc');
 
-            $add_sessions_table = TableRegistry::getTableLocator()->get('add_sessions');
-            $sessions_data = $add_sessions_table->find('all')->contain(['Departments', 'BusinessUnits'])->where(['AND' => ['add_sessions.joinee_id' => $user_id, 'add_sessions.status' => 1]])->toArray();
+        $add_sessions_table = TableRegistry::getTableLocator()->get('add_sessions');
+        $query5 = "SELECT a.*, concat(u.first_name,' ', u.last_name) as employee_name,
+ concat(m.first_name,' ', m.last_name) as manager_name, d.title as department,bu.title as business_unit FROM add_sessions a Left join 
+users u on a.joinee_id=u.id Left join users m on a.user_id=m.id inner join departments as d on u.department = d.id left join 
+business_units as bu on bu.id = u.businees_unit WHERE u.status ='1' AND a.joinee_id ='" . $user_id . "'
+            ";
+        $sessions_data = $conn->execute($query5)->fetchAll('assoc');
+
 
         if ($this->request->is('ajax')) {
             $r_status = $this->request->data('r_status');
@@ -990,10 +1133,12 @@ $this->autoRender = false;
             $status2 = 0;
         }
 
+        $query4 = "select count(user_id) as userfeedback from feedback_responses where user_id = '" . $user_id . "'";
+        $feedback = $conn->execute($query4)->fetchAll('assoc');
+        $feedback_value = $feedback[0]['userfeedback'];
 
 
-        $this->set(compact('user_deatil', 'logistic_detail', 'status1', 'value', 'logistic_status', 'user_details', 'status2','sessions_data','feedbackuser','user_id'));
-
+        $this->set(compact('user_deatil', 'logistic_detail', 'status1', 'value', 'logistic_status', 'user_details', 'status2', 'sessions_data', 'feedbackuser', 'user_id', 'feedback_value'));
     }
 
     public function getdepartments() {
@@ -1050,9 +1195,6 @@ $this->autoRender = false;
         die;
     }
 
-
-   
-
     public function stchange($id, $flag) {
         $this->autoRender = false;
         $user_type = $this->Auth->user('user_type');
@@ -1062,7 +1204,7 @@ $this->autoRender = false;
         }
         $userTbl = TableRegistry::getTableLocator()->get('Users');
         $user = $userTbl->get($id);
-        if($user->status!=1){
+        if ($user->status != 1) {
             echo 'Invalid request 2 !';
             die;
         }
@@ -1075,8 +1217,7 @@ $this->autoRender = false;
         echo json_encode(['Done']);
         die;
     }
-    
-    
+
     public function getFeedbackData($user_id) {
         $this->autoRender = false;
         $fbTbl = TableRegistry::getTableLocator()->get('Feedbacks');
@@ -1089,14 +1230,24 @@ $this->autoRender = false;
         $username = $uinfo['first_name'] . " " . $uinfo['last_name'];
         $ueId = $uinfo['emp_id'];
         $doj = date('d/m/Y', strtotime($uinfo['doj']));
-        // Get feedbacl list for user
+
+        // Get feedback list given by supervisor for employee
         $query1 = $fbTbl->find('all')
                 ->where(['status' => 1, 'for_supervisor' => 1])
                 ->contain([
-            'FeedbackVerify' => function ($q) use ($user_id){
-                    return $q->where(['FeedbackVerify.user_id' =>$user_id]);
+            'FeedbackVerify' => function ($q) use ($user_id) {
+                return $q->where(['FeedbackVerify.user_id' => $user_id]);
             },
             'FeedbackQuestions' => ['Questions']]);
+
+        /* //get feedback list given by employee for supervisor
+          $query1 = $fbTbl->find('all')
+          ->where(['status' => 1, 'for_joinee' => 1])
+          ->contain([
+          'FeedbackVerify' => function ($q) use ($user_id){
+          return $q->where(['FeedbackVerify.response_by' =>$user_id]);
+          },
+          'FeedbackQuestions' => ['Questions']]); */
         foreach ($query1 as $rw) {
             //pr($rw);die;
             if (!empty($rw)) {
@@ -1109,7 +1260,7 @@ $this->autoRender = false;
                 $completedTxt = "<h5>&nbsp;</h5>";
                 $title = $rw['title'];
                 $fstatus = '<p class="margin-bottom-0 text-red">Pending</p>';
-                if (($completed)&&!empty($rw['feedback_verify'][0])) {
+                if (($completed) && !empty($rw['feedback_verify'][0])) {
                     $completedOn = date('d/m/Y', strtotime($rw['feedback_verify'][0]['created']));
                     $completedTxt = '<h5 class="text-muted">Completed on ' . $completedOn . '</h5>';
                 }
@@ -1166,7 +1317,7 @@ $this->autoRender = false;
                 $feedbackAnsData = $rw['feedback_verify'];
                 if (!empty($rw['feedback_questions'])) {
                     foreach ($rw['feedback_questions'] as $key1 => $fq) {
-                        if($completed){
+                        if ($completed) {
                             $answer = $feedbackAnsData[$key1];
                         }
                         $detailedHtml .= '<div class="col-md-6">
@@ -1219,8 +1370,179 @@ $this->autoRender = false;
         echo json_encode($feedBackData);
         die;
     }
-    
-    
+
+    public function getFeedbackDataForUser($user_id) {
+        $this->autoRender = false;
+        $fbTbl = TableRegistry::getTableLocator()->get('Feedbacks');
+        //$feedbackUserTbl = TableRegistry::getTableLocator()->get('FeedbackUsers');
+        $uTbl = TableRegistry::getTableLocator()->get('Users');
+        $feedBackData = [];
+
+        // Get basic info of user
+        $uinfo = $uTbl->get($user_id);
+        $username = $uinfo['first_name'] . " " . $uinfo['last_name'];
+        $ueId = $uinfo['emp_id'];
+        $doj = date('d/m/Y', strtotime($uinfo['doj']));
+
+        //get feedback list given by employee for supervisor
+        $query1 = $fbTbl->find('all')
+                ->where(['status' => 1, 'for_joinee' => 1])
+                ->contain([
+            'FeedbackVerify' => function ($q) use ($user_id) {
+                return $q->where(['FeedbackVerify.response_by' => $user_id]);
+            },
+            'FeedbackQuestions' => ['Questions']]);
+        foreach ($query1 as $rw) {
+            //pr($rw);die;
+            if (!empty($rw)) {
+                $key = $rw['id'];
+                $completed = false;
+                if (!empty($rw['feedback_verify'])) {  // This method will be replaced by another method later
+                    $completed = true;
+                }
+                $completedOn = "-";
+                $completedTxt = "<h5>&nbsp;</h5>";
+                $title = $rw['title'];
+                $fstatus = '<p class="margin-bottom-0 text-red">Pending</p>';
+                if (($completed) && !empty($rw['feedback_verify'][0])) {
+                    $completedOn = date('d/m/Y', strtotime($rw['feedback_verify'][0]['created']));
+                    $completedTxt = '<h5 class="text-muted">Completed on ' . $completedOn . '</h5>';
+                }
+                if ($completed) {
+                    $fstatus = '<p class="margin-bottom-0 text-green">Completed</p>';
+                }
+
+                // Html for info
+                $infohtml = '<div class="col-md-4">
+                                <div class="panel panel-success joinee-blocks info-sec-emp" data-rel="' . $key . '">
+                                    <div class="panel-body">
+                                        <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
+                                        <strong>' . $title . '</strong>
+                                        <p class="margin-bottom-0 text-muted">' . $completedOn . '</p>
+                                        ' . $fstatus . '
+                                    </div>
+                                </div>
+                            </div>';
+                $detailedHtml = '<div class="hidden feedback-sec" id="detail-sec-' . $key . '">
+                            <form class="feedback-form" onsubmit="return false;">
+                            <input type="hidden" name="fu_id" value="' . $user_id . '">
+                            <input type="hidden" name="f_id" value="' . $key . '">
+                            <input type="hidden" name="u_id" value="' . $user_id . '">    
+                            <ol class="breadcrumb">
+                                <li class="text-blue pointer goback-feedback" data-rel="' . $key . '">Interval Feedback</li>
+                                <li class="active">' . $title . '</li>
+                            </ol>
+                            <div class="margin-top-sm">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span>Name : </span>
+                                        <strong class="j-name-html">' . $username . '</strong>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span>Emp Id : </span>
+                                        <strong class="j-emp_id-html">' . $ueId . '</strong>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span>DOJ : </span>
+                                        <strong class="j-doj-html">' . $doj . '</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h4 class="margin-0">' . $title . '</h4>
+                                    ' . $completedTxt . '
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row" style="border-style: ridge;margin-left: 1px;">';
+                $feedbackAnsData = $rw['feedback_verify'];
+                if (!empty($rw['feedback_questions'])) {
+                    // Check if it is type checklist
+                    if ($rw['list_type'] == 1) {
+                        $rw['cate_data'] = [];
+                        foreach ($rw['feedback_questions'] as $key0 => $fq0) {
+                            if (!empty($fq0['question']['category'])) {
+                                $category = trim($fq0['question']['category']);
+                                //$cat = Inflector::slug($category, "_");
+                                $rw['cate_data'][$category][] = $fq0;
+                                // $rw['cate_data2'][$cat][] = $category;
+                            } else {
+                                $rw['cate_data'][] = $fq0;
+                            }
+                        }
+                    }
+                    if ($rw['list_type'] == 1) {
+                        $feedQdata = $rw['cate_data'];
+                    } else {
+                        $feedQdata = $rw['feedback_questions'];
+                    }
+
+                    foreach ($feedQdata as $key01 => $fq01) {
+                        if ($rw['list_type'] == 1) {
+                            $detailedHtml .= '<h4>' . $key01 . '</h4>';
+                        } else {
+                            $fq01 = $feedQdata;
+                        }
+
+                        foreach ($fq01 as $key1 => $fq) {
+                            if ($completed) {
+                                $answer = $feedbackAnsData[$key1];
+                            }
+                            $detailedHtml .= '<div class="col-md-6">
+                                                    <p>' . ($key1 + 1) . '. ' . $fq['question']['title'] . '</p>';
+                            $ratingG = 0;
+                            if ($fq['question']['type'] == 2) {
+                                $starClas = " star-rate";
+                                if ($completed) {
+                                    $ratingG = $answer['rating'];
+                                    $starClas = "";
+                                }
+                                $detailedHtml .= ' <input type="hidden" name="q_' . $fq['id'] . '" class="rate" value="' . $ratingG . '"/><div class="u-rate" data-rate="0">&nbsp;';
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($ratingG > 0) {
+                                        $detailedHtml .= '&nbsp;<span><i class="fa fa-star fa-lg text-gold' . $starClas . '"></i></span>';
+                                    } else {
+                                        $detailedHtml .= '&nbsp;<span><i class="fa fa-star-o fa-lg text-gold ' . $starClas . '"></i></span>';
+                                    }
+                                    $ratingG--;
+                                }
+                                $detailedHtml .= '</div>';
+                            } else if ($fq['question']['type'] == 1) {
+                                $textExtra = "";
+                                $tval = "";
+                                if ($completed) {
+                                    $textExtra = ' readonly ';
+                                    $tval = $answer['answer'];
+                                }
+                                $detailedHtml .= '<div class="form-group">
+                                                                    <textarea disabled class="form-control" ' . $textExtra . ' rows="2" name="q_' . $fq['id'] . '">' . $tval . '</textarea>
+                                                                </div>';
+                            }
+
+                            $detailedHtml .= '<hr class="margin-sm"></div>';
+                        }
+                    }
+                }
+                $submitClass = " hidden";
+                if (!$completed) {
+                    $submitClass = " save-feedback";
+                }
+                $detailedHtml .= '</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            </form>
+                        </div>';
+                $feedBackData[] = ['info' => $infohtml, 'details' => $detailedHtml];
+            }
+        }
+        echo json_encode($feedBackData);
+        die;
+    }
+
     public function getFeedbackdetailData($user_id) {
         $this->autoRender = false;
         $fbTbl = TableRegistry::getTableLocator()->get('Feedbacks');
@@ -1237,8 +1559,8 @@ $this->autoRender = false;
         $query1 = $fbTbl->find('all')
                 ->where(['status' => 1, 'for_supervisor' => 1])
                 ->contain([
-            'FeedbackVerify' => function ($q) use ($user_id){
-                    return $q->where(['FeedbackVerify.user_id' =>$user_id]);
+            'FeedbackVerify' => function ($q) use ($user_id) {
+                return $q->where(['FeedbackVerify.user_id' => $user_id]);
             },
             'FeedbackQuestions' => ['Questions']]);
         foreach ($query1 as $rw) {
@@ -1253,7 +1575,7 @@ $this->autoRender = false;
                 $completedTxt = "<h5>&nbsp;</h5>";
                 $title = $rw['title'];
                 $fstatus = '<p class="margin-bottom-0 text-red">Pending</p>';
-                if (($completed)&&!empty($rw['feedback_verify'][0])) {
+                if (($completed) && !empty($rw['feedback_verify'][0])) {
                     $completedOn = date('d/m/Y', strtotime($rw['feedback_verify'][0]['created']));
                     $completedTxt = '<h5 class="text-muted">Completed on ' . $completedOn . '</h5>';
                 }
@@ -1310,7 +1632,7 @@ $this->autoRender = false;
                 $feedbackAnsData = $rw['feedback_verify'];
                 if (!empty($rw['feedback_questions'])) {
                     foreach ($rw['feedback_questions'] as $key1 => $fq) {
-                        if($completed){
+                        if ($completed) {
                             $answer = $feedbackAnsData[$key1];
                         }
                         $detailedHtml .= '<div class="col-md-6">

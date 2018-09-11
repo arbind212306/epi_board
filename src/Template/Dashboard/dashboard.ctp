@@ -13,15 +13,10 @@
         </div>
         <div class="col-xs-12 margin-top-lg overflow-scroll">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="padding-md bg-white">
                         <div class="row">
-                        <!--<div class="col-md-6 text-center">-->
-                                <h4 class="text-center">Onboard</h4>
-                        <!--</div>-->
-                        </div>    
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <h5 class="text-center"><strong>Business Unit</strong></h5>
                                 <div class="form-group">
                                     <select class="form-control" id="bu_unit" name="bu_unit" 
@@ -38,7 +33,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <h5 class="text-center"><strong>Department</strong></h5>
                                 <div class="form-group">
                                     <select class="form-control" id="department" name="department" 
@@ -48,7 +43,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <h5 class="text-center"><strong>Sub Department</strong></h5>
                                 <div class="form-group">
                                     <select class="form-control" id="sub_department" name="sub_department">
@@ -56,12 +51,7 @@
                                     </select>
                                 </div>
                             </div>
-<!--                            <div class="col-md-4 text-center">
-                                <h4>Onboard</h4>
-                            </div>-->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <h5 class="text-center"><strong>Location</strong></h5>
                                 <div class="form-group">
                                     <select class="form-control" name="location" id="location">
@@ -76,7 +66,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <h5 class="text-center"><strong>Days</strong></h5>
                                 <div class="form-group">
                                     <select class="form-control" name="days" id="days" onchange="return getfilter();">
@@ -89,7 +79,16 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
+                    </div> 
+                </div>
+                <div class="col-md-6">
+                    <div class="padding-md bg-white">
+                        <div class="row">
+                        <!--<div class="col-md-6 text-center">-->
+                                <h4 class="text-center">Onboard</h4>
+                        <!--</div>-->
+                        </div>    
                         <div id="chartdiv"></div>
                         <div style="display:none;" id="chartdiv2"></div>
                         <div>
@@ -104,74 +103,6 @@
                             <h4 class="text-center">Confirmation</h4>
                            
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5 class="text-center"><strong>Business Unit</strong></h5>
-                                <div class="form-group">
-                                    <select class="form-control" id="bu_unit_1" name="bu_unit" 
-                                            onchange="getDepartment(this,'1');">
-                                        <option value="All">All</option>
-                                        <?php if(!empty($business_units)){
-                                            foreach ($business_units as $value_business): 
-                                        ?>
-                                        <option value="<?= $value_business['id'] ?>"><?= $value_business['title'] ?>
-                                        </option>
-                                        <?php endforeach; } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="text-center"><strong>Department</strong></h5>
-                                <div class="form-group">
-                                    <select class="form-control" id="department_1" name="department" 
-                                            onchange="return getsubDepartment(this,'1');">
-                                        <option value="All">All</option>
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="text-center"><strong>Sub Department</strong></h5>
-                                <div class="form-group">
-                                    <select class="form-control" id="sub_department_1" name="sub_department">
-                                        <option value="All">All</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h5 class="text-center"><strong>Location</strong></h5>
-                                <div class="form-group">
-                                    <select class="form-control" name="location" id="location_1">
-                                        <option value="All">All</option>
-                                        <?php if(!empty($location)){
-                                            foreach ($location as $value_location):
-                                        ?>
-                                        <option value="<?= $value_location['city'] ?>"><?= $value_location['city'] ?></option>
-                                        <?php endforeach; } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="text-center"><strong>Days</strong></h5>
-                                <div class="form-group">
-                                    <select class="form-control" name="days" id="days_1"
-                                            onchange="return getConfirmation();">
-                                        <option value="All">All</option>
-                                        <option value="7">Last 7 Days</option>
-                                        <option value="30">Last 1 Month</option>
-                                        <option value="90">Last 3 Months</option>
-                                        <option value="180">Last 6 Months</option>
-                                        <option value="365">Last 1 Year</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                  <?= $this->Html->image('loading.gif',['class' => 'loader','id' =>'loader2',
-                                      'style'=>'display:none']); ?>  
-                            </div>
-                        </div>
                         <div id="chartConfirmation"></div>
                         <div style="display:none;" id="chartConfirmation2"></div>
                         <div>
@@ -183,7 +114,7 @@
                 </div>
             <!-- new row strats here for gauge graph -->
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="padding-md bg-white">
                         <div class="row">
                         <!--<div class="col-md-6 text-center">-->
@@ -195,7 +126,7 @@
                         <!--<div style="display:none;" id="chartdiv2"></div>-->
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="padding-md bg-white">
                         <div class="row">
                             <h4 class="text-center"></h4>
@@ -257,8 +188,11 @@ function getsubDepartment(sel,idnum){
 //code for setting values in global variable in json format
 var onBoardPerDay = <?= $onBoardPerDay ?> ;
 var confirmed = <?= $confirmed ?>;
-console.log(confirmed);
-console.log(typeof confirmed);
+var active = <?= $active ?>;
+var inactive = <?= $inactive ?>;
+var allConfirmationData = <?= $allConfirmationData ?>;
+//console.log(allConfirmationData);
+//console.log(typeof allConfirmationData);
 //first graph code i.e., onboard graph
 var chart = AmCharts.makeChart("chartdiv", {
     "type": "serial",
@@ -272,11 +206,17 @@ var chart = AmCharts.makeChart("chartdiv", {
         "id": "v1",
         "axisAlpha": 0,
         "position": "left",
-        "ignoreAxisWidth":true
+        "ignoreAxisWidth":true,
+        "integersOnly": true,
+        "title": 'Number of Onboard'
     }],
     "balloon": {
         "borderThickness": 1,
         "shadowAlpha": 0
+    },
+    "legend": {
+    "useGraphSettings": true,
+    "position": "top"
     },
     "graphs": [{
         "id": "g1",
@@ -288,10 +228,10 @@ var chart = AmCharts.makeChart("chartdiv", {
         "bullet": "round",
         "bulletBorderAlpha": 1,
         "bulletColor": "#FFFFFF",
-        "bulletSize": 5,
+        "bulletSize": 8,
         "hideBulletsCount": 50,
-        "lineThickness": 2,
-        "title": "red line",
+        "lineThickness": 3,
+        "title": "Onboard",
         "useLineColorForBulletBorder": true,
         "valueField": "value",
         "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
@@ -321,11 +261,11 @@ var chart = AmCharts.makeChart("chartdiv", {
         "valueLineAlpha":0.2,
         "valueZoomable":true
     },
-    "valueScrollbar":{
-      "oppositeAxis":false,
-      "offset":50,
-      "scrollbarHeight":10
-    },
+//    "valueScrollbar":{
+//      "oppositeAxis":false,
+//      "offset":50,
+//      "scrollbarHeight":10
+//    },
     "categoryField": "date",
     "categoryAxis": {
         "parseDates": true,
@@ -357,32 +297,69 @@ var chart2 = AmCharts.makeChart("chartConfirmation", {
         "id": "v1",
         "axisAlpha": 0,
         "position": "left",
-        "ignoreAxisWidth":true
+        "ignoreAxisWidth":true,
+        "integersOnly": true,
+        "title":"Number of values(confirmed/Active/Inactive)"
     }],
     "balloon": {
         "borderThickness": 1,
-        "shadowAlpha": 0
+        "shadowAlpha": 0,
+        "adjustBorderColor":false,
+        "color":"#ffffff"
+    },
+    "legend": {
+    "useGraphSettings": true,
+    "position": "top"
     },
     "graphs": [{
-        "id": "g1",
-        "balloon":{
-          "drop":true,
-          "adjustBorderColor":false,
-          "color":"#ffffff"
-        },
+        "id": "g1,g2,g3",
+//        "balloon":{
+//          "drop":true,
+//          "adjustBorderColor":false,
+//          "color":"#ffffff",
+//          "fillColor": "#FFFFFF"
+//        },
         "bullet": "round",
         "bulletBorderAlpha": 1,
         "bulletColor": "#FFFFFF",
-        "bulletSize": 5,
+        "bulletSize": 8,
         "hideBulletsCount": 50,
-        "lineThickness": 2,
-        "title": "red line",
+        "lineThickness": 3,
+        "title": "Confirmed",
+        "showBalloon": true,
         "useLineColorForBulletBorder": true,
         "valueField": "value",
         "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+    },
+        {
+        "id": "g2",
+        "bullet": "round",
+        "bulletBorderAlpha": 1,
+        "bulletColor": "#00FF00",
+        "bulletSize": 8,
+        "hideBulletsCount": 50,
+        "lineThickness": 3,
+        "title": "Active",
+        "lineColor": "red",
+        "useLineColorForBulletBorder": true,
+        "valueField": "value2",
+        "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+    },
+        {
+        "id": "g3",
+        "bullet": "round",
+        "bulletBorderAlpha": 1,
+        "bulletColor": "#ff003f",
+        "bulletSize": 8,
+        "hideBulletsCount": 50,
+        "lineThickness": 3,
+        "title": "Inactive",
+        "lineColor": "green",
+        "useLineColorForBulletBorder": true,
+        "valueField": "value3"
     }],
     "chartScrollbar": {
-        "graph": "g1",
+        "graph": "g1,g2,g3",
         "oppositeAxis":false,
         "offset":30,
         "scrollbarHeight": 80,
@@ -402,22 +379,22 @@ var chart2 = AmCharts.makeChart("chartConfirmation", {
         "valueLineBalloonEnabled": true,
         "cursorAlpha":1,
         "cursorColor":"#258cbb",
-        "limitToGraph":"g1",
+        "limitToGraph":"g1,g2,g3",
         "valueLineAlpha":0.2,
         "valueZoomable":true
     },
-    "valueScrollbar":{
-      "oppositeAxis":false,
-      "offset":50,
-      "scrollbarHeight":10
-    },
+//    "valueScrollbar":{
+//      "oppositeAxis":false,
+//      "offset":50,
+//      "scrollbarHeight":10
+//    },
     "categoryField": "date",
     "categoryAxis": {
         "parseDates": true,
         "dashLength": 1,
         "minorGridEnabled": true
     },
-    "dataProvider": confirmed
+    "dataProvider": allConfirmationData
 });
 
 chart2.addListener("rendered", zoomChart2);
@@ -445,7 +422,7 @@ var gaugeChart = AmCharts.makeChart("chart3", {
       "radius": "100%",
       "innerRadius": "85%"
     }, {
-      "color": "#84b761",
+      "color": "#006600",
       "startValue": 0,
       "endValue": 80,
       "radius": "100%",
@@ -458,7 +435,7 @@ var gaugeChart = AmCharts.makeChart("chart3", {
       "radius": "80%",
       "innerRadius": "65%"
     }, {
-      "color": "#fdd400",
+      "color": "#FF9900",
       "startValue": 0,
       "endValue": 35,
       "radius": "80%",
@@ -471,7 +448,7 @@ var gaugeChart = AmCharts.makeChart("chart3", {
       "radius": "60%",
       "innerRadius": "45%"
     }, {
-      "color": "#cc4748",
+      "color": "#E23D00",
       "startValue": 0,
       "endValue": 92,
       "radius": "60%",
@@ -485,7 +462,7 @@ var gaugeChart = AmCharts.makeChart("chart3", {
     "y": "5%",
     "size": 15,
     "bold": true,
-    "color": "#84b761",
+    "color": "#006600",
     "align": "right"
   }, {
     "text": "Received",
@@ -493,7 +470,7 @@ var gaugeChart = AmCharts.makeChart("chart3", {
     "y": "15%",
     "size": 15,
     "bold": true,
-    "color": "#fdd400",
+    "color": "#FF9900",
     "align": "right"
   }, {
     "text": "Pending",
@@ -501,7 +478,7 @@ var gaugeChart = AmCharts.makeChart("chart3", {
     "y": "24%",
     "size": 15,
     "bold": true,
-    "color": "#cc4748",
+    "color": "#E23D00",
     "align": "right"
   }]
 });
@@ -512,11 +489,11 @@ var gaugeChart = AmCharts.makeChart("chart3", {
    
     #chartdiv,#chartConfirmation,#chartdiv2,#chartConfirmation2 {
 	width	: 100%;
-	height	: 400px;
+	height	: 500px;
 }	
 #chart3 {
   width: 100%;
-  height: 400px;
+  height: 300px;
   margin: auto;
 }
 .loader {

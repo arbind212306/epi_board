@@ -13,7 +13,7 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                    <label for="authmethod" class="padding-top-md">Business Unit</label>
+                                    <label for="authmethod" class="padding-top-md">Business Unit<span style='color: red'> * </span></label>
                                 </div>
                                 <div class="col-md-9 bu_name_append">
                                     <select class="form-control bu_name" id="bu_name" name="bu_name">
@@ -29,7 +29,7 @@
                             <div class="form-group row">
                                 <div class="form-group row">
                                     <div class="col-md-3">
-                                        <label for="empid" class="padding-top-md">Department</label>
+                                        <label for="empid" class="padding-top-md">Department<span style='color: red'> * </span></label>
                                     </div>
                                     <div class="col-md-9 dept_append">
                                         <select class="form-control dept" id="dept" name="dept">
@@ -48,7 +48,7 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                    <label for="" class="padding-top-md">Sub Department</label>
+                                    <label for="" class="padding-top-md">Sub Department<span style='color: red'> * </span></label>
                                 </div>
                                 <div class="col-md-9 sub_dept">
                                     <select class="form-control sub_dept" id="sub_dept" name="sub_dept">
@@ -65,7 +65,7 @@
                             <div class="form-group row">
                                 <div class="form-group row">
                                     <div class="col-md-3">
-                                        <label for="empid" class="padding-top-md">Location</label>
+                                        <label for="empid" class="padding-top-md">Location<span style='color: red'> * </span></label>
                                     </div>
                                     <div class="col-md-9 location">
                                         <select required class="form-control" id="location" name="location">
@@ -86,7 +86,7 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                    <label for="frstname" class="padding-top-md">Title</label>
+                                    <label for="frstname" class="padding-top-md">Title<span style='color: red'> * </span></label>
                                 </div>
                                 <div class="col-md-9">
                                     <input type="text" id="title" name="title" class="form-control">

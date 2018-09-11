@@ -166,8 +166,7 @@ class FeedbackController extends AppController {
             if ($count_title > 0) {
                 for ($i = 0; $i < $count_title; $i++) {
                     $requestData = $this->request->data;
-                    $user_type = $_POST['user_type'];
-                    $feedback_type = $_POST['feedback_type'];
+                   
                     $category = $_POST['category'];
                     $type = $_POST['type'];
                     $title = $_POST['title'][$i];
@@ -179,8 +178,7 @@ class FeedbackController extends AppController {
                     $questionTbl = TableRegistry::getTableLocator()->get('questions');
                     $questionsdata = $questionTbl->newEntity();
 
-                    $questionsdata->user_type = $user_type;
-                    $questionsdata->feedback_type = $feedback_type;
+                
                     $questionsdata->category = $category;
                     $questionsdata->type = $type;
                     $questionsdata->title = $title;

@@ -62,140 +62,9 @@
                     <div class="col-xs-12 bg-dark">
                         <div class="padding-md">
                             <div class="panel-close-btn" data-sidebar-button><i class="fa fa-times fa-lg text-white"></i></div>
-                            <h3 class="margin-0" id="sidebar_header">15 Day Checklist</h3>
+                            <h3 class="margin-0" id="sidebar_header"></h3>
                         </div>
                     </div>
-
-                    <div id="15_day_checklist_completed" class="col-xs-12 hidden sidebar-section margin-top-md">
-                        <h4>Organisation Overview</h4>
-                        <div class="well well-sm">
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                        </div>
-                        <h4>Process Overview</h4>
-                        <div class="well well-sm">
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                        </div>
-                        <h4>Learning Overview</h4>
-                        <div class="well well-sm">
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <p class="margin-bottom-0">A. I am almost certain</p>
-                        </div>
-                    </div>
-                    <div id="15_day_checklist_pending" class="col-xs-12 hidden sidebar-section margin-top-md">
-                        <h4>Organisation Overview</h4>
-                        <div class="well well-sm">
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                        </div>
-                        <hr/>
-                        <h4>Process Overview</h4>
-                        <div class="well well-sm">
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                        </div>
-                        <hr/>
-                        <h4>Learning Overview</h4>
-                        <div class="well well-sm">
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                            <hr class="margin-top-sm margin-bottom-sm"/>
-                            <p>Q. I am aware of Quatrro values and its journey</p>
-                            <div class="form-group">
-                                <label>Answer:</label>
-                                <input type="text" class="form-control bg-white">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 text-center">
-                            <button class="btn btn-danger">Submit</button>
-                        </div>
-                    </div>
-
                     <div id="logistics_completed" class="col-xs-12 hidden sidebar-section margin-top-md">
                         <div class="row">
                             <div class="success-msg" id="send_requirments" style="display:none;">
@@ -289,6 +158,12 @@
                             </div>
                         </div> -->
                     </div>
+                    <div id="logistics_pending" class="col-xs-12 hidden sidebar-section margin-top-md">
+                <div class="well text-center">
+                    <h5>Logistics Arrangements still pending!</h5>
+                </div>
+            </div>
+
                 </div>
                 <div id="confirmation_status_completed" class="col-xs-12 hidden sidebar-section margin-top-md">
                     <div class="row">
@@ -452,9 +327,10 @@
                                 <th>Meeting With</th>
                                 <th>Department</th>
                                 <th>Note</th>
+                                <th>Date</th>
                                 <th>Start time</th>
                                 <th>End Time</th>
-                                <th>Duration</th>
+                                <th>Duration</th> 
                                 <th>Status</th>
 
                             </tr>
@@ -463,26 +339,38 @@
                             <?php foreach ($sessions_data as $sessions_data) { ?>
 
                                 <tr>
-                                    <td><?php echo "Raghav" ?></td>
-                                    <td><?php echo $sessions_data['department']['title'] ?></td> 
+                                    <td><?php echo $sessions_data['manager_name']?></td>
+                                    <td><?php echo $sessions_data['department']?></td> 
                                     <td><?php
                                         $note = substr($sessions_data['note'], 0, 20) . '...';
                                         echo'<span title="' . $sessions_data['note'] . '">' . $note . '</span>';
                                         ?></td> 
-                                    <td><?php echo $sessions_data['start_time'] ?></td> 
+                                    <td><?php 
+                                      $orgdate = $sessions_data['session_date'];
+                                    $date = date("d-m-Y", strtotime($orgdate));
+                                    echo $date; ?></td>   
+                                    <td><?php echo $sessions_data['start_time'] ?></td>     
                                     <td><?php echo $sessions_data['end_time'] ?></td> 
+                                     
                                     <td><?php
-                                        $diff = date_diff($sessions_data['end_time'], $sessions_data['start_time']);
-                                        $hours = $diff->h;
-                                        $minute = $diff->i;
-                                        $dur = $hours . "Hr " . $minute . " Min";
+                                        $strtdate = new \DateTime($sessions_data['start_time']);
+                                        $enddate = new \DateTime($sessions_data['end_time']);
+                                        $diff = date_diff($strtdate, $enddate);
+                                         $hours = $diff->h;
+                                         $minute = $diff->i;
+                                         $dur = $hours . "Hr " . $minute . " Min";
                                         echo $dur;
-                                        ?></td> 
+                                        ?></td>   
                                     <td><?php
-                                        $value = $sessions_data['status'];
-                                        if ($value == 1)
-                                            
-                                            ?><i class="fa fa-circle text-orange"></i></td>   
+                                       if ($sessions_data['is_accepted'] == 1) {
+                                                $status = 'fa fa-check text-green';
+                                            } else {
+                                                $status = 'fa fa-circle text-orange';
+                                            }
+
+                                      ?>
+                                      <i class='<?php echo $status?>'></i>
+                                    </td>   
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -621,7 +509,12 @@
                                 ?>">My Roadmap</div>
                             </div>
 
-                            <div class="col-sm-2 bs-wizard-step disabled ">
+                            <div class="col-sm-2 bs-wizard-step <?php $value = $feedback_value; if($value != 0) {
+                                echo "complete";
+                            } else {
+                                echo "disabled";
+                            }
+                            ?>">
                                 <div class="text-center bs-wizard-stepnum">&nbsp;</div>
                                 <div class="progress"><div class="progress-bar"></div></div>
                                 <span class="bs-wizard-dot"></span>
@@ -830,40 +723,39 @@
                 </div>
             </div> -->
             <div class="col-md-3">
-                <div class="panel panel-success joinee-blocks" data-sidebar-button onclick="dashboard.toggleLogistics('completed')">
+                <div class="panel panel-success joinee-blocks" data-sidebar-button onclick="<?php
+                if (empty($logistic_detail)) {
+                    echo "dashboard.toggleLogistics('pending')";
+                } else {
+                    echo"dashboard.toggleLogistics('completed')";
+                }
+                ?>">
                     <div class="panel-body">
                         <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
                         <strong>Logistics</strong>
                         <p class="margin-bottom-0 text-muted"><?php
-                            $orgdate = $logistic_detail['time_created'];
+                          if(empty($logistic_detail['time_created'])){
+                            $orgdate="";
+                          }else{
+                            $orgdate = $logistic_detail['time_created'];}
                             $date = date("d-m-Y", strtotime($orgdate));
-                            echo $date;
+                            if(!empty($orgdate)){echo $date;}else{echo"-";}
                             ?></p>
 
                         <?php
                         $value = "";
                         $class = "";
                         if ($status2 == 0) {
-                            $value = "Done";
-                            $class = "text-success"
+                            $value = "Pending";
+                            $class = "text-danger"
                             ?>
                             <?php
                         } else {
-                            $value = "Pending";
-                            $class = "text-danger"
+                            $value = "Done";
+                            $class = "text-success"
                             ?> <?php }
                         ?>
                         <p class="margin-bottom-0 <?php echo $class; ?>"><?php echo $value; ?></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-danger joinee-blocks" data-sidebar-button onclick="dashboard.toggle15DayChecklist('pending')">
-                    <div class="panel-body">
-                        <div class="panel-proceed-btn"><i class="fa fa-angle-double-right fa-lg"></i></div>
-                        <strong>15 Day Checklist</strong>
-                        <p class="margin-bottom-0 text-muted">-</p>
-                        <p class="margin-bottom-0 text-danger">Pending</p>
                     </div>
                 </div>
             </div>
@@ -919,7 +811,6 @@
 <?php $updatestatus = $this->Url->build(['controller' => 'Users', 'action' => 'employeeDashboard']); ?>
 <script>
                     $('[data-toggle="tooltip"]').tooltip();
-
                     $(document).ready(function () {
                         var ukey = $('#u-key').val();
                         showFeedbackData(ukey);

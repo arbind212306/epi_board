@@ -6,9 +6,8 @@
             <file>file:/D:/xampp/htdocs/springboardv2/src/Controller/DashboardController.php</file>
             <file>file:/D:/xampp/htdocs/springboardv2/src/Template/Element/header.ctp</file>
             <file>file:/D:/xampp/htdocs/springboardv2/webroot/js/dashboard.js</file>
-            <file>file:/D:/xampp/htdocs/springboardv2/src/Controller/SupervisorController.php</file>
-            <file>file:/D:/xampp/htdocs/springboardv2/src/Template/Dashboard/dashboard.ctp</file>
             <file>file:/D:/xampp/htdocs/springboardv2/webroot/js/customchart.js</file>
+            <file>file:/D:/xampp/htdocs/springboardv2/src/Template/Dashboard/dashboard.ctp</file>
             <file>file:/D:/xampp/htdocs/springboardv2/src/Model/Table/DashboardTable.php</file>
         </group>
     </open-files>

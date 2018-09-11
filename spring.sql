@@ -80,7 +80,7 @@ CREATE TABLE `add_sessions` (
   `is_accepted` int(1) DEFAULT '0',
   `status` tinyint(4) DEFAULT '1' COMMENT '2=acepted by Superviosr',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 /*Data for the table `add_sessions` */
 
@@ -93,7 +93,15 @@ insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`depar
 insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (10,6,1,1,1,7,'Hey Dear You have to meet with this Employee','2018-09-05','07:08:00','08:09:00','2018-09-04 06:33:25','2018-09-06 08:26:09',0,1);
 insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (11,1,7,1,2,7,'Hey Dear You have to meet with this Employee','2018-09-05','17:00:00','18:00:00','2018-09-04 13:23:22',NULL,0,1);
 insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (12,6,28,1,1,7,'Hello its on 5sep eve changed','2018-09-06','10:00:00','11:00:00','2018-09-05 12:40:16','2018-09-06 09:31:05',0,1);
-insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (15,2,1,1,1,7,'Need to discuss the career path','2018-09-07','13:00:00','14:30:00','2018-09-06 13:42:17',NULL,0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (15,2,1,1,1,7,'Need to discuss the career path','2018-09-07','01:00:00','02:30:00','2018-09-06 13:42:17','2018-09-11 06:54:33',0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (17,2,NULL,1,1,8,'Testing text ','2018-09-11','01:01:00','11:25:00','2018-09-10 05:35:49','2018-09-11 06:55:04',1,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (18,2,1,1,1,7,'','2018-09-12','13:00:00','15:00:00','2018-09-10 05:35:49',NULL,0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (19,5,35,1,1,7,'Hello 10 sep atul vs rajiv','2018-09-11','13:00:00','15:00:00','2018-09-10 09:54:12',NULL,0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (20,7,28,1,1,7,'mukul vs supervisor','2018-09-13','12:00:00','13:00:00','2018-09-10 09:55:03',NULL,0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (21,7,47,1,1,8,'mukul vs employee','2018-09-28','01:00:00','14:00:00','2018-09-10 09:56:06',NULL,0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (22,47,35,1,1,7,'Hey..you have to attend the meeting  with Rajiv shukla','2018-09-13','19:45:00','20:00:00','2018-09-10 14:06:24','2018-09-10 14:13:42',1,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (23,47,NULL,2,29,53,'Hey..you have to attend the meeting  with Akash','2018-09-11','07:38:00','00:00:00','2018-09-10 14:06:24','2018-09-11 06:15:20',0,1);
+insert into `add_sessions` (`id`,`joinee_id`,`user_id`,`business_unit_id`,`department_id`,`sub_department_id`,`note`,`session_date`,`start_time`,`end_time`,`time_created`,`time_modified`,`is_accepted`,`status`) values (24,34,28,1,1,7,'Hey Bro you have scheduled meeting','2018-09-12','15:00:00','17:00:00','2018-09-11 13:38:45',NULL,1,1);
 
 /*Table structure for table `business_units` */
 
@@ -104,7 +112,7 @@ CREATE TABLE `business_units` (
   `title` varchar(100) DEFAULT NULL,
   `status` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `business_units` */
 
@@ -215,7 +223,7 @@ CREATE TABLE `feedback_questions` (
   `question_id` int(11) DEFAULT NULL,
   `question_for` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feedback_questions` */
 
@@ -233,6 +241,18 @@ insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for
 insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (58,1,3,2);
 insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (59,1,4,2);
 insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (60,1,20,2);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (74,4,29,1);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (75,4,34,1);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (76,4,36,1);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (77,4,37,1);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (78,4,38,1);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (79,4,39,1);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (80,5,2,2);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (81,5,3,2);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (82,5,4,2);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (83,5,37,2);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (84,5,38,2);
+insert into `feedback_questions` (`id`,`feedback_id`,`question_id`,`question_for`) values (85,5,39,2);
 
 /*Table structure for table `feedback_responses` */
 
@@ -250,7 +270,7 @@ CREATE TABLE `feedback_responses` (
   `modified` datetime DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL COMMENT 'Temporary , will use feedback_user_id later',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feedback_responses` */
 
@@ -269,8 +289,55 @@ insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,
 insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (13,56,4,'4',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',7);
 insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (14,57,4,'4',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',7);
 insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (15,58,5,'5',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',7);
-insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (16,59,4,'4',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',7);
-insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (17,60,0,'Nice guy',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',7);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (16,59,4,'1',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',7);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (17,60,0,'Nice guy',1,7,28,'2018-09-06 11:10:49','2018-09-06 11:10:49',1);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (36,55,4,'4',1,NULL,5,'2018-09-07 09:36:11','2018-09-07 09:36:11',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (37,56,3,'3',1,NULL,5,'2018-09-07 09:36:11','2018-09-07 09:36:11',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (38,57,4,'4',1,NULL,5,'2018-09-07 09:36:11','2018-09-07 09:36:11',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (39,58,2,'2',1,NULL,5,'2018-09-07 09:36:11','2018-09-07 09:36:11',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (40,59,4,'4',1,NULL,5,'2018-09-07 09:36:11','2018-09-07 09:36:11',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (41,60,0,'sadf',1,NULL,5,'2018-09-07 09:36:11','2018-09-07 09:36:11',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (42,29,3,'3',2,NULL,5,'2018-09-07 10:03:19','2018-09-07 10:03:19',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (43,30,3,'3',2,NULL,5,'2018-09-07 10:03:19','2018-09-07 10:03:19',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (44,31,0,'asdf',2,NULL,5,'2018-09-07 10:03:19','2018-09-07 10:03:19',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (45,55,4,'4',1,6,28,'2018-09-10 11:10:18','2018-09-10 11:10:18',6);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (46,56,5,'5',1,6,28,'2018-09-10 11:10:18','2018-09-10 11:10:18',6);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (47,57,3,'3',1,6,28,'2018-09-10 11:10:18','2018-09-10 11:10:18',6);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (48,58,0,'0',1,6,28,'2018-09-10 11:10:18','2018-09-10 11:10:18',6);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (49,59,0,'0',1,6,28,'2018-09-10 11:10:18','2018-09-10 11:10:18',6);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (50,60,0,'jv',1,6,28,'2018-09-10 11:10:18','2018-09-10 11:10:18',6);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (51,32,3,'3',3,NULL,5,'2018-09-10 11:20:28','2018-09-10 11:20:28',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (52,33,3,'3',3,NULL,5,'2018-09-10 11:20:28','2018-09-10 11:20:28',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (53,34,4,'4',3,NULL,5,'2018-09-10 11:20:28','2018-09-10 11:20:28',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (54,35,4,'4',3,NULL,5,'2018-09-10 11:20:28','2018-09-10 11:20:28',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (55,36,4,'4',3,NULL,5,'2018-09-10 11:20:28','2018-09-10 11:20:28',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (56,61,0,'Yes I am',4,NULL,5,'2018-09-11 05:34:57','2018-09-11 05:34:57',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (57,62,0,'Yes I am',4,NULL,5,'2018-09-11 05:34:57','2018-09-11 05:34:57',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (58,63,0,'Yes I am',4,NULL,5,'2018-09-11 05:34:57','2018-09-11 05:34:57',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (59,64,0,'Yes I am',4,NULL,5,'2018-09-11 05:34:58','2018-09-11 05:34:58',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (60,65,0,'Yes I am',4,NULL,5,'2018-09-11 05:34:58','2018-09-11 05:34:58',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (61,66,0,'Yes',4,NULL,5,'2018-09-11 05:34:58','2018-09-11 05:34:58',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (62,55,4,'4',1,NULL,2,'2018-09-11 09:26:50','2018-09-11 09:26:50',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (63,56,2,'2',1,NULL,2,'2018-09-11 09:26:50','2018-09-11 09:26:50',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (64,57,4,'4',1,NULL,2,'2018-09-11 09:26:50','2018-09-11 09:26:50',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (65,58,2,'2',1,NULL,2,'2018-09-11 09:26:50','2018-09-11 09:26:50',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (66,59,3,'3',1,NULL,2,'2018-09-11 09:26:50','2018-09-11 09:26:50',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (67,60,0,'Hi feedback',1,NULL,2,'2018-09-11 09:26:50','2018-09-11 09:26:50',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (68,61,0,'Yes',4,NULL,2,'2018-09-11 09:36:45','2018-09-11 09:36:45',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (69,62,0,'Yes',4,NULL,2,'2018-09-11 09:36:46','2018-09-11 09:36:46',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (70,63,0,'Yes',4,NULL,2,'2018-09-11 09:36:46','2018-09-11 09:36:46',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (71,64,0,'Yes',4,NULL,2,'2018-09-11 09:36:46','2018-09-11 09:36:46',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (72,65,0,'Yes',4,NULL,2,'2018-09-11 09:36:46','2018-09-11 09:36:46',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (73,66,0,'Yes',4,NULL,2,'2018-09-11 09:36:46','2018-09-11 09:36:46',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (74,29,4,'4',2,NULL,2,'2018-09-11 13:04:51','2018-09-11 13:04:51',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (75,30,2,'2',2,NULL,2,'2018-09-11 13:04:51','2018-09-11 13:04:51',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (76,31,0,'Answer for qustion',2,NULL,2,'2018-09-11 13:04:51','2018-09-11 13:04:51',NULL);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (77,55,5,'5',1,2,28,'2018-09-11 13:06:32','2018-09-11 13:06:32',2);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (78,56,0,'0',1,2,28,'2018-09-11 13:06:32','2018-09-11 13:06:32',2);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (79,57,0,'0',1,2,28,'2018-09-11 13:06:32','2018-09-11 13:06:32',2);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (80,58,2,'2',1,2,28,'2018-09-11 13:06:32','2018-09-11 13:06:32',2);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (81,59,4,'4',1,2,28,'2018-09-11 13:06:32','2018-09-11 13:06:32',2);
+insert into `feedback_responses` (`id`,`feedback_question_id`,`rating`,`answer`,`feedback_id`,`feedback_user_id`,`response_by`,`created`,`modified`,`user_id`) values (82,60,0,'asdasd',1,2,28,'2018-09-11 13:06:32','2018-09-11 13:06:32',2);
 
 /*Table structure for table `feedback_users` */
 
@@ -301,14 +368,17 @@ CREATE TABLE `feedbacks` (
   `for_joinee` int(1) DEFAULT '0',
   `for_supervisor` int(1) DEFAULT '0',
   `status` int(1) DEFAULT '1',
+  `list_type` int(11) DEFAULT NULL COMMENT '1=checklist',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feedbacks` */
 
-insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`) values (1,'Feedback 15 Days',15,'Desc',1,1,1);
-insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`) values (2,'Feedback after 1st week',7,'Joininig day',1,0,1);
-insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`) values (3,'1st month feedback',30,'1st month feedback',1,1,1);
+insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`,`list_type`) values (1,'Feedback 15 Days',15,'Desc',1,1,1,NULL);
+insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`,`list_type`) values (2,'Feedback after 1st week',7,'Joininig day',1,0,1,NULL);
+insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`,`list_type`) values (3,'1st month feedback',30,'1st month feedback',1,1,1,NULL);
+insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`,`list_type`) values (4,'15 Day Checklist',15,'15 Day Checklist for user',1,0,1,1);
+insert into `feedbacks` (`id`,`title`,`interval_days`,`description`,`for_joinee`,`for_supervisor`,`status`,`list_type`) values (5,'45 Days checklist',45,'45 Days Checklist Description',0,1,0,NULL);
 
 /*Table structure for table `hrms_users` */
 
@@ -398,7 +468,7 @@ CREATE TABLE `logistics_arrangement` (
   `time_created` datetime NOT NULL,
   `logistic_arrangement_add_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
 
 /*Data for the table `logistics_arrangement` */
 
@@ -432,26 +502,36 @@ insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`ti
 insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (86,6,'1',0,'2018-09-05 06:30:04',NULL);
 insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (87,6,'2',0,'2018-09-05 06:30:04',NULL);
 insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (88,6,'3',0,'2018-09-05 06:30:04',NULL);
-insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (92,2,'1',0,'2018-09-06 14:06:33',NULL);
-insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (93,2,'2',0,'2018-09-06 14:06:33',NULL);
-insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (94,2,'3',0,'2018-09-06 14:06:33',NULL);
-insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (95,2,'4',0,'2018-09-06 14:06:33',NULL);
-insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (96,2,'5',1,'2018-09-07 06:21:13',NULL);
-insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (97,2,'6',1,'2018-09-07 06:21:13',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (98,47,'1',1,'2018-09-10 13:09:05',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (99,47,'2',0,'2018-09-10 13:09:05',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (100,47,'3',1,'2018-09-10 13:09:05',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (101,47,'4',0,'2018-09-10 13:09:05',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (102,2,'1',1,'2018-09-11 06:00:30',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (103,2,'2',1,'2018-09-11 06:00:30',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (104,2,'3',1,'2018-09-11 06:00:30',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (105,55,'1',0,'2018-09-11 07:24:09',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (106,55,'7',0,'2018-09-11 07:24:09',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (107,55,'5',0,'2018-09-11 07:24:58',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (108,55,'6',0,'2018-09-11 07:24:58',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (109,55,'4',0,'2018-09-11 07:31:19',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (117,48,'1',0,'2018-09-11 12:48:11',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (118,48,'4',0,'2018-09-11 12:48:11',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (123,48,'2',0,'2018-09-11 13:27:43',NULL);
+insert into `logistics_arrangement` (`id`,`user_id`,`logistic_id`,`r_status`,`time_created`,`logistic_arrangement_add_by`) values (124,48,'5',0,'2018-09-11 13:27:43',NULL);
 
 /*Table structure for table `questions` */
 
 DROP TABLE IF EXISTS `questions`;
 
 CREATE TABLE `questions` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text,
   `type` int(11) DEFAULT NULL COMMENT '1=text;2=rating;',
   `category` varchar(100) DEFAULT NULL,
   `describtion` text,
   `status` varchar(11) DEFAULT NULL COMMENT '0=inactive;1=active',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 /*Data for the table `questions` */
 
@@ -474,6 +554,17 @@ insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) 
 insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (23,'this is text uped by abh',2,'Learning Outsource','this is desc added by abh','0');
 insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (24,'this is text2 upd',2,'Support Resource','this is desc2 updateded by abhi..','0');
 insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (25,'this is text3 updated by abhishek',1,'Human Resource','this is desc3  updated by abhishek','0');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (29,' I am aware of Quatrro values and its journey',1,'Organize Behaviour','','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (30,'this is abhi type1',2,'Learning Outsource','this is abhi type desc1','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (31,'this is abhi type2 updated',1,'Human Resource','this is abhi type desc2 updated','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (32,'this is 1',2,'Process Overview','desc1','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (33,'this is type2 updated',1,'Support Resource','desc2 updated','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (34,'I am aware of Quatrro organisation structure',1,'Organize Behaviour','','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (35,' I am aware of Quatrro policies',1,'Organize Behaviour','','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (36,'I am aware of entire training process',1,'Process Overview','','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (37,'I have gone through entire HR Communication process',1,'Process Overview','','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (38,'I am aware of entire training process ',1,'Learning Outsource','','1');
+insert into `questions` (`id`,`title`,`type`,`category`,`describtion`,`status`) values (39,'I already had a meeting with my team lead',1,'Learning Outsource','','1');
 
 /*Table structure for table `roles` */
 
@@ -493,47 +584,7 @@ CREATE TABLE `roles` (
 insert into `roles` (`id`,`title`,`description`,`access`,`status`) values (1,'Admin','Admin','[\"5\",\"21\",\"22\",\"6\",\"23\",\"24\",\"7\",\"25\",\"26\",\"8\",\"27\",\"28\",\"9\",\"29\",\"10\",\"11\",\"12\",\"13\",\"14\",\"15\",\"16\",\"17\",\"18\",\"19\",\"20\"]','1');
 insert into `roles` (`id`,`title`,`description`,`access`,`status`) values (2,'Supervisor','supervisor','[\"5\",\"21\",\"22\",\"13\"]','1');
 insert into `roles` (`id`,`title`,`description`,`access`,`status`) values (3,'SPOC','SPOC',NULL,'1');
-insert into `roles` (`id`,`title`,`description`,`access`,`status`) values (4,'Employee','Employee','','1');
-
-/*Table structure for table `to_remove_joinee_roadmaps` */
-
-DROP TABLE IF EXISTS `to_remove_joinee_roadmaps`;
-
-CREATE TABLE `to_remove_joinee_roadmaps` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `roadmap_id` int(11) DEFAULT NULL,
-  `added_by` int(11) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL COMMENT '1=assigned;2=completed;3=rejected;',
-  `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
-/*Data for the table `to_remove_joinee_roadmaps` */
-
-insert into `to_remove_joinee_roadmaps` (`id`,`user_id`,`roadmap_id`,`added_by`,`status`,`created`,`modified`) values (3,6,1,28,0,'2018-08-29 08:21:41','2018-08-29 08:21:41');
-insert into `to_remove_joinee_roadmaps` (`id`,`user_id`,`roadmap_id`,`added_by`,`status`,`created`,`modified`) values (4,6,2,28,0,'2018-08-29 08:21:41','2018-08-29 08:21:41');
-insert into `to_remove_joinee_roadmaps` (`id`,`user_id`,`roadmap_id`,`added_by`,`status`,`created`,`modified`) values (5,6,1,28,1,'2018-08-30 12:09:09','2018-08-30 12:09:09');
-insert into `to_remove_joinee_roadmaps` (`id`,`user_id`,`roadmap_id`,`added_by`,`status`,`created`,`modified`) values (6,6,2,28,1,'2018-08-30 12:09:09','2018-08-30 12:09:09');
-
-/*Table structure for table `to_remove_roadmaps` */
-
-DROP TABLE IF EXISTS `to_remove_roadmaps`;
-
-CREATE TABLE `to_remove_roadmaps` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(80) DEFAULT NULL,
-  `description` text,
-  `duration` int(5) DEFAULT NULL,
-  `status` int(1) DEFAULT '1' COMMENT '0=inactive;1=active;',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
-/*Data for the table `to_remove_roadmaps` */
-
-insert into `to_remove_roadmaps` (`id`,`title`,`description`,`duration`,`status`) values (1,'Roadmap Training 1','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',7,1);
-insert into `to_remove_roadmaps` (`id`,`title`,`description`,`duration`,`status`) values (2,'Roadmap Training 5','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',18,1);
+insert into `roles` (`id`,`title`,`description`,`access`,`status`) values (4,'Employee','Employee',NULL,'1');
 
 /*Table structure for table `users` */
 
@@ -564,7 +615,7 @@ CREATE TABLE `users` (
   `modified` datetime DEFAULT NULL,
   `last_login` date DEFAULT NULL,
   `status` int(1) unsigned NOT NULL DEFAULT '1' COMMENT '0=inactive;1=active;2=confirmed;3=rejected;',
-  `auth_type` varchar(11) NOT NULL,
+  `auth_type` varchar(30) NOT NULL,
   `supervisor_name` varchar(50) DEFAULT NULL,
   `ob_status` int(1) DEFAULT NULL,
   `manager_name` varchar(50) DEFAULT NULL,
@@ -572,21 +623,20 @@ CREATE TABLE `users` (
   `bhr_name` varchar(50) DEFAULT NULL,
   `bhr_email` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users` */
 
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (1,1,'tss00065@gmail.com','0E0A9BFBCCA3F2321ED02EFCDE0D0527','P53041900','Aditya','Jain','2018-08-15','tss00065@gmail.com',NULL,NULL,NULL,NULL,'1','1','7','PHP Developer',NULL,NULL,NULL,'2018-08-29 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (2,4,'akshay.jain836@gmail.com','$2y$10$rqJO1MDMvMHcHQYmvKFTderWnGm9FJ.HUr684eD3BhUdcjmwwl/D2','TSS00069','Akshay','Jain','2018-08-21','akshay.jain836@gmail.com','9784789956','Delhi',NULL,'Viyatnam','3','2','7','PHP Developer','B4','QUA98745','QUA96358','0000-00-00 00:00:00','2018-09-06 12:16:15',NULL,1,'Manual',NULL,1,'Amit Kumar','amit.kumar@quatrro.com','Rakesh Kumar','rakesh.kumar@quatrro.com');
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (3,0,'Abhishek','$2y$10$jQJn/.F.ymYuaMI6QfLm1eGDBGZbGrhSRDV1fIL.kGkM49hF2BrWW','p-ni002','Abhishek','Gupta','2018-08-21','abhishekkumargupta33@gmail.com','7503275011','Delhi',NULL,'India','1','3','7','software developer',NULL,'','','2018-08-21 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (5,4,'atul@gmail.com','$2y$10$qg4dewiDY2lYWaKIdjWnFuGCPoz0k/pgufmoGDqBwgKpb3Pb5TNrG','QUA00236','Atul','Jain','2018-08-23','atul@gmail.com',NULL,NULL,NULL,NULL,'2','4','7','PHP Developer',NULL,NULL,NULL,'2018-08-21 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (6,4,'Ritesh','$2y$10$00U3P0YrmRmb7VdoXCckwel.jbcyzNBPmDZ7249DGv6MDBI.MJbmu','QUA32156','Ritesh','Garg','2018-08-30','ritesh.garg@gmail.com','828754544','Delhi','Delhi UT','India','3','1','7','Technology Head','B2','QUA58965','QUA78549','0000-00-00 00:00:00',NULL,NULL,1,'Admin',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (7,4,'mukul','$2y$10$ZKx8ZitTZHTsUQNEOt31Vuzb2.1hlLPSUz3rKOpuQHXdVITSGiveS','qua98756','MUKUL','SINGH','2018-09-21','mukul.singh01@gmail.com','963852741','Thane',NULL,'Viyatnam','1','1','8','Developer1.0','B3','qua12345','qua69875','0000-00-00 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (9,4,'Aman','$2y$10$foHGEJh9ftZhrUP5hv8crOiBMT/iT73i6Kp3LhHjOwU/Rgu0VRs/u','QUA00069','Aman','Kumar','2018-08-24','aman.kumar@quatrro.com','9874563212','Delhi',NULL,'USA','3','3','7','PHP Developer','B1','QUA58965','QUA78549','0000-00-00 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (25,1,'admin','$2y$10$AvHB03bBHOmqzc/q2rnFwe73q73HEatvzGdvPWwe9TVQsJh3wNqZC','qua12345','Admin','','2018-08-24','','','Thane',NULL,'Select','1','4','7','PHP Developer','','','','0000-00-00 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (26,0,'Testing','$2y$10$WKiLT4uJd/T8QT4.dzeg3eCDtVPGmETcZCSPdAf.EFWXhREbQKNHu','QUA32156','Admin','Admin','2018-08-30','admin@quatrro.com','9874563215','Delhi',NULL,'India','2','1','9','PHP Developer','B1','QUA58965','QUA78549','0000-00-00 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (28,2,'supervisor','$2y$10$Cfg7k3jTMgJKfecpJO51lO0mhYsupZn0lLx.c5h1ZaktnYUEpl/0e','QA001','Supervisor','Spring','2018-08-28','supervisor@quatrro.com','7845784512','Delhi',NULL,'India','1','1','7','Team Lead','4','QA002','BHR','2018-08-28 06:54:50','2018-08-28 06:54:50',NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (34,4,'kundan','$2y$10$DYMeYSw5jBoix5r2w.8cMe0Hq0TW5R/m3prCUcEmq.zd4jtDax5Bi','QA2344','Kundan','Singh','2018-08-30','kundan@gmail.com','8287057800','Delhi',NULL,'India','1','3','7','SSE','B','QA1233','BHR','2018-08-31 10:29:08','2018-09-06 12:15:10',NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
-insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (35,2,'Rajiv','$2y$10$Q0cF9P82g3bVXqGZlo2WSuXsPTxYZu3oUeQvXq8xwOL/fDSQqU77W','QUA021R','Rajiv','Sukhla','2018-09-05','rajiv@gmail.com','9337180770','Delhi',NULL,'India','1','1','7','Engineer','2','QTA0247','QMA0024','2018-09-04 09:33:49','2018-09-05 09:33:49',NULL,1,'Manual',NULL,1,'Sanjeev','Sanjeev@gmail.com','Shiv','shiv@gmail.com');
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (1,1,'tss00065@gmail.com','0E0A9BFBCCA3F2321ED02EFCDE0D0527','QGS-001','Aditya','Jain','2018-08-15','tss00065@gmail.com',NULL,NULL,NULL,NULL,'1','1','7','PHP Developer',NULL,'QGS-002',NULL,'2018-08-29 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (2,4,'akshay.jain836@gmail.com','$2y$10$rqJO1MDMvMHcHQYmvKFTderWnGm9FJ.HUr684eD3BhUdcjmwwl/D2','QGS-002','Akshay','Jain','2018-08-11','akshay.jain836@gmail.com','9784789956','Delhi',NULL,'Viyatnam','3','2','7','PHP Developer','B4','QGS-025','QUA96358','2018-08-11 00:00:00','2018-09-06 12:16:15',NULL,2,'Manual',NULL,1,'Amit Kumar','amit.kumar@quatrro.com','Rakesh Kumar','rakesh.kumar@quatrro.com');
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (3,0,'Abhishek','$2y$10$jQJn/.F.ymYuaMI6QfLm1eGDBGZbGrhSRDV1fIL.kGkM49hF2BrWW','QGS-003','Abhishek','Gupta','2018-08-21','abhishekkumargupta33@gmail.com','7503275011','Delhi',NULL,'India','1','3','7','software developer',NULL,'QGS-002','','2018-08-21 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (25,1,'admin','$2y$10$AvHB03bBHOmqzc/q2rnFwe73q73HEatvzGdvPWwe9TVQsJh3wNqZC','QGS-025','Admin','','2018-08-24','admin@quatrro.com','','Thane',NULL,'Select','1','4','7','PHP Developer','','QGS-002','','0000-00-00 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (26,0,'Testing','$2y$10$WKiLT4uJd/T8QT4.dzeg3eCDtVPGmETcZCSPdAf.EFWXhREbQKNHu','QGS-026','Admin','Admin','2018-08-30','','9874563215','Delhi',NULL,'India','2','1','9','PHP Developer','B1','QGS-002','QUA78549','0000-00-00 00:00:00',NULL,NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (28,2,'supervisor','$2y$10$Cfg7k3jTMgJKfecpJO51lO0mhYsupZn0lLx.c5h1ZaktnYUEpl/0e','QGS-028','Supervisor','Spring','2018-08-28','supervisor@quatrro.com','7845784512','Delhi',NULL,'India','1','1','7','Team Lead','4','QGS-002','BHR','2018-08-28 06:54:50','2018-08-28 06:54:50',NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (34,4,'kundan','$2y$10$rqJO1MDMvMHcHQYmvKFTderWnGm9FJ.HUr684eD3BhUdcjmwwl/D2','QGS-034','Kundan','Singh','2018-08-30','kundan@gmail.com','8287057800','Delhi',NULL,'India','1','3','7','SSE','B','QGS-002','BHR','2018-08-31 10:29:08','2018-09-07 07:52:13',NULL,1,'Manual',NULL,1,NULL,NULL,NULL,NULL);
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (35,2,'Rajiv','$2y$10$Q0cF9P82g3bVXqGZlo2WSuXsPTxYZu3oUeQvXq8xwOL/fDSQqU77W','QGS-035','Rajiv','Sukhla','2018-09-05','rajiv@gmail.com','9337180770','Delhi',NULL,'India','1','1','7','Engineer','2','QGS-002','QMA0024','2018-09-04 09:33:49','2018-09-05 09:33:49',NULL,2,'Manual',NULL,1,'Sanjeev','Sanjeev@gmail.com','Shiv','shiv@gmail.com');
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (48,4,'Abhishek','$2y$10$nxFik0qoDrlHP8e5yuF5OunjAGshDbnQW48b97kMF/yyOy5J.XYW.','QUA021R','Abhishek','Gupta','2018-09-10','abhishek@gmail.com','','Delhi',NULL,'USA','1','4','95','Developer','2','QGS-002','QMA0024','2018-09-09 13:25:30','2018-09-10 13:25:30',NULL,1,'Manual',NULL,1,'Sanjeev','Sanjeev@gmail.com','Shiv','shiv@gmail.com');
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (54,4,'Rajiv','$2y$10$kNt8xVE6wwNTFxOFZ.0wB.BlHYSCAgYf/2CNlNOqd95hZo8WT.vhW','QUA021R','Rajiv','','2018-09-10','rajiv1@gmail.com','pass','Thane',NULL,'India','2','80','','Developer','1','QGS-002','QMA0024','2018-08-08 13:38:47','2018-09-11 06:02:41',NULL,2,'Manual',NULL,1,'Sanjeev','Sanjeev@gmail.com','Shiv','shiv@gmail.com');
+insert into `users` (`id`,`user_type`,`username`,`password`,`emp_id`,`first_name`,`last_name`,`doj`,`email`,`mobile`,`city`,`state`,`country`,`businees_unit`,`department`,`sub_department`,`designation`,`band`,`manager_emp_id`,`bhr_emp_id`,`created`,`modified`,`last_login`,`status`,`auth_type`,`supervisor_name`,`ob_status`,`manager_name`,`manager_email`,`bhr_name`,`bhr_email`) values (55,4,'Baren','$2y$10$mdTpalVq37uNpgWPew1Q2OYX7FVrlxPbavja41TUbb.SobCDTXqSi','QUA021R','Baren','','2018-09-10','baren@gmail.com','','Thane',NULL,'USA','2','42','76','Developer','2','QGS-002','QMA0024','2018-09-07 13:42:13','2018-09-10 13:42:13',NULL,1,'Manual',NULL,1,'Sanjeev','Sanjeev@gmail.com','Shiv','shiv@gmail.com');
 
 SET SQL_MODE=@OLD_SQL_MODE;

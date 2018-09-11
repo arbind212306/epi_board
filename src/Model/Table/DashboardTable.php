@@ -65,6 +65,35 @@ class DashboardTable extends Table {
         return $result = $total[0]->count; 
     }
     
+    //query for counting onboard based on filter month wise
+    public function CountBasedOnMonth($business_unit='',$department='',$sub_department='',$city='',
+            $daysAgo='',$year=''){
+        
+        $query = $this->find();
+        $query->select(['count' => $query->func()->count('id')]);
+        $query->where(['ob_status' => 1]);
+        if(!empty($business_unit)){
+            $query->where(['businees_unit' => $business_unit]);
+        }
+        if(!empty($department)){
+            $query->where(['department' => $department]);
+        }
+        if(!empty($sub_department)){
+            $query->where(['sub_department' => $sub_department]);
+        }
+        if(!empty($city)){
+            $query->where(['city' => $city]);
+        }
+        if(!empty($year)){
+            $query->where(['YEAR(created)' => "$year"]);
+        }
+        if(!empty($daysAgo)){
+            $query->where(['MONTH(created)' => "$daysAgo"]);
+        }
+        $total = $query->toArray();
+        return $result = $total[0]->count;
+    }
+    
     //query to count total confirmation month wise
     public function countTotalConfirmation($agoDate=''){
         $query = $this->find();
@@ -76,12 +105,32 @@ class DashboardTable extends Table {
                 
     }
     
+    //query to count total active for confirmation graph
+    public function countTotalActive($agoDate=''){
+        $query = $this->find();
+        $query->select(['count' => $query->func()->count('id')]);
+        $query->where(['ob_status' => 1,'status' => 1 ,'DATE(created)' => "$agoDate"]);
+        $total = $query->toArray();
+        return $result = $total[0]->count;
+    }
+    
+    //query to count toatl inactive for confirmation graph
+    public function countTotalInactive($agoDate=''){
+        $query = $this->find();
+        $query->select(['count' => $query->func()->count('id')]);
+        $query->where(['ob_status' => 1,'status' => 0 ,'DATE(created)' => "$agoDate"]);
+        $total = $query->toArray();
+        return $result = $total[0]->count;
+                
+    }
+    
     //query for counting toatl confirmed 
-    public function getConfirmation($business_unit='',$department='',$sub_department='',$city='',$daysAgo=''){
+    public function getConfirmation($business_unit='',$department='',$sub_department='',
+            $city='',$daysAgo='',$status=''){
         $query = $this->find();
         $query->select(['count' => $query->func()->count('id')]);
         $query->where(['ob_status' => 1]);
-        $query->where(['status' => 2]);
+        $query->where(['status' => $status]);
         if(!empty($business_unit)){
             $query->where(['businees_unit' => $business_unit]);
         }
@@ -97,7 +146,35 @@ class DashboardTable extends Table {
         if(!empty($daysAgo)){
             $query->where(['DATE(created)' => $daysAgo]);
         }
-//        echo $query;exit;
+        $toatl = $query->toArray();
+        return $result = $toatl[0]->count;
+    }
+    
+    //query for counting total confirmed/active/inactive monthwise
+     public function getConfirmationMonthWise($business_unit='',$department='',$sub_department='',
+             $city='',$daysAgo='',$status='',$year=''){
+        $query = $this->find();
+        $query->select(['count' => $query->func()->count('id')]);
+        $query->where(['ob_status' => 1]);
+        $query->where(['status' => $status]);
+        if(!empty($business_unit)){
+            $query->where(['businees_unit' => $business_unit]);
+        }
+        if(!empty($department)){
+            $query->where(['department' => $department]);
+        }
+        if(!empty($sub_department)){
+            $query->where(['sub_department' => $sub_department]);
+        }
+        if(!empty($city)){
+            $query->where(['city' => $city]);
+        }
+        if(!empty($year)){
+            $query->where(['YEAR(created)' => "$year"]);
+        }
+        if(!empty($daysAgo)){
+            $query->where(['MONTH(created)' => "$daysAgo"]);
+        }
         $toatl = $query->toArray();
         return $result = $toatl[0]->count;
     }

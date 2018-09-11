@@ -161,7 +161,8 @@
                             </div>
                             <hr/>
                             <div class="col-xs-12 text-center">
-                                <button class="btn btn-danger padding-left-xl padding-right-xl sub_btn"  type="submit">Add</button>
+                            <button type=""  data-sidebar-button class="btn btn-primary btn-sm padding-left-lg padding-right-lg">Close</button>
+                            <button class="btn btn-danger btn-sm padding-left-xl padding-right-xl sub_btn" type="submit">Update</button>
                             </div>
 
                         </div>
@@ -286,6 +287,8 @@
     $('[data-toggle="tooltip"]').tooltip();
     $(document).ready(function () {
         $('.edit-f').click(function () {
+            $('#joinee_q_sec').hide();
+            $('#sup_q_sec').hide();
             // Reset
             $('.sub_btn').html('Edit');
             reset();
@@ -306,9 +309,11 @@
                 $('#interval').val(data.interval_days);
                 if (data.for_joinee == '1') {
                     $('input[name="for_joinee"]').prop('checked', true);
+                    $('#joinee_q_sec').show();
                 }
                 if (data.for_supervisor == '1') {
                     $('input[name="for_supervisor"]').prop('checked', true);
+                    $('#sup_q_sec').show();            
                 }
                 if (data.feedback_questions.length > 0) {
                     $(data.feedback_questions).each(function (i, u) {
@@ -361,10 +366,12 @@
         });
         $('#add_f').click(function () {
             reset();
+            $('#joinee_q_sec').hide();
+            $('#sup_q_sec').hide();
             $('.sub_btn').html('Add');
         });
         $('#feedback_table').DataTable({
-            "aaSorting": []
+            aaSorting: []
         });
     });
     function hideSidebar() {
@@ -383,3 +390,8 @@
         $('input[name=for_joinee],input[name=for_supervisor],input[name="q_j[]"],input[name="q_s[]"]').prop('checked', false);
     }
 </script>
+<style>
+    .dataTables_info{width: 170px;}
+    .paging_simple_numbers{width: 170px;float: right;margin-top: -27px;}
+    #report_table td {text-align:left;}
+</style> 

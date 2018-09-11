@@ -1,7 +1,9 @@
 //code for getting data from controller displaying onboard graph
 function getfilter(){
-    $('#chartdiv').hide();
+    $('#chartdiv').remove();
+    $('#chartConfirmation').remove();
     $('#loader1').show();
+    $('#loader2').show();
     var business_unit = $('#bu_unit').val();
     var department = $('#department').val();
     var sub_department = $('#sub_department').val();
@@ -15,6 +17,7 @@ function getfilter(){
     "location":location, "days":days},
         
         success: function(data){
+            console.log(data);
             var chartdiv2 = AmCharts.makeChart("chartdiv2", {
                 "type": "serial",
                 "theme": "light",
@@ -27,11 +30,17 @@ function getfilter(){
                     "id": "v1",
                     "axisAlpha": 0,
                     "position": "left",
-                    "ignoreAxisWidth":true
+                    "ignoreAxisWidth":true,
+                    "integersOnly": true,
+                    "title": 'Number of Onboard'
                 }],
                 "balloon": {
                     "borderThickness": 1,
                     "shadowAlpha": 0
+                },
+                "legend": {
+                    "useGraphSettings": true,
+                    "position": "top"
                 },
                 "graphs": [{
                     "id": "g1",
@@ -43,10 +52,10 @@ function getfilter(){
                     "bullet": "round",
                     "bulletBorderAlpha": 1,
                     "bulletColor": "#FFFFFF",
-                    "bulletSize": 5,
+                    "bulletSize": 8,
                     "hideBulletsCount": 50,
-                    "lineThickness": 2,
-                    "title": "red line",
+                    "lineThickness": 3,
+                    "title": "Onboard",
                     "useLineColorForBulletBorder": true,
                     "valueField": "value",
                     "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
@@ -76,11 +85,11 @@ function getfilter(){
                     "valueLineAlpha":0.2,
                     "valueZoomable":true
                 },
-                "valueScrollbar":{
-                  "oppositeAxis":false,
-                  "offset":50,
-                  "scrollbarHeight":10
-                },
+//                "valueScrollbar":{
+//                  "oppositeAxis":false,
+//                  "offset":50,
+//                  "scrollbarHeight":10
+//                },
                 "categoryField": "date",
                 "categoryAxis": {
                     "parseDates": true,
@@ -98,22 +107,16 @@ function getfilter(){
                 chartdiv2.zoomToIndexes(chartdiv2.dataProvider.length - 40, chartdiv2.dataProvider.length - 1);
             }
 //            
-            $('#loader1').hide();
+            $('#loader1').remove();
             $('#chartdiv2').show();
         }
     });
+    
+    getConfirmation(business_unit,department,sub_department,location,days);
 }
 
 //script for getting data and displaying confirmation graph on ajax hit
-function getConfirmation(){
-    $('#chartConfirmation').hide();
-    $('#loader2').show();
-    var business_unit = $('#bu_unit_1').val();
-    var department = $('#department_1').val();
-    var sub_department = $('#sub_department_1').val();
-    var location = $('#location_1').val();
-    var days = $('#days_1').val(); 
-    
+function getConfirmation(business_unit,department,sub_department,location,days){
     $.ajax({
         url: webroot + 'dashboard/get-filter-confirmation',
         type: 'POST',
@@ -121,7 +124,8 @@ function getConfirmation(){
         data: {"business_unit":business_unit, "department":department, "sub_department":sub_department,
     "location":location, "days":days},
         
-        success: function(data){
+        success: function(response){
+            console.log(response);
             var chartConf = AmCharts.makeChart("chartConfirmation2", {
                 "type": "serial",
                 "theme": "light",
@@ -134,29 +138,65 @@ function getConfirmation(){
                     "id": "v1",
                     "axisAlpha": 0,
                     "position": "left",
-                    "ignoreAxisWidth":true
+                    "ignoreAxisWidth":true,
+                    "integersOnly": true,
+                    "title":"Number of values(confirmed/Active/Inactive)"
                 }],
                 "balloon": {
                     "borderThickness": 1,
-                    "shadowAlpha": 0
+                    "shadowAlpha": 0,
+                    "adjustBorderColor":false,
+                    "color":"#ffffff"
                 },
-                "graphs": [{
-                    "id": "g1",
-                    "balloon":{
-                      "drop":true,
-                      "adjustBorderColor":false,
-                      "color":"#ffffff"
+                "legend": {
+                    "useGraphSettings": true,
+                    "position": "top"
                     },
+                "graphs": [{
+                    "id": "g1,g2,g3",
+//                    "balloon":{
+//                      "drop":true,
+//                      "adjustBorderColor":false,
+//                      "color":"#ffffff"
+//                    },
                     "bullet": "round",
                     "bulletBorderAlpha": 1,
                     "bulletColor": "#FFFFFF",
-                    "bulletSize": 5,
+                    "bulletSize": 8,
                     "hideBulletsCount": 50,
-                    "lineThickness": 2,
-                    "title": "red line",
+                    "lineThickness": 3,
+                    "title": "Confirmed",
+                    "showBalloon": true,
                     "useLineColorForBulletBorder": true,
                     "valueField": "value",
                     "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+                },
+                {
+                    "id": "g2",
+                    "bullet": "round",
+                    "bulletBorderAlpha": 1,
+                    "bulletColor": "#00FF00",
+                    "bulletSize": 8,
+                    "hideBulletsCount": 50,
+                    "lineThickness": 3,
+                    "title": "Active",
+                    "lineColor": "red",
+                    "useLineColorForBulletBorder": true,
+                    "valueField": "value2",
+                    "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+                },
+                    {
+                    "id": "g3",
+                    "bullet": "round",
+                    "bulletBorderAlpha": 1,
+                    "bulletColor": "#ff003f",
+                    "bulletSize": 8,
+                    "hideBulletsCount": 50,
+                    "lineThickness": 3,
+                    "title": "Inactive",
+                    "lineColor": "green",
+                    "useLineColorForBulletBorder": true,
+                    "valueField": "value3"
                 }],
                 "chartScrollbar": {
                     "graph": "g1",
@@ -179,22 +219,22 @@ function getConfirmation(){
                     "valueLineBalloonEnabled": true,
                     "cursorAlpha":1,
                     "cursorColor":"#258cbb",
-                    "limitToGraph":"g1",
+                    "limitToGraph":"g1,g2,g3",
                     "valueLineAlpha":0.2,
                     "valueZoomable":true
                 },
-                "valueScrollbar":{
-                  "oppositeAxis":false,
-                  "offset":50,
-                  "scrollbarHeight":10
-                },
+//                "valueScrollbar":{
+//                  "oppositeAxis":false,
+//                  "offset":50,
+//                  "scrollbarHeight":10
+//                },
                 "categoryField": "date",
                 "categoryAxis": {
                     "parseDates": true,
                     "dashLength": 1,
                     "minorGridEnabled": true
                 },
-                "dataProvider": data
+                "dataProvider": response
             });
 
             chartConf.addListener("rendered", zoomChartConf);
@@ -205,7 +245,7 @@ function getConfirmation(){
                 chartConf.zoomToIndexes(chartConf.dataProvider.length - 40, chartConf.dataProvider.length - 1);
             }
             
-            $('#loader2').hide();
+            $('#loader2').remove();
             $('#chartConfirmation2').show();
         }
     });

@@ -17,6 +17,7 @@ class SupervisorController extends AppController {
     }
 
     public function dashboard() {
+        $fifteen_check_list_id = 4;
         $user = $this->Auth->user();
         $user_type = $user['user_type'];
         if ($user_type != 2) {
@@ -26,11 +27,15 @@ class SupervisorController extends AppController {
         $userTbl = TableRegistry::getTableLocator()->get('Users');
         $query1 = $userTbl->find('all')
                 ->where(['user_type' => 4, 'status !=' => 0, 'ob_status' => 1])
-                ->contain(['FeedbackUsers', 'LogisticsArrangement']);
+                ->contain(['FeedbackUsers', 'LogisticsArrangement', 'FeedbackVerifyUser' => function ($q) use($fifteen_check_list_id) {
+                        return $q->where(['FeedbackVerifyUser.feedback_id' => $fifteen_check_list_id]);
+                    }])
+                ->order(['id' => 'DESC']);
         $joineeData = [];
+        $fiften_status = 0;
         foreach ($query1 as $rw) {
-            if (!empty($rw) &&(!in_array($rw->status,[3]))) {
-                
+            if (!empty($rw) && (!in_array($rw->status, [3]))) {
+
                 $fcomplete = false;
                 $locomplete = false;
                 if (!empty($rw->feedback_users)) {
@@ -42,12 +47,27 @@ class SupervisorController extends AppController {
                         }
                     }
                 }
-                if (!empty($rw->logistics_arrangement)) {
-                    $locomplete = true;
-                }
 
-                $rw->fcomplete = $fcomplete;
+                // Logicstic status
+                if (!empty($rw->logistics_arrangement)) {
+                    $locomplete = 0;
+                    foreach ($rw->logistics_arrangement as $lr) {
+                        if ($lr->r_status == 1) {
+                            $locomplete = 1;
+                        } else {
+                            $locomplete = 0;
+                        }
+                    }
+                }
                 $rw->lcomplete = $locomplete;
+                // Feedback status
+                if (!empty($rw->feedback_verify_user)) {
+                    $fiften_status = 1;
+                }
+                $rw->fifteen = $fiften_status;
+                
+                
+                $rw->fcomplete = $fcomplete;
                 $joineeData[] = $rw->toArray();
             }
         }
@@ -212,8 +232,8 @@ class SupervisorController extends AppController {
         $query1 = $fbTbl->find('all')
                 ->where(['status' => 1, 'for_supervisor' => 1])
                 ->contain([
-            'FeedbackVerify' => function ($q) use ($user_id){
-                return $q->where(['FeedbackVerify.user_id' =>$user_id]);
+            'FeedbackVerify' => function ($q) use ($user_id) {
+                return $q->where(['FeedbackVerify.user_id' => $user_id]);
             },
             'FeedbackQuestions' => ['Questions']]);
         foreach ($query1 as $rw) {
@@ -228,7 +248,7 @@ class SupervisorController extends AppController {
                 $completedTxt = "<h5>&nbsp;</h5>";
                 $title = $rw['title'];
                 $fstatus = '<p class="margin-bottom-0 text-red">Pending</p>';
-                if (($completed)&&!empty($rw['feedback_verify'][0])) {
+                if (($completed) && !empty($rw['feedback_verify'][0])) {
                     $completedOn = date('d/m/Y', strtotime($rw['feedback_verify'][0]['created']));
                     $completedTxt = '<h5 class="text-muted">Completed on ' . $completedOn . '</h5>';
                 }
@@ -285,7 +305,7 @@ class SupervisorController extends AppController {
                 $feedbackAnsData = $rw['feedback_verify'];
                 if (!empty($rw['feedback_questions'])) {
                     foreach ($rw['feedback_questions'] as $key1 => $fq) {
-                        if($completed){
+                        if ($completed) {
                             $answer = $feedbackAnsData[$key1];
                         }
                         $detailedHtml .= '<div class="col-md-6">
@@ -392,8 +412,6 @@ class SupervisorController extends AppController {
         echo json_encode($logData);
         die;
     }
-
-
 
     public function access() {
         $accessCatTbl = TableRegistry::getTableLocator()->get('AccessCategories');

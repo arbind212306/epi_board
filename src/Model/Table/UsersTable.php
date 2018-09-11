@@ -26,7 +26,7 @@ class UsersTable extends Table {
             'propertyName' => 'department'
         ]);
         $this->belongsTo('SubDepart', [
-            'className'=>'Departments',
+            'className' => 'Departments',
             'foreignKey' => 'sub_department'
         ]);
         $this->belongsTo('Users', [
@@ -34,12 +34,16 @@ class UsersTable extends Table {
             'foreignKey' => 'manager_emp_id',
             'propertyName' => 'manager_emp_id'
         ]);
+        $this->hasMany('FeedbackVerifyUser', [
+            'className' => 'FeedbackResponses',
+            'foreignKey' => 'response_by'
+        ]);
     }
 
     public function findAuth(\Cake\ORM\Query $query, array $options) {
         $query
                 ->find('all')
-                ->where(['Users.status !=' =>0,'ob_status'=>1]);
+                ->where(['Users.status !=' => 0, 'ob_status' => 1]);
         return $query;
     }
 

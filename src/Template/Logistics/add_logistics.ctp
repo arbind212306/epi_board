@@ -20,7 +20,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Business Unit</label>
+                                <label for="title" class="padding-top-md">Business Unit<span style='color: red'>*</span></label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -39,7 +39,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Department</label>
+                                <label for="title" class="padding-top-md">Department<span style='color: red'>*</span></label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -56,7 +56,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Sub Department</label>
+                                <label for="title" class="padding-top-md">Sub Department<span style='color: red'>*</span></label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -72,7 +72,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Location</label>
+                                <label for="title" class="padding-top-md">Location<span style='color: red'>*</span></label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
@@ -91,7 +91,7 @@
                     <div class="col-md-6">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <label for="title" class="padding-top-md">Title</label>
+                                <label for="title" class="padding-top-md">Title<span style='color: red'>*</span></label>
                             </div>
                             <div class="col-md-9">
                                 <div class="form-group">
